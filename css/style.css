@@ -14,12 +14,13 @@ header {
     justify-content: space-between;
     padding: 1rem 2rem;
     background-color: #333;
-    color: #333131;
+    color: #fdfafa;
 }
 
 .logo {
     font-size: 2rem;
     line-height: 1.2;
+    font-family: 'Arial', sans-serif;
 }
 
 nav {
@@ -50,46 +51,54 @@ input[type="text"] {
     margin-left: 1rem;
 }
 
-/* Welcome section */
-.welcome {
+/* Main container with two columns */
+.main-container {
     display: flex;
     justify-content: space-between;
     padding: 2rem;
 }
 
+/* Left side: Welcome section */
+.welcome {
+    width: 60%; /* Takes 60% of the screen width */
+}
+
 .welcome-text {
-    max-width: 40%;
+    max-width: 100%; /* Adjusts to fit the column width */
     font-size: 1rem;
     color: #333;
 }
 
-.book-section {
-    max-width: 55%;
+/* Right side: Book sidebar */
+.book-sidebar {
+    width: 35%; /* Takes 35% of the screen width */
+    background-color: #f4f4f4; /* Light grey background for distinction */
+    padding: 1rem;
+    border-radius: 8px;
 }
 
-.book-section h3 {
-    margin-top: 0;
+/* Book section styling */
+.books-section h3 {
     font-size: 1.25rem;
-    color: #444;
+    margin-top: 0;
+    color: #333;
 }
 
 .book-list {
-    display: flex;
-    gap: 1rem;
-    overflow-x: auto;
-    padding-bottom: 1rem;
+    list-style-type: none; /* Remove bullets */
+    padding: 0;
+    margin: 0 0 1rem 0;
 }
 
-.book {
-    text-align: center;
-    min-width: 120px;
+.book-list li {
+    padding: 0.5rem 0;
+    font-size: 1rem;
+    color: #333;
+    border-bottom: 1px solid #ddd; /* Divider between books */
 }
 
-.book img {
-    width: 100px;
-    height: 150px;
-    border-radius: 8px;
-    margin-bottom: 0.5rem;
+.book-list li:last-child {
+    border-bottom: none; /* Remove divider after the last item */
 }
 
 /* Footer */
@@ -99,6 +108,7 @@ footer {
     text-align: center;
     padding: 1rem;
 }
+
 /* Overlay to dim the background */
 .overlay {
     position: fixed;
@@ -163,42 +173,6 @@ footer {
     transform: translateX(0); /* Slide into view */
 }
 
-/* Header styling for categories page */
-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem 2rem;
-    background-color: #333;
-    border-bottom: 1px solid #ddd;
-    color: #fdfafa;
-}
-
-.logo {
-    font-size: 2rem;
-    line-height: 1.2;
-    font-family: 'Arial', sans-serif;
-}
-
-.category-button,
-.search-icon {
-    background-color: #ffffff;
-    border: none;
-    border-radius: 20px;
-    padding: 0.5rem 1rem;
-    margin-right: 1rem;
-    font-size: 1rem;
-    cursor: pointer;
-    color: #333;
-}
-
-.icon {
-    font-size: 1.5rem;
-    text-decoration: none;
-    color: #333;
-    margin-left: 1rem;
-}
-
 /* Categories container */
 .categories-container {
     display: flex;
@@ -225,12 +199,4 @@ header {
     font-size: 1rem;
     color: #333;
     margin: 0;
-}
-
-/* Footer */
-footer {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 1rem;
 }

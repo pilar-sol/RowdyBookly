@@ -18,35 +18,35 @@
         </nav>
     </header>
     
-    <main>
+    <main class="main-container">
+        <!-- Left side content -->
         <section class="welcome">
             <div class="welcome-text">
-                <h2>Welcome to Rowdy Bookly!</h2>
+                <h2>Welcome to RowdyBookly!</h2>
                 <p>Our mission is to provide a fast, convenient, and secure shopping experience, tailored to meet the unique needs of the bookworm community. Enjoy a reliable service that ensures smooth access to the books you love, anytime, anywhere.</p>
             </div>
-            <div class="book-section">
-                <h3>Recently Viewed</h3>
-                <div class="book-list">
-                    <!-- Sample book -->
-                    <div class="book">
-                        <img src="images/sample_book1.jpg" alt="Book Cover">
-                        <p>Roman Year: A Memoir</p>
-                        <span>André Aciman</span>
-                    </div>
-                    <!-- Add more books here as needed -->
-                </div>
-
-                <h3>Popular</h3>
-                <div class="book-list">
-                    <div class="book">
-                        <img src="images/sample_book2.jpg" alt="Book Cover">
-                        <p>Above the Noise: My Story of...</p>
-                        <span>DeMar DeRozan</span>
-                    </div>
-                    <!-- Add more books here as needed -->
-                </div>
-            </div>
         </section>
+        
+        <!-- Right side content: Books listing -->
+        <aside class="book-sidebar">
+            <section class="books-section">
+                <h3>Recently Viewed</h3>
+                <ul class="book-list">
+                    <li>Book Title 1</li>
+                    <li>Book Title 1</li>
+                    <li>Book Title 2</li>
+                    <li>Book Title 2</li>
+                </ul>
+                
+                <h3>Popular</h3>
+                <ul class="book-list">
+                    <li>Book Title 3</li>
+                    <li>Book Title 3</li>
+                    <li>Book Title 4</li>
+                    <li>Book Title 4</li>
+                </ul>
+            </section>
+        </aside>
     </main>
     
     <footer>
