@@ -212,7 +212,15 @@ footer {
     height: 100vh; /* Full height to center vertically */
     text-align: center;
     background-color: #e0e0e0; /* Light grey background */
-    padding: 2rem;
+    padding: 2rem; 
+}
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem 2.5rem; /* Adjust padding to make banner thicker */
+    background-color: #333; /* Gray background color */
+    color: #fdfafa;
 }
 
 .login-container h1 {
@@ -293,7 +301,7 @@ footer {
     height: 100vh; /* Full height to center vertically */
     text-align: center;
     background-color: #e0e0e0; /* Light grey background */
-    padding: 2rem;
+    padding: 1.5rem 2rem; /* Adjust padding to make banner thicker */
 }
 
 .signup-container h1, .login-container h1 {
