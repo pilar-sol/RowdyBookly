@@ -5,10 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RowdyBookly</title>
     <link rel="stylesheet" href="css/style.css">
+    <style> 
+        .main-page {
+            color: beige;
+            text-decoration: none; 
+        }
+
+        .main-page:hover {
+            color: #ffa07a; 
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1 class="logo">Rowdy<br>Bookly</h1>
+        <h1 class="logo">
+            <a class="main-page" href="index.php">
+            Rowdy<br>Bookly
+            </a>
+        </h1>
         <nav>
             <a href="categories.php" class="category-button">Categories</a>
             <input type="text" placeholder="Search">
