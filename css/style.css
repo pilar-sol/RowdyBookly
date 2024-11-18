@@ -22,7 +22,14 @@ header {
     line-height: 1.2;
     font-family: 'Arial', sans-serif;
 }
+.main-page {
+    color: beige;
+    text-decoration: none; 
+}
 
+.main-page:hover {
+    color: #ffa07a; 
+}
 
 nav {
     display: flex;

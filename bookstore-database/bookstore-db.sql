@@ -28,7 +28,7 @@ CREATE TABLE Books (
     title VARCHAR(200) NOT NULL,
     cover_image_url TEXT,
     author_id INT NOT NULL,
-    publication_year YEAR,
+    publication_year INT,
     price DECIMAL(10, 2) NOT NULL,
     description TEXT,
     FOREIGN KEY (author_id) REFERENCES Authors(author_id)
@@ -84,6 +84,8 @@ CREATE TABLE OrderItems (
     FOREIGN KEY (order_id) REFERENCES Orders(order_id) ON DELETE CASCADE,
     FOREIGN KEY (book_id) REFERENCES Books(book_id) ON DELETE CASCADE
 );
+
+
 INSERT INTO Authors (name, bio)
 VALUES
     ('Siddhartha Mukherjee', 'An Indian-American physician and biologist, known for his work on cancer.'),
@@ -114,32 +116,34 @@ VALUES
 -- Sample data for Books
 INSERT INTO Books (title, cover_image_url, author_id, publication_year, price, description)
 VALUES
-    ('The Emperor of All Maladies', 'url_to_image5.jpg', 1, 2010, 16.99, 'A biography of cancer, covering its history, treatment, and research developments.'),
-    ('The Intelligent Investor', 'url_to_image6.jpg', 2, 1949, 22.50, 'A definitive book on value investing and financial principles.'),
-    ('Calculus Made Easy', 'url_to_image7.jpg', 3, 1910, 13.99, 'A simplified introduction to calculus concepts and applications.'),
-    ('Clean Code', 'url_to_image8.jpg', 4, 2008, 29.99, 'A handbook of agile software craftsmanship.'),
-    ('A People\'s History of the United States', 'url_to_image9.jpg', 5, 1980, 18.99, 'A retelling of American history from the perspective of marginalized groups.'),
-    ('A Brief History of Time', 'url_to_image10.jpg', 6, 1988, 15.99, 'A classic work by Stephen Hawking on cosmology and black holes.'),
-    ('Harry Potter and the Sorcerer\'s Stone', 'url_to_image1.jpg', 1, 1997, 19.99, 'The first book in the Harry Potter series.'),
-    ('1984', 'url_to_image2.jpg', 2, 1949, 9.99, 'A dystopian social science fiction novel and cautionary tale about the dangers of totalitarianism.'),
-    ('The Hobbit', 'url_to_image3.jpg', 3, 1937, 14.99, 'A fantasy novel and children\'s book by J.R.R. Tolkien.'),
-    ('Pride and Prejudice', 'url_to_image4.jpg', 4, 1813, 12.99, 'A romantic novel that also critiques the British landed gentry at the end of the 18th century.');
+    ('The Emperor of All Maladies', 'the-emperor-of-all-maladies.jpg', 1, 2010, 16.99, 'A biography of cancer, covering its history, treatment, and research developments.'),
+    ('The Intelligent Investor', 'the-intelligent-investor.jpg', 2, 1949, 22.50, 'A definitive book on value investing and financial principles.'),
+    ('Calculus Made Easy', 'calculus-made-easy.jpg', 3, 1910, 13.99, 'A simplified introduction to calculus concepts and applications.'),
+    ('Clean Code', 'clean-code.jpg', 4, 2008, 29.99, 'A handbook of agile software craftsmanship.'),
+    ('A People\'s History of the United States', 'a-peoples-history-of-the-united-states.jpg', 5, 1980, 18.99, 'A retelling of American history from the perspective of marginalized groups.'),
+    ('A Brief History of Time', 'a-brief-history-of-time.jpg', 6, 1988, 15.99, 'A classic work by Stephen Hawking on cosmology and black holes.'),
+    ('Harry Potter and the Sorcerer\'s Stone', 'harry-potter-and-the-sorcerers-stone.jpg', 7, 1997, 19.99, 'The first book in the Harry Potter series.'),
+    ('1984', '1984.jpg', 8, 1949, 9.99, 'A dystopian social science fiction novel and cautionary tale about the dangers of totalitarianism.'),
+    ('The Hobbit', 'the-hobbit.jpg', 9, 1937, 14.99, 'A fantasy novel and children\'s book by J.R.R. Tolkien.'),
+    ('Pride and Prejudice', 'pride-and-prejudice.jpg', 10, 1813, 12.99, 'A romantic novel that also critiques the British landed gentry at the end of the 18th century.');
 
 -- Sample data for BookGenres
 INSERT INTO BookGenres (book_id, genre_id)
 VALUES
-    (1, 7),  -- Harry Potter -> Fantasy
-    (2, 8),  -- 1984 -> Science Fiction
-    (2, 9),  -- 1984 -> Classics
-    (3, 7),  -- The Hobbit -> Fantasy
-    (4, 10), -- Pride and Prejudice -> Romance
-    (4, 9),  -- Pride and Prejudice -> Classics
-    (5, 1),  -- The Emperor of All Maladies -> Health and Medicine
-    (6, 2),  -- The Intelligent Investor -> Finance
-    (7, 3),  -- Calculus Made Easy -> Mathematics
-    (8, 4),  -- Clean Code -> Coding
-    (9, 5),  -- A People's History of the United States -> History
-    (10, 6); -- A Brief History of Time -> Science
+    (1, 1),  -- The Emperor of All Maladies -> Medicine (book_id 1)
+    (2, 2),  -- The Intelligent Investor -> Finance (book_id 2)
+    (3, 3),  -- Calculus Made Easy -> Math (book_id 3)
+    (4, 4),  -- Clean Code -> Coding (book_id 4)
+    (5, 5),  -- A People's History of the United States -> History (book_id 5)
+    (6, 6),  -- A Brief History of Time -> Science (book_id 6)
+    (7, 7),  -- Harry Potter and the Sorcerer's Stone -> Fantasy (book_id 7)
+    (8, 8),  -- 1984 -> Fiction (book_id 8)
+    (9, 7),  -- The Hobbit -> Fantasy (book_id 9)
+    (10, 10), -- Pride and Prejudice -> Romance (book_id 10)
+    (7, 7),  -- Harry Potter and the Sorcerer's Stone -> Fantasy (book_id 7)
+    (8, 8),  -- 1984 -> Fiction (book_id 8)
+    (10, 9); -- Pride and Prejudice -> Classics (book_id 10)
+
 
 -- Sample data for Users
 INSERT INTO Users (username, password_hash, email, address)

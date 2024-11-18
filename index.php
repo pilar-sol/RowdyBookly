@@ -1,3 +1,18 @@
+<?php
+session_start();
+include 'config.php';  // Include database connection
+
+// Check if the user is logged in
+$is_logged_in = isset($_SESSION['user_id']);
+
+// Count the total number of items in the cart
+$cart_item_count = 0;
+if (isset($_SESSION['cart'])) {
+    foreach ($_SESSION['cart'] as $item) {
+        $cart_item_count += $item['quantity'];  // Sum up quantities of all items
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,14 +21,8 @@
     <title>RowdyBookly</title>
     <link rel="stylesheet" href="css/style.css">
     <style> 
-        .main-page {
-            color: beige;
-            text-decoration: none; 
-        }
-
-        .main-page:hover {
-            color: #ffa07a; 
-        }
+        <?php include 'css/style.css'; ?>
+        
     </style>
 </head>
 <body>
@@ -27,7 +36,12 @@
             <a href="categories.php" class="category-button">Categories</a>
             <input type="text" placeholder="Search">
             <button class="search-button">🔍</button>
-            <a href="login.php" class="icon">👤</a>
+            <?php if ($is_logged_in): ?>
+                    <span class="login_welcome">Welcome, <?php echo $_SESSION['username']; ?>!</span>
+                    <a href="logout.php">Logout</a>
+            <?php else: ?>
+                <a href="login.php" class="icon">👤</a>
+            <?php endif; ?>
             <a href="javascript:void(0);" class="icon" onclick="openCart()">🛒</a>
         </nav>
     </header>
