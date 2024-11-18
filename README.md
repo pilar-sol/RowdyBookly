@@ -15,6 +15,7 @@ This guide provides instructions specifically for setting up and testing the dat
 2. Account Register
 3. Admin management (managing orders, adding/editing/removing authors, genre, books information)
 4. User profile page (this would include user information like email, phone number, address)
+5. Search for product 
 
 ## Getting Started
 
