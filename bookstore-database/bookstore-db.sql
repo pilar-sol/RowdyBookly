@@ -140,8 +140,6 @@ VALUES
     (8, 8),  -- 1984 -> Fiction (book_id 8)
     (9, 7),  -- The Hobbit -> Fantasy (book_id 9)
     (10, 10), -- Pride and Prejudice -> Romance (book_id 10)
-    (7, 7),  -- Harry Potter and the Sorcerer's Stone -> Fantasy (book_id 7)
-    (8, 8),  -- 1984 -> Fiction (book_id 8)
     (10, 9); -- Pride and Prejudice -> Classics (book_id 10)
 
 

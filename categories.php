@@ -89,6 +89,11 @@ if (isset($_SESSION['cart'])) {
     </header>
     
     <main class="categories-container">
+            <a href="books.php?genre=<?php echo urlencode($genre_name); ?>" class="category">
+                    <span class="category-icon">
+                        <img src="icon/everything.png" alt="<?php echo htmlspecialchars('All'); ?>" />
+                    </span>
+                    <p><?php echo htmlspecialchars('All'); ?></p>
         <?php if ($result && $result->num_rows > 0): ?>
             <?php while ($row = $result->fetch_assoc()): ?>
                 <?php 
