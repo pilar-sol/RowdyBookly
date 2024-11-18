@@ -2,10 +2,19 @@
 
 Welcome to Rowdy Bookly! Our mission is to provide a fast, convenient, and secure shopping experience, made to meet the unique needs of the bookworm community. 
 
-This project is the culmination of an intense two-week learning journey where we had to quickly familiarize ourselves with PHP, SQL, and the XAMPP server. Despite the steep learning curve, we were able to overcome develop a functional and interactive platform that showcases both our adaptability and ability to apply new skills in a short period of time.
+This project is the culmination of an intense two-week learning journey where we had to quickly familiarize ourselves with PHP, SQL, and the XAMPP server, even though most of our group members have no prior experience with this technology. Despite the steep learning curve, we were able to develop a functional and interactive platform that showcases both our adaptability and ability to apply new skills in a short period of time.
 
 This guide provides instructions specifically for setting up and testing the database-testing branch locally.
-
+## Core features that we managed to develop for this prototype
+1. Display categories directly from the database
+2. Display books based on the selected category
+3. Add book to cart
+4. Compute the total prices
+## Core features that we have not managed to develop for this prototype but aim to complete for the final product:
+1. Account Login
+2. Account Register
+3. Admin management (managing orders, adding/editing/removing authors, genre, books information)
+4. User profile page (this would include user information like email, phone number, address)
 
 ## Getting Started
 
