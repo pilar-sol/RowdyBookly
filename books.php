@@ -11,7 +11,7 @@ $genre = $_GET['genre'];
 
 // Fetch books by genre
 $books_query = $conn->prepare("
-    SELECT b.title, b.cover_image_url, b.publication_year, b.price, b.description, a.name AS author_name
+    SELECT b.book_id, b.title, b.cover_image_url, b.publication_year, b.price, b.description, a.name AS author_name
     FROM Books b
     JOIN BookGenres bg ON b.book_id = bg.book_id
     JOIN Genres g ON bg.genre_id = g.genre_id
@@ -107,7 +107,8 @@ if ($books_result->num_rows > 0):
                 <p><strong>Author:</strong> <?php echo htmlspecialchars($book['author_name']); ?></p>
                 <p><strong>Price:</strong> $<?php echo number_format($book['price'], 2); ?></p>
                 <p><strong>Published:</strong> <?php echo htmlspecialchars($book['publication_year']); ?></p>
-                <!-- <p><?php echo htmlspecialchars($book['description']); ?></p> -->
+                <p><?php echo htmlspecialchars($book['description']); ?></p>
+                <p><?php echo htmlspecialchars( $book['book_id']); ?></p>
                 
                 <!-- Add to Cart Button -->
                 <form action="add-to-cart.php" method="post">

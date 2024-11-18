@@ -122,10 +122,10 @@ VALUES
     ('Clean Code', 'clean-code.jpg', 4, 2008, 29.99, 'A handbook of agile software craftsmanship.'),
     ('A People\'s History of the United States', 'a-peoples-history-of-the-united-states.jpg', 5, 1980, 18.99, 'A retelling of American history from the perspective of marginalized groups.'),
     ('A Brief History of Time', 'a-brief-history-of-time.jpg', 6, 1988, 15.99, 'A classic work by Stephen Hawking on cosmology and black holes.'),
-    ('Harry Potter and the Sorcerer\'s Stone', 'harry-potter-and-the-sorcerers-stone.jpg', 1, 1997, 19.99, 'The first book in the Harry Potter series.'),
-    ('1984', '1984.jpg', 2, 1949, 9.99, 'A dystopian social science fiction novel and cautionary tale about the dangers of totalitarianism.'),
-    ('The Hobbit', 'the-hobbit.jpg', 3, 1937, 14.99, 'A fantasy novel and children\'s book by J.R.R. Tolkien.'),
-    ('Pride and Prejudice', 'pride-and-prejudice.jpg', 4, 1813, 12.99, 'A romantic novel that also critiques the British landed gentry at the end of the 18th century.');
+    ('Harry Potter and the Sorcerer\'s Stone', 'harry-potter-and-the-sorcerers-stone.jpg', 7, 1997, 19.99, 'The first book in the Harry Potter series.'),
+    ('1984', '1984.jpg', 8, 1949, 9.99, 'A dystopian social science fiction novel and cautionary tale about the dangers of totalitarianism.'),
+    ('The Hobbit', 'the-hobbit.jpg', 9, 1937, 14.99, 'A fantasy novel and children\'s book by J.R.R. Tolkien.'),
+    ('Pride and Prejudice', 'pride-and-prejudice.jpg', 10, 1813, 12.99, 'A romantic novel that also critiques the British landed gentry at the end of the 18th century.');
 
 -- Sample data for BookGenres
 INSERT INTO BookGenres (book_id, genre_id)
