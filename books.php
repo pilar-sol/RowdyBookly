@@ -10,20 +10,30 @@ if (!isset($_GET['genre'])) {
 $genre = $_GET['genre'];
 
 // Fetch books by genre
-$books_query = $conn->prepare("
-    SELECT b.book_id, b.title, b.cover_image_url, b.publication_year, b.price, b.description, a.name AS author_name
-    FROM Books b
-    JOIN BookGenres bg ON b.book_id = bg.book_id
-    JOIN Genres g ON bg.genre_id = g.genre_id
-    JOIN Authors a ON b.author_id = a.author_id
-    WHERE g.genre_name = ?
-");
-$books_query->bind_param("s", $genre);
+if ($genre == 'All') {
+    // If the genre is 'All', fetch all books without filtering by genre
+    $books_query = $conn->prepare("
+        SELECT b.book_id, b.title, b.cover_image_url, b.publication_year, b.price, b.description, a.name AS author_name
+        FROM Books b
+        JOIN Authors a ON b.author_id = a.author_id
+    ");
+} else {
+    // Fetch books by the specified genre
+    $books_query = $conn->prepare("
+        SELECT b.book_id, b.title, b.cover_image_url, b.publication_year, b.price, b.description, a.name AS author_name
+        FROM Books b
+        JOIN BookGenres bg ON b.book_id = bg.book_id
+        JOIN Genres g ON bg.genre_id = g.genre_id
+        JOIN Authors a ON b.author_id = a.author_id
+        WHERE g.genre_name = ?
+    ");
+    $books_query->bind_param("s", $genre);
+}
 $books_query->execute();
 $books_result = $books_query->get_result();
 
 // Check if books were found for the genre
-if ($books_result->num_rows > 0):
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,8 +62,11 @@ if ($books_result->num_rows > 0):
             <a href="login.php" class="icon">👤</a>
             <a href="cart.php" class="icon">🛒</a>
         </nav>
+        
     </header>
-    
+
+    <?php if ($books_result->num_rows > 0):?>
+
     <main class="book-list-container">
         <h2>Books in <?php echo htmlspecialchars(ucwords($genre)); ?> Genre</h2>
         <div class="books">
@@ -79,14 +92,15 @@ if ($books_result->num_rows > 0):
         </div>
     </main>
     
+    <?php else: ?>
+    <p>No books found in this genre.</p>
+    <?php endif; ?>
     <footer>
         <p>&copy; 2024 RowdyBookly</p>
     </footer>
 </body>
 </html>
-<?php else: ?>
-    <p>No books found in this genre.</p>
-<?php endif; ?>
+
 
 </body>
 </html>
