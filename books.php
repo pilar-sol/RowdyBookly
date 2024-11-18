@@ -32,53 +32,10 @@ if ($books_result->num_rows > 0):
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Books in <?php echo htmlspecialchars(ucwords($genre)); ?> Genre</title>
     <link rel="stylesheet" href="css/style.css">
-    <style><?php include 'css/style.css'; ?>
-        .book-list-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
-        }
-
-        .book-item {
-            background: #fff;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            width: 200px;
-            padding: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-
-        .book-item img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-        }
-
-        .book-item h3 {
-            font-size: 1.2rem;
-            margin: 10px 0;
-        }
-
-        .book-item p {
-            font-size: 0.9rem;
-            color: #555;
-        }
-
-        .book-item button {
-            background-color: #28a745;
-            color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-
-        .book-item button:hover {
-            background-color: #218838;
-        }
+    <style>
+        
+        <?php include 'css/style.css'; ?>
+        <?php include 'css/book-display.css'; ?>
     </style>
 </head>
 <body>
@@ -104,12 +61,12 @@ if ($books_result->num_rows > 0):
             <div class="book-item">
                 <img src="images/<?php echo htmlspecialchars($book['cover_image_url']); ?>" alt="<?php echo htmlspecialchars($book['title']); ?>">
                 <h3><?php echo htmlspecialchars($book['title']); ?></h3>
-                <p><strong>Author:</strong> <?php echo htmlspecialchars($book['author_name']); ?></p>
+                <p><strong>By:</strong> <?php echo htmlspecialchars($book['author_name']); ?></p>
                 <p><strong>Price:</strong> $<?php echo number_format($book['price'], 2); ?></p>
-                <p><strong>Published:</strong> <?php echo htmlspecialchars($book['publication_year']); ?></p>
+                <!-- <p><strong>Published:</strong> <?php echo htmlspecialchars($book['publication_year']); ?></p>
                 <p><?php echo htmlspecialchars($book['description']); ?></p>
                 <p><?php echo htmlspecialchars( $book['book_id']); ?></p>
-                
+            -->
                 <!-- Add to Cart Button -->
                 <form action="add-to-cart.php" method="post">
                     <input type="hidden" name="book_id" value="<?php echo (int)$book['book_id']; ?>">

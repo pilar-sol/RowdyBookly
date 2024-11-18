@@ -4,6 +4,7 @@ include 'config.php';  // Database connection
 
 // Check if book_id and quantity are passed via POST
 if (isset($_POST['book_id']) && isset($_POST['quantity'])) {
+    $genre = ($_POST['genre']);
     $book_id = intval($_POST['book_id']);
     $quantity = max(1, intval($_POST['quantity'])); // Ensure quantity is at least 1
 
@@ -33,9 +34,9 @@ if (isset($_POST['book_id']) && isset($_POST['quantity'])) {
                 'quantity' => $quantity
             ];
         }
-
+        header("Location: books.php?genre=" . urlencode($genre) . "&message=added_to_cart");
         // Redirect to the books page with a success message
-        header("Location: books.php?message=added_to_cart");
+        //header("Location: books.php?message=added_to_cart");
         exit();
     } else {
         // Book not found
