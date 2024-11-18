@@ -110,8 +110,9 @@ if ($books_result->num_rows > 0):
                 <!-- <p><?php echo htmlspecialchars($book['description']); ?></p> -->
                 
                 <!-- Add to Cart Button -->
-                <form action="add_to_cart.php" method="POST">
-                    <!-- <input type="hidden" name="book_id" value="<?php echo $book['book_id']; ?>"> -->   
+                <form action="add-to-cart.php" method="post">
+                    <input type="hidden" name="book_id" value="<?php echo (int)$book['book_id']; ?>">
+                    <input type="number" name="quantity" value="1" min="1" max="10">
                     <button type="submit">Add to Cart</button>
                 </form>
             </div>

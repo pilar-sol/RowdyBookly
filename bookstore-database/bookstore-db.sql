@@ -84,6 +84,8 @@ CREATE TABLE OrderItems (
     FOREIGN KEY (order_id) REFERENCES Orders(order_id) ON DELETE CASCADE,
     FOREIGN KEY (book_id) REFERENCES Books(book_id) ON DELETE CASCADE
 );
+
+
 INSERT INTO Authors (name, bio)
 VALUES
     ('Siddhartha Mukherjee', 'An Indian-American physician and biologist, known for his work on cancer.'),
