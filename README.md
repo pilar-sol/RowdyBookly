@@ -1,7 +1,10 @@
 # RowdyBookly
 
-RowdyBookly is a dynamic book e-commerce platform that allows users to browse categories, view books, and manage their shopping cart. This project is built with PHP and MySQL using XAMPP as the local development environment. 
+Welcome to Rowdy Bookly! Our mission is to provide a fast, convenient, and secure shopping experience, made to meet the unique needs of the bookworm community. 
 
+This project is the culmination of an intense two-week learning journey where we had to quickly familiarize ourselves with PHP, SQL, and the XAMPP server. Despite the steep learning curve, we were able to overcome develop a functional and interactive platform that showcases both our adaptability and ability to apply new skills in a short period of time.
+
+This guide provides instructions specifically for setting up and testing the database-testing branch locally.
 
 
 ## Getting Started
