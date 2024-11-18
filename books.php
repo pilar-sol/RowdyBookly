@@ -2,7 +2,7 @@
 session_start();
 include 'config.php';  // Include your database connection
 
-// Check if genre is passed in the URL
+//Check if genre is passed in the URL
 if (!isset($_GET['genre'])) {
     die("Genre not specified.");
 }
@@ -114,6 +114,7 @@ if ($books_result->num_rows > 0):
                 <form action="add-to-cart.php" method="post">
                     <input type="hidden" name="book_id" value="<?php echo (int)$book['book_id']; ?>">
                     <input type="number" name="quantity" value="1" min="1" max="10">
+                    <input type="hidden" name="genre" value="<?php echo htmlspecialchars($genre); ?>">
                     <button type="submit">Add to Cart</button>
                 </form>
             </div>
