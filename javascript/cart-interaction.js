@@ -8,5 +8,5 @@ function closeCart() {
     document.getElementById("cartPanel").classList.remove("active");
 }
 
-// Optional: Close the cart when clicking outside of it
+// Close the cart when clicking outside of it
 document.getElementById("overlay").addEventListener("click", closeCart);
