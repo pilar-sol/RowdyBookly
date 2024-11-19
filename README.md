@@ -9,7 +9,8 @@ This guide provides instructions specifically for setting up and testing the dat
 1. Display categories directly from the database
 2. Display books based on the selected category
 3. Add book to cart
-4. Compute the total prices
+4. Compute the total prices: The cart will deliver an estimate checkout price without tax, the checkout page will add tax to the subtotal
+5. Remove items from the cart (partly): We can only manage to do this in the order review due to knowledge constraint
 ## Core features that we have not managed to develop for this prototype but aim to complete for the final product:
 1. Account Login
 2. Account Register
