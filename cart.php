@@ -24,9 +24,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
         }
     } elseif (isset($_POST['remove_item'])) {
-        // Remove an item from the cart
-        $book_id = $_POST['book_id'];
-        unset($_SESSION['cart'][$book_id]);
+        foreach ($_POST['remove_item'] as $book_id => $value) {
+            unset($_SESSION['cart'][$book_id]);
+        }
     }
 }
 ?>
@@ -121,6 +121,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <th>Book</th>
                     <th>Quantity</th>
                     <th>Price ($)</th>
+                    <th>book ID</th>
                     <th>Total ($)</th>
                     <th>Action</th>
                 </tr>
@@ -147,10 +148,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <input type="number" name="quantity[<?php echo $book_id; ?>]" value="<?php echo $item['quantity']; ?>" min="0">
                         </td>
                         <td><?php echo number_format($price, 2); ?></td>
+                        <td><?php echo $book_id; ?></td>
                         <td><?php echo number_format($item_total, 2); ?></td>
                         <td>
-                            <button type="submit" name="remove_item" value="1">Remove</button>
-                            <input type="hidden" name="book_id" value="<?php echo $book_id; ?>">
+                            <button type="submit" name="remove_item[<?php echo $book_id; ?>]" value="1">Remove</button>
                         </td>
                     </tr>
                 <?php } ?>
