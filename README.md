@@ -70,9 +70,9 @@ Ensure you have the following installed on your machine:
 
 ## Database Setup
 
-### Step 1: Start MySQL
+### Step 1: Start MySQL and Apache server
 1. Open the XAMPP Control Panel.
-2. Click "Start" next to **MySQL** to start the database server.
+2. Click "Start" next to **MySQL** and **Apache** to start the database server.
 
 ### Step 2: Create the Database
 1. Open a browser and navigate to:
