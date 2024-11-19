@@ -7,6 +7,18 @@ if (!isset($_GET['genre'])) {
     die("Genre not specified.");
 }
 
+// Check if the user is logged in
+$is_logged_in = isset($_SESSION['user_id']);
+
+// Count the total number of items in the cart
+$cart_item_count = 0;
+if (isset($_SESSION['cart'])) {
+    foreach ($_SESSION['cart'] as $item) {
+        $cart_item_count += $item['quantity'];  // Sum up quantities of all items
+    }
+}
+
+
 $genre = $_GET['genre'];
 
 // Fetch books by genre
@@ -34,6 +46,7 @@ $books_result = $books_query->get_result();
 
 // Check if books were found for the genre
 
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,10 +72,14 @@ $books_result = $books_query->get_result();
             <a href="categories.php" class="category-button">Categories</a>
             <input type="text" placeholder="Search">
             <button class="search-button">🔍</button>
-            <a href="login.php" class="icon">👤</a>
-            <a href="cart.php" class="icon">🛒</a>
+            <?php if ($is_logged_in): ?>
+                    <span class="login_welcome">Welcome, <?php echo $_SESSION['username']; ?>!</span>
+                    <a href="logout.php">Logout</a>
+            <?php else: ?>
+                <a href="login.php" class="icon">👤</a>
+            <?php endif; ?>
+            <a href="javascript:void(0);" class="icon" onclick="openCart()">🛒</a>
         </nav>
-        
     </header>
 
     <?php if ($books_result->num_rows > 0):?>
@@ -98,9 +115,53 @@ $books_result = $books_query->get_result();
     <footer>
         <p>&copy; 2024 RowdyBookly</p>
     </footer>
-</body>
-</html>
 
+    <div class="overlay" id="overlay"></div>
+    <div class="cart-panel" id="cartPanel">
+        <div class="cart-header">
+            <h2>Shopping Cart 🛒</h2>
+            <button class="close-cart" onclick="closeCart()">✖</button>
+        </div>
+        <div class="cart-content">
+            <?php if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])): ?>
+                <ul>
+                    <?php
+                    // Initialize subtotal
+                    $subtotal = 0;
+
+                    foreach ($_SESSION['cart'] as $book_id => $item) {
+                        // Fetch book details from the database
+                        $sql = "SELECT title, price FROM Books WHERE book_id = ?";
+                        $stmt = $conn->prepare($sql);
+                        $stmt->bind_param("i", $book_id);
+                        $stmt->execute();
+                        $stmt->bind_result($title, $price);
+                        $stmt->fetch();
+                        $stmt->close();
+
+                        // Calculate total price for the item
+                        $item_total = $price * $item['quantity'];
+                        $subtotal += $item_total;
+                    ?>
+                        <li>
+                            <div class='cart-item'>
+                                <strong><?php echo htmlspecialchars($title); ?></strong><br>
+                                Price: $<?php echo number_format($price, 2); ?> <br>
+                                Quantity: <?php echo $item['quantity']; ?><br>
+                                Total: $<?php echo number_format($item_total, 2); ?>
+                            </div>
+                        </li>
+                    <?php } ?>
+                </ul>
+                <hr>
+                <p><strong>Subtotal(before taxes): $<?php echo number_format($subtotal, 2); ?></strong></p>
+                <a href="review-order.php" class="checkout-button">Review order</a>
+            <?php else: ?>
+                <p>Your cart is empty. <a href="categories.php">Browse Books</a></p>
+            <?php endif; ?>
+        </div>
+    </div>
 
 </body>
+<script src="javascript/cart-interaction.js"></script>
 </html>

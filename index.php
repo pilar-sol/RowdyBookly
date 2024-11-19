@@ -128,20 +128,7 @@ if (isset($_SESSION['cart'])) {
     </div>
 </div>
 
-<script>
-function openCart() {
-    document.getElementById("overlay").classList.add("active");
-    document.getElementById("cartPanel").classList.add("active");
-}
-
-function closeCart() {
-    document.getElementById("overlay").classList.remove("active");
-    document.getElementById("cartPanel").classList.remove("active");
-}
-
-// Optional: Close the cart when clicking outside of it
-document.getElementById("overlay").addEventListener("click", closeCart);
-</script>
+<script src="javascript/cart-interaction.js"></script>
 
 </body>
 </html>
