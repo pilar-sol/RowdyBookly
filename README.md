@@ -52,8 +52,13 @@ Ensure you have the following installed on your machine:
    3. extract the zip
 
 ### Step 2: Move the Project to XAMPP’s `htdocs` Directory
-1. Copy the `RowdyBookly` folder.
-2. Paste it into the `htdocs` directory of your XAMPP installation:
+1. Navigate to the htdocs folder in the directory of your XAMPP installation
+   - Windows: `C:\xampp\htdocs`
+   - macOS: `/Applications/XAMPP/htdocs`
+3. Create a folder in htdocs
+4. Move all the surrounding file into the folder you just created
+6. Copy the `RowdyBookly` folder.
+7. Paste it into the `htdocs` directory of your XAMPP installation **next to** the other folder that you just created:
    - Windows: `C:\xampp\htdocs`
    - macOS: `/Applications/XAMPP/htdocs`
 
