@@ -1,4 +1,5 @@
 <?php
+session_start();
 include 'config.php'; // Include your database connection
 
 // Fetch genres from the database
