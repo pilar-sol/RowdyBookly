@@ -112,19 +112,19 @@ Ensure you have the following installed on your machine:
 ## Usage
 
 ### Logging In
-1. Navigate to the login page:
+1. Navigate to the login page: (not yet implemented)
    ```
    http://localhost/RowdyBookly/login.php
    ```
-2. Enter the following credentials:
+2. Enter the following credentials: (not yet implemented)
    - Username: `user`
    - Password: `password`
 3. Click the **login arrow** button to proceed to the homepage.
 
-### Exploring Categories
+### Exploring Categories (implemented)
 1. Click on the "Categories" button on the homepage.
 2. Select a category to view books in that category.
 
-### Shopping Cart
+### Shopping Cart (implemented)
 1. Click on the shopping cart icon in the header.
 2. Manage your cart, which will display selected items or indicate when it is empty.
