@@ -27,40 +27,31 @@ Follow these steps to set up and test the `database-testing` branch locally.
 
 Ensure you have the following installed on your machine:
 1. **XAMPP** (or similar local PHP server) - [Download XAMPP](https://www.apachefriends.org/index.html)
-2. **Git** - [Download Git](https://git-scm.com/)
+2. **Git** - [Download Git](https://git-scm.com/) (optional for deployment)
 3. **Web Browser** (e.g., Chrome, Firefox, Edge)
 
 ---
 
 ## Branch Setup
 
-### Step 1: Clone the Repository
-1. Open a terminal or command prompt.
-2. Navigate to the folder where you want to clone the project.
-3. Run the following command to clone the repository:
-   ```bash
-   git clone https://github.com/pilar-sol/RowdyBookly.git
-   ```
-4. Navigate into the project directory:
-   ```bash
-   cd RowdyBookly
-   ```
+### Step 1: Clone the Repository or download the zip straight from this directory
+1. Way one: Clone the Repository
+   1. Open a terminal or command prompt.
+   2. Navigate to the folder where you want to clone the project.
+   3. Run the following command to clone the repository:
+      ```bash
+      git clone https://github.com/pilar-sol/RowdyBookly.git
+      ```
+   4. Navigate into the project directory:
+      ```bash
+      cd RowdyBookly
+      ```
+2. Way two: Download the zip
+   1. Clicking on the coding button
+   2. Download the file as zip
+   3. extract the zip
 
-### Step 2: Switch to the `database-testing` Branch
-1. Fetch the latest updates from the remote repository:
-   ```bash
-   git fetch
-   ```
-2. Check out the `database-testing` branch:
-   ```bash
-   git checkout database-testing
-   ```
-3. Pull the latest updates from the branch to ensure your local copy is up-to-date:
-   ```bash
-   git pull origin database-testing
-   ```
-
-### Step 3: Move the Project to XAMPP’s `htdocs` Directory
+### Step 2: Move the Project to XAMPP’s `htdocs` Directory
 1. Copy the `RowdyBookly` folder.
 2. Paste it into the `htdocs` directory of your XAMPP installation:
    - Windows: `C:\xampp\htdocs`
