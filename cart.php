@@ -4,7 +4,7 @@ include 'config.php';  // Include database connection
 
 // Check if cart is empty
 if (!isset($_SESSION['cart']) || empty($_SESSION['cart'])) {
-    echo "<p>Your cart is empty. <a href='books.php'>Go back to shopping</a></p>";
+    echo "<p>Your cart is empty. <a href='index.php'>Go back to shopping</a></p>";
     exit();
 }
 
@@ -175,7 +175,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <p>Total: $<?php echo number_format($total, 2); ?></p>
 
         <a href="checkout.php" class="checkout-button">Proceed to Checkout</a>
-        <a href="books.php" class="back-button">Back to Home</a>
+        <a href="index.php" class="back-button">Back to Home</a>
     </div>
 
     <?php $conn->close(); ?>

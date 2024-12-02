@@ -175,7 +175,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <p>Total: $<?php echo number_format($total, 2); ?></p>
 
         <a href="checkout.php" class="checkout-button">Proceed to Checkout</a>
-        <a href="books.php" class="back-button">Back to Home</a>
+        <a href="index.php" class="back-button">Back to Home</a>
     </div>
 
     <?php $conn->close(); ?>

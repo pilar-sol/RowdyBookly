@@ -1,4 +1,9 @@
 <?php
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 session_start();
 include 'config.php';  // Include database connection
 
@@ -37,12 +42,15 @@ if (isset($_SESSION['cart'])) {
             <input type="text" placeholder="Search">
             <button class="search-button">🔍</button>
             <?php if ($is_logged_in): ?>
-                    <span class="login_welcome">Welcome, <?php echo $_SESSION['username']; ?>!</span>
-                    <a href="logout.php">Logout</a>
+                    <a href="profile.php" class="icon">👤</a>
+                    <a href="logout.php" class="icon" title="Logout">
+                        <img src="images/logout.png" alt="Logout" style="width:30px; height:30px;">
+</a>
             <?php else: ?>
-                <a href="login.php" class="icon">👤</a>
+                <a href="profile.php" class="icon">👤</a>
             <?php endif; ?>
             <a href="javascript:void(0);" class="icon" onclick="openCart()">🛒</a>
+            
         </nav>
     </header>
     

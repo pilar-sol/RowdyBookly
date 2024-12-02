@@ -80,8 +80,10 @@ if (isset($_SESSION['cart'])) {
             <input type="text" placeholder="Search">
             <button class="search-button">🔍</button>
             <?php if ($is_logged_in): ?>
-                    <span class="login_welcome">Welcome, <?php echo $_SESSION['username']; ?>!</span>
-                    <a href="logout.php">Logout</a>
+                    <a href="profile.php" class="icon">👤</a>
+                    <a href="logout.php" class="icon" title="Logout">
+                        <img src="images/logout.png" alt="Logout" style="width:30px; height:30px;">
+</a>
             <?php else: ?>
                 <a href="login.php" class="icon">👤</a>
             <?php endif; ?>
