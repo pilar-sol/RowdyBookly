@@ -1,12 +1,28 @@
 <?php
 // Database credentials
-define('DB_HOST', 'localhost');
-define('DB_USER', 'root');
-define('DB_PASSWORD', ''); // Leave empty if no password is set
-define('DB_NAME', 'bookstore_db');
+
+// Fetch database URL from environment variable
+//$dbUrl = getenv('CLEARDB_DATABASE_URL');
+//$dbUrl = 'mysql://aqapvw1dt4k36dav:cp8n1pd5tgos08nw@qn0cquuabmqczee2.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/rp7q9eqqkuuf90wn';
+$dbUrl = getenv('JAWSDB_URL');
+
+// // Fallback for local testing (optional, remove in production)
+// if (!$dbUrl) {
+//     $dbUrl = 'mysql://aqapvw1dt4k36dav:cp8n1pd5tgos08nw@qn0cquuabmqczee2.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/rp7q9eqqkuuf90wn';
+// }
+
+// Parse the URL
+$dbParts = parse_url($dbUrl);
+
+// Extract database connection details
+define('DB_HOST', $dbParts['host']); // Hostname
+define('DB_PORT', 3306);             // Port number
+define('DB_USER', $dbParts['user']); // Username
+define('DB_PASSWORD', $dbParts['pass']); // Password
+define('DB_NAME', ltrim($dbParts['path'], '/')); // Database name
 
 // Create connection
-$conn = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+$conn = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT);
 
 // Check connection
 if ($conn->connect_error) {
@@ -33,5 +49,7 @@ $schemaFile = 'schema.sql'; // Path to your SQL file
 if (file_exists($schemaFile)) {
     executeSqlFile($conn, $schemaFile);
 }
+
+?>
 
 ?>
