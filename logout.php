@@ -25,10 +25,10 @@ session_destroy();
         }
     </style>
     <script>
-        // Redirect to index.php after 3 seconds
+        // Redirect to index.php after 1 seconds
         setTimeout(() => {
             window.location.href = "index.php";
-        }, 3000);
+        }, 1000);
     </script>
 </head>
 <body>
