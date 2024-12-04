@@ -1,7 +1,7 @@
 <?php
 // Fetch database URL from environment variable
-//$dbUrl = getenv('CLEARDB_DATABASE_URL');
-$dbUrl = 'mysql://aqapvw1dt4k36dav:cp8n1pd5tgos08nw@qn0cquuabmqczee2.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/rp7q9eqqkuuf90wn';
+$dbUrl = getenv('CLEARDB_DATABASE_URL');
+//$dbUrl = 'mysql://aqapvw1dt4k36dav:cp8n1pd5tgos08nw@qn0cquuabmqczee2.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/rp7q9eqqkuuf90wn';
 
 
 // Parse the URL
@@ -15,7 +15,7 @@ define('DB_PASSWORD', $dbParts['pass']);
 define('DB_NAME', ltrim($dbParts['path'], '/'));
 
 // Create connection
-$conn = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+$conn = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT);
 
 // Check connection
 if ($conn->connect_error) {
