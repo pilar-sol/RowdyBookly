@@ -1,11 +1,16 @@
 <?php
 session_start(); // Start a session to track logged-in users
 
-// Database configuration
-$host = 'localhost';      // Database host
-$dbname = 'rowdybookly';  // Database name
-$username = 'root';       // Database username
-$password = '';           // Database password
+// Fetch database URL from environment variable
+$dbUrl = getenv('CLEARDB_DATABASE_URL');
+
+// Parse the URL
+$dbParts = parse_url($dbUrl);
+
+$host = $dbParts['host'];
+$dbname = ltrim($dbParts['path'], '/');
+$username = $dbParts['user'];
+$password = $dbParts['pass'];
 
 // Connect to the database
 try {
