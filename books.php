@@ -55,13 +55,6 @@ $books_result = $books_query->get_result();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Books in <?php echo htmlspecialchars(ucwords($genre)); ?> Genre</title>
     <link rel="stylesheet" href="css/style.css">
-    <style>
-        
-        <?php include 'css/style.css'; ?>
-        <?php include 'css/book-display.css'; ?>
-    </style>
-</head>
-<body>
     <header>
         <h1 class="logo">
             <a class="main-page" href="index.php">
@@ -81,33 +74,49 @@ $books_result = $books_query->get_result();
             <a href="javascript:void(0);" class="icon" onclick="openCart()">🛒</a>
         </nav>
     </header>
+    <style>
+        
+        <?php include 'css/style.css'; ?>
+        <?php include 'css/book-display.css'; ?>
+        body{
+            
+        }
+    </style>
+    
+</head>
+<body>
+    
 
     <?php if ($books_result->num_rows > 0):?>
 
-    <main class="book-list-container">
+    <div class="book-list-container">
         <h2>Books in <?php echo htmlspecialchars(ucwords($genre)); ?> Genre</h2>
         <div class="books">
+            
             <?php while ($book = $books_result->fetch_assoc()): ?>
-            <div class="book-item">
-                <img src="images/<?php echo htmlspecialchars($book['cover_image_url']); ?>" alt="<?php echo htmlspecialchars($book['title']); ?>">
-                <h3><?php echo htmlspecialchars($book['title']); ?></h3>
-                <p><strong>By:</strong> <?php echo htmlspecialchars($book['author_name']); ?></p>
-                <p><strong>Price:</strong> $<?php echo number_format($book['price'], 2); ?></p>
-                <!-- <p><strong>Published:</strong> <?php echo htmlspecialchars($book['publication_year']); ?></p>
-                <p><?php echo htmlspecialchars($book['description']); ?></p>
-                <p><?php echo htmlspecialchars( $book['book_id']); ?></p>
-            -->
-                <!-- Add to Cart Button -->
-                <form action="add-to-cart.php" method="post">
-                    <input type="hidden" name="book_id" value="<?php echo (int)$book['book_id']; ?>">
-                    <input type="number" name="quantity" value="1" min="1" max="10">
-                    <input type="hidden" name="genre" value="<?php echo htmlspecialchars($genre); ?>">
-                    <button type="submit">Add to Cart</button>
-                </form>
-            </div>
+                
+                    <div class="book-item">
+                        <a href="book-detail.php?book_id=<?php echo (int)$book['book_id']; ?>" class="book-link">
+                            <img src="images/<?php echo htmlspecialchars($book['cover_image_url']); ?>" alt="<?php echo htmlspecialchars($book['title']); ?>">
+                            <h3><?php echo htmlspecialchars($book['title']); ?></h3>
+                            <p><strong>By:</strong> <?php echo htmlspecialchars($book['author_name']); ?></p>
+                            <p><strong>Price:</strong> $<?php echo number_format($book['price'], 2); ?></p>
+                        
+                            <form action="add-to-cart.php" method="post">
+                                <input type="hidden" name="book_id" value="<?php echo (int)$book['book_id']; ?>">
+                                <input type="number" name="quantity" value="1" min="1" max="10">
+                                <input type="hidden" name="genre" value="<?php echo htmlspecialchars($genre); ?>">
+                                <button type="submit">Add to Cart</button>
+                            </form>
+                        </a>
+                    </div>
+        
+                
+            
             <?php endwhile; ?>
+            </div>
         </div>
-    </main>
+    </div>
     
     <?php else: ?>
     <p>No books found in this genre.</p>

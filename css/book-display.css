@@ -1,7 +1,14 @@
 .book-list-container {
-    display: grid;
+    display: flex;
     flex-wrap: wrap;
     padding: 20px;
+    
+}
+.book-link {
+    border-radius: 10px;
+    text-decoration: none;
+    color: inherit;
+    display: block;
     
 }
 
@@ -15,15 +22,22 @@
 
 
 .book-item {
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+    background-color: beige;
+    background-size: contain;
+    border: 10px solid #311d05;
+    border-radius: 10px;
     width: 200px;
     padding: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
+    transition: transform 0.3s ease;
+    margin: 10px;
 }
 
+.book-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
 .book-item img {
     max-width: 100%;
     height: auto;
@@ -41,7 +55,7 @@
 }
 
 .book-item button {
-    background-color: #28a745;
+    background-color: #9a6206;
     color: white;
     padding: 10px;
     border: none;
@@ -51,5 +65,7 @@
 }
 
 .book-item button:hover {
-    background-color: #218838;
+    background-color: #eab25d;
 }
+
+
