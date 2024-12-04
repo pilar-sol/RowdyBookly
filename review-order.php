@@ -118,6 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <table>
             <thead>
                 <tr>
+                    
                     <th>Book</th>
                     <th>Quantity</th>
                     <th>Price ($)</th>
@@ -130,9 +131,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <?php
                 // Fetch book details from the session cart
                 foreach ($_SESSION['cart'] as $book_id => $item) {
-                    $sql = "SELECT title, price FROM Books WHERE book_id = ?";
+                    $sql = "SELECT title, cover_image_url, price FROM Books WHERE book_id = ?";
                     $stmt = $conn->prepare($sql);
                     $stmt->bind_param("i", $book_id);
+                    
                     $stmt->execute();
                     $stmt->bind_result($title, $price);
                     $stmt->fetch();
@@ -143,11 +145,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $subtotal += $item_total;
                 ?>
                     <tr>
+                        
+                        <td><?php echo htmlspecialchars($cover_image_url); ?></td>
                         <td><?php echo htmlspecialchars($title); ?></td>
                         <td>
                             <input type="number" name="quantity[<?php echo $book_id; ?>]" value="<?php echo $item['quantity']; ?>" min="0">
                         </td>
                         <td><?php echo number_format($price, 2); ?></td>
+                        
                         <td><?php echo $book_id; ?></td>
                         <td><?php echo number_format($item_total, 2); ?></td>
                         <td>
@@ -174,8 +179,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <p>Tax (8.25%): $<?php echo number_format($tax_amount, 2); ?></p>
         <p>Total: $<?php echo number_format($total, 2); ?></p>
 
-        <a href="checkout.php" class="checkout-button">Proceed to Checkout</a>
-        <a href="books.php" class="back-button">Back to Home</a>
+        <a href="#" class="checkout-button">Proceed to Checkout</a>
+        <a href="categories.php" class="back-button">Back to Home</a>
     </div>
 
     <?php $conn->close(); ?>
