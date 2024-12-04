@@ -2,11 +2,18 @@
 // Start session
 session_start();
 
-// Database configuration
-$host = 'localhost';      // Database host
-$dbname = 'rowdybookly';  // Database name
-$username = 'root';       // Database username
-$password = '';           // Database password
+// Fetch database URL from environment variable
+//$dbUrl = getenv('CLEARDB_DATABASE_URL');
+$dbUrl = 'mysql://aqapvw1dt4k36dav:cp8n1pd5tgos08nw@qn0cquuabmqczee2.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/rp7q9eqqkuuf90wn';
+
+
+// Parse the URL
+$dbParts = parse_url($dbUrl);
+
+$host = $dbParts['host'];
+$dbname = ltrim($dbParts['path'], '/');
+$username = $dbParts['user'];
+$password = $dbParts['pass'];
 
 // Connect to the database
 try {
