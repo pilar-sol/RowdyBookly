@@ -7,6 +7,10 @@ error_reporting(E_ALL);
 session_start();
 include 'config.php';  // Include database connection
 
+if ($conn->connect_error) {
+    die("Database connection failed: " . $conn->connect_error);
+}
+
 // Check if the user is logged in
 $is_logged_in = isset($_SESSION['user_id']);
 if (!$is_logged_in) {
