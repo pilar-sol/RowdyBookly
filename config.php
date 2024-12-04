@@ -7,7 +7,7 @@ $dbUrl = 'mysql://aqapvw1dt4k36dav:cp8n1pd5tgos08nw@qn0cquuabmqczee2.cbetxkdyhws
 // Parse the URL
 $dbParts = parse_url($dbUrl);
 
-define('DB_HOST', 'qn0cquuabmqczee2.cbetxkdyhwsb.us-east-1.rds.amazonaws.com');
+define('DB_HOST', 'qn0cquuabmqczee2.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306');
 //define('DB_HOST', $dbParts['host']);
 define('DB_USER', $dbParts['user']);
 define('DB_PASSWORD', $dbParts['pass']);
