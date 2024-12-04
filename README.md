@@ -21,7 +21,7 @@ This guide provides instructions specifically for setting up and testing the dat
 ## Getting Started
 There are two methods that you can use to test our website:
 
-Method 1: Test the website using this link: "https://rowdybookly-c2e55b3c933f.herokuapp.com/"
+Method 1: Test the website using this link: "https://rowdybookly-c2e55b3c933f.herokuapp.com/".
 Method 2: Follow the steps below to locally set up and test the `database-testing` branch(our prototype).
 
 
