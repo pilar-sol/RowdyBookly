@@ -1,13 +1,16 @@
 <?php
-// Database credentials
-define('DB_HOST', 'localhost');
-define('DB_USER', 'root');
-define('DB_PASSWORD', ''); // Leave empty if no password is set
-define('DB_NAME', 'rowdybookly');
+// Fetch database URL from environment variable
+$dbUrl = getenv('CLEARDB_DATABASE_URL');
+
+// Parse the URL
+$dbParts = parse_url($dbUrl);
+
+define('DB_HOST', $dbParts['host']);
+define('DB_USER', $dbParts['user']);
+define('DB_PASSWORD', $dbParts['pass']);
+define('DB_NAME', ltrim($dbParts['path'], '/'));
 
 // Create connection
-
-
 $conn = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
 // Check connection
@@ -35,6 +38,5 @@ $schemaFile = 'schema.sql'; // Path to your SQL file
 if (file_exists($schemaFile)) {
     executeSqlFile($conn, $schemaFile);
 }
-
 
 ?>
