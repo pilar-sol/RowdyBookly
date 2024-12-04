@@ -8,11 +8,6 @@ $dbParts = parse_url($dbUrl);
 define('DB_HOST', $dbParts['host']);
 define('DB_USER', $dbParts['user']);
 define('DB_PASSWORD', $dbParts['pass']);
-
-
-
-
-
 define('DB_NAME', ltrim($dbParts['path'], '/'));
 
 // Create connection
