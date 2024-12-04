@@ -6,6 +6,8 @@ define('DB_PASSWORD', ''); // Leave empty if no password is set
 define('DB_NAME', 'rowdybookly');
 
 // Create connection
+
+
 $conn = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
 // Check connection
