@@ -63,10 +63,6 @@ $stmt->close();
     </header>
     
     <main class="main-container">
-         <!-- Admin Login Button -->
-    <div style="text-align: center; margin-bottom: 20px;">
-        <a href="admin-login.php" class="admin-login-button" style="padding: 10px 20px; background-color: #007BFF; color: white; text-decoration: none; border-radius: 5px;">Admin Login</a>
-    </div>
 
         <!-- Left side content: Profile Details -->
         <section class="welcome">
@@ -76,6 +72,7 @@ $stmt->close();
                 <p><strong>Email:</strong> <?php echo htmlspecialchars($email); ?></p>
                 <p><strong>Address:</strong> <?php echo htmlspecialchars($address ?: 'Not provided'); ?></p>
                 <a href="edit-profile.php" class="edit-button">Edit Profile</a>
+                <a href="admin-login.php" class="admin-login-button" style="padding: 10px 20px; background-color: #007BFF; color: white; text-decoration: none; border-radius: 5px;">Admin Login</a>
             </div>
         </section>
     </main>
