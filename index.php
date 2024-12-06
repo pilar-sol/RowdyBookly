@@ -96,7 +96,9 @@ if (isset($_SESSION['cart'])) {
     <section class="popular-books">
         <h3>Popular Books</h3>
         <ul class="book-list">
-        <?php
+
+    <?php
+
     // Fetch popular books from the database
     $sql = "SELECT book_id, title, cover_image_url FROM Books WHERE book_id IN (1, 2, 3, 4)";
 
@@ -116,7 +118,7 @@ if (isset($_SESSION['cart'])) {
     }
     ?>
 </ul>
-    </ul>
+
     </section>
 
     <footer>
