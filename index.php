@@ -105,9 +105,11 @@ if (isset($_SESSION['cart'])) {
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     echo "<li>
-                            <img src='" . htmlspecialchars($row['cover_image_url']) . "' alt='" . htmlspecialchars($row['title']) . "' style='width:120px;height:180px;'>
-                            <p><strong>" . htmlspecialchars($row['title']) . "</strong></p>
-                        </li>";
+                            <a href='book-detail.php?book_id=" . htmlspecialchars($row['book_id']) . "'>
+                                <img src='" . htmlspecialchars($row['cover_image_url']) . "' alt='" . htmlspecialchars($row['title']) . "' style='width:120px;height:180px;'>
+                                <p><strong>" . htmlspecialchars($row['title']) . "</strong></p>
+                                <a>
+                            </li>";
                 }
             } else {
                 echo "<li>No popular books available at the moment.</li>";
