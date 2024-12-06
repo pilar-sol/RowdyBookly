@@ -71,7 +71,8 @@ $stmt->close();
                 <p><strong>Username:</strong> <?php echo htmlspecialchars($username); ?></p>
                 <p><strong>Email:</strong> <?php echo htmlspecialchars($email); ?></p>
                 <p><strong>Address:</strong> <?php echo htmlspecialchars($address ?: 'Not provided'); ?></p>
-                <a href="edit-profile.php" class="edit-button">Edit Profile</a>
+                <!--<a href="edit-profile.php" class="edit-button">Edit Profile</a>-->
+                <a href="edit-profile.php" class="admin-login-button" style="padding: 10px 20px; background-color: #007BFF; color: white; text-decoration: none; border-radius: 5px;">Edit Profile</a>
                 <a href="admin-login.php" class="admin-login-button" style="padding: 10px 20px; background-color: #007BFF; color: white; text-decoration: none; border-radius: 5px;">Admin Login</a>
             </div>
         </section>
