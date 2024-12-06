@@ -83,9 +83,8 @@ $sql = "SELECT b.title, b.cover_image_url, a.name AS author_name
                             
                     <?php endwhile; ?>
                 <?php else: ?>
-                    echo "<li>No staff picks available at the moment.</li>";
-                }
-                ?>
+                    <li>No staff picks available at the moment.</li>;
+                <?php endif; ?>
             </ul>
             </section>
         </aside>
