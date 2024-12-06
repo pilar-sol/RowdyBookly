@@ -78,12 +78,12 @@ if (isset($_SESSION['cart'])) {
 
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
-                        echo "<a href="book-detail.php?book_id=<?php echo (int)$book['book_id']; ?>" class="book-link">
+                        echo "
                             <li>
                                 <img src='images/" . htmlspecialchars($row['cover_image_url']) . "' alt='" . htmlspecialchars($row['title']) . "' style='width:100px;height:150px;'>
                                 <p><strong>" . htmlspecialchars($row['title']) . "</strong><br>by " . htmlspecialchars($row['author_name']) . "</p>
 
-                            </li></a>";
+                            </li>";
                             
                     }
                 } else {
