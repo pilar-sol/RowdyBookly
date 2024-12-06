@@ -71,21 +71,22 @@ $sql = "SELECT b.title, b.cover_image_url, a.name AS author_name
         <!-- Right side content: Books listing -->
         <aside class="book-sidebar">
             <section class="books-section">
-            <h3>Staff Picks</h3>
-            <ul class="book-list">
-                <!-- // Fetch staff picks from the database-->
-                <?php if ($result->num_rows > 0): ?> 
-                   <?php while ($row = $result->fetch_assoc()): ?> 
-                        <li>
-                        <img src="images/<?php echo htmlspecialchars($book['cover_image_url']); ?>" alt="<?php echo htmlspecialchars($book['title']); ?>">
-                            <p><strong><?php echo htmlspecialchars($book['title']); ?></strong><br><?php echo htmlspecialchars($book['author_name']); ?></p>
-                        </li>";
-                            
-                    <?php endwhile; ?>
-                <?php else: ?>
-                    <li>No staff picks available at the moment.</li>;
-                <?php endif; ?>
-            </ul>
+                <h3>Staff Picks</h3>
+                <ul class="book-list">
+                    <!-- Fetch staff picks from the database -->
+                    <?php if ($result->num_rows > 0): ?> 
+                        <?php while ($row = $result->fetch_assoc()): ?> 
+                            <li>
+                            <a href="book-detail.php?book_id=<?php echo (int)$book['book_id']; ?>" class="book-link">
+                                <img src="images/<?php echo htmlspecialchars($row['cover_image_url']); ?>" alt="<?php echo htmlspecialchars($row['title']); ?>" style="width:100px;height:150px;">
+                                <p><strong><?php echo htmlspecialchars($row['title']); ?></strong><br>by <?php echo htmlspecialchars($row['author_name']); ?></p>
+                            </a>
+                            </li>
+                        <?php endwhile; ?>
+                    <?php else: ?>
+                        <li>No staff picks available at the moment.</li>
+                    <?php endif; ?>
+                </ul>
             </section>
         </aside>
     </main>
