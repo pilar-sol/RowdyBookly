@@ -77,9 +77,12 @@ $sql = "SELECT b.title, b.cover_image_url, a.name AS author_name
                     <?php if ($result->num_rows > 0): ?> 
                         <?php while ($row = $result->fetch_assoc()): ?> 
                             <li>
-                                <img src="images/<?php echo htmlspecialchars($row['cover_image_url']); ?>" alt="<?php echo htmlspecialchars($row['title']); ?>" style="width:100px;height:150px;">
-                                <p><strong><?php echo htmlspecialchars($row['title']); ?></strong><br>by <?php echo htmlspecialchars($row['author_name']); ?></p>
-                            
+                                <div class="book-item">
+                                    <a href="book-detail.php?book_id=<?php echo (int)$book['book_id']; ?>" class="book-link">
+                                        <img src="images/<?php echo htmlspecialchars($row['cover_image_url']); ?>" alt="<?php echo htmlspecialchars($row['title']); ?>" style="width:100px;height:150px;">
+                                        <p><strong><?php echo htmlspecialchars($row['title']); ?></strong><br>by <?php echo htmlspecialchars($row['author_name']); ?></p>
+                                    </a>
+                                    </div>
                             </li>
                         <?php endwhile; ?>
                     <?php else: ?>
