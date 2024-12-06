@@ -30,28 +30,41 @@ $message = '';
 // Handle book submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = $_POST['title'];
-    $cover_image_url = $_POST['cover_image_url'];
-    $author_id = $_POST['author_id'];
+    $author = $_POST['author'];
     $publication_year = $_POST['publication_year'];
     $price = $_POST['price'];
     $description = $_POST['description'];
 
-    // Validate inputs
-    if (
-        !empty($title) && 
-        !empty($author_id) && 
-        !empty($publication_year) && 
-        !empty($price) && 
-        !empty($description) && 
-        is_numeric($price) && 
-        is_numeric($publication_year)
-    ) {
+    // Handle file upload for the cover image
+    $cover_image = null;
+    if (isset($_FILES['cover_image']) && $_FILES['cover_image']['error'] === UPLOAD_ERR_OK) {
+        $image_name = $_FILES['cover_image']['name'];
+        $image_tmp_path = $_FILES['cover_image']['tmp_name'];
+        $image_extension = strtolower(pathinfo($image_name, PATHINFO_EXTENSION));
+
+        if ($image_extension === 'jpg') {
+            $upload_dir = 'uploads/';
+            if (!is_dir($upload_dir)) {
+                mkdir($upload_dir, 0777, true); // Create the directory if it doesn't exist
+            }
+
+            $cover_image = $upload_dir . uniqid() . '.jpg';
+            move_uploaded_file($image_tmp_path, $cover_image);
+        } else {
+            $message = "Only .jpg files are allowed for the cover image.";
+        }
+    } else {
+        $message = "Please upload a valid .jpg cover image.";
+    }
+
+    // Validate and insert book data
+    if (!empty($title) && !empty($author) && !empty($publication_year) && !empty($price) && !empty($description) && is_numeric($price) && is_numeric($publication_year) && $cover_image) {
         // Insert the book into the database
         $stmt = $pdo->prepare("INSERT INTO Books (title, cover_image_url, author_id, publication_year, price, description) 
-                               VALUES (:title, :cover_image_url, :author_id, :publication_year, :price, :description)");
+                               VALUES (:title, :cover_image_url, (SELECT author_id FROM Authors WHERE name = :author LIMIT 1), :publication_year, :price, :description)");
         $stmt->bindParam(':title', $title);
-        $stmt->bindParam(':cover_image_url', $cover_image_url);
-        $stmt->bindParam(':author_id', $author_id);
+        $stmt->bindParam(':cover_image_url', $cover_image);
+        $stmt->bindParam(':author', $author);
         $stmt->bindParam(':publication_year', $publication_year);
         $stmt->bindParam(':price', $price);
         $stmt->bindParam(':description', $description);
@@ -59,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($stmt->execute()) {
             $message = "Book added successfully!";
         } else {
-            $message = "Failed to add the book.";
+            $message = "Failed to add the book. Ensure the author exists.";
         }
     } else {
         $message = "Please fill in all required fields correctly.";
@@ -73,6 +86,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - Add Book</title>
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .dashboard-container {
+            width: 50%;
+            margin: 0 auto;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        form label {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        form input, form textarea, form button {
+            margin-top: 5px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        form textarea {
+            resize: none;
+        }
+        .submit-button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .submit-button:hover {
+            background-color: #0056b3;
+        }
+        .message {
+            color: green;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -84,16 +137,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </header>
     <main class="dashboard-container">
         <h2>Add a New Book</h2>
-        <?php if (!empty($message)) { echo "<p style='color:green;'>$message</p>"; } ?>
-        <form action="admin-dashboard.php" method="post">
-            <label for="title">Title:</label>
+        <?php if (!empty($message)) { echo "<p class='message'>$message</p>"; } ?>
+        <form action="admin-dashboard.php" method="post" enctype="multipart/form-data">
+            <label for="title">Book Title:</label>
             <input type="text" id="title" name="title" required>
 
-            <label for="cover_image_url">Cover Image URL:</label>
-            <input type="url" id="cover_image_url" name="cover_image_url">
+            <label for="author">Author:</label>
+            <input type="text" id="author" name="author" required>
 
-            <label for="author_id">Author ID:</label>
-            <input type="number" id="author_id" name="author_id" required>
+            <label for="cover_image">Cover Image (.jpg):</label>
+            <input type="file" id="cover_image" name="cover_image" accept=".jpg" required>
 
             <label for="publication_year">Publication Year:</label>
             <input type="number" id="publication_year" name="publication_year" required>
