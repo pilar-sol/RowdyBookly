@@ -31,7 +31,8 @@ $sql = "SELECT b.book_id, b.title, b.cover_image_url, a.name AS author_name
     <title>RowdyBookly</title>
     <link rel="stylesheet" href="css/style.css">
     <style> 
-        <?php include 'css/style.css'; ?>
+            <?php include 'css/style.css'; ?>
+            <?php include 'css/book-display.css'; ?>
         
     </style>
 </head>
