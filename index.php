@@ -69,7 +69,11 @@ if (isset($_SESSION['cart'])) {
             <ul class="book-list">
                 <?php
                 // Fetch staff picks from the database
-                $sql = "SELECT title, cover_image_url, author_id FROM books WHERE is_staff_pick = 1 LIMIT 7";
+                $sql = "SELECT b.title, b.cover_image_url, a.name AS author_name 
+                FROM books b 
+                JOIN authors a ON b.author_id = a.author_id 
+                WHERE b.is_staff_pick = 1 LIMIT 7";
+
                 $result = $conn->query($sql);
 
                 if ($result->num_rows > 0) {
