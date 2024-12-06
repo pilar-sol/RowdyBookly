@@ -80,7 +80,8 @@ if (isset($_SESSION['cart'])) {
                     while ($row = $result->fetch_assoc()) {
                         echo "<li>
                                 <img src='" . htmlspecialchars($row['cover_image_url']) . "' alt='" . htmlspecialchars($row['title']) . "' style='width:100px;height:150px;'>
-                                <p><strong>" . htmlspecialchars($row['title']) . "</strong><br>by Author ID: " . htmlspecialchars($row['author_id']) . "</p>
+                                <p><strong>" . htmlspecialchars($row['title']) . "</strong><br>by " . htmlspecialchars($row['author_name']) . "</p>
+
                             </li>";
                     }
                 } else {
