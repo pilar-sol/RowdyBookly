@@ -106,7 +106,7 @@ if (isset($_SESSION['cart'])) {
                 while ($row = $result->fetch_assoc()) {
                     echo "<li>
                             <a href='book-detail.php?book_id=" . htmlspecialchars($row['book_id']) . "'>
-                                <img src='" . htmlspecialchars($row['cover_image_url']) . "' alt='" . htmlspecialchars($row['title']) . "' style='width:120px;height:180px;'>
+                                <img src="images/<?php echo htmlspecialchars($book['cover_image_url']); ?>" alt="<?php echo htmlspecialchars($book['title']); ?>">
                                 <p><strong>" . htmlspecialchars($row['title']) . "</strong></p>
                                 <a>
                             </li>";
