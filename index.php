@@ -65,13 +65,26 @@ if (isset($_SESSION['cart'])) {
         <!-- Right side content: Books listing -->
         <aside class="book-sidebar">
             <section class="books-section">
-                <h3>Recently Viewed</h3>
-                <ul class="book-list">
-                    <li>Book Title 1</li>
-                    <li>Book Title 1</li>
-                    <li>Book Title 2</li>
-                    <li>Book Title 2</li>
-                </ul>
+            <h3>Staff Picks</h3>
+            <ul class="book-list">
+                <?php
+                // Fetch staff picks from the database
+                $sql = "SELECT title, cover_image_url, author_id FROM books WHERE is_staff_pick = 1 LIMIT 7";
+                $result = $conn->query($sql);
+
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<li>
+                                <img src='" . htmlspecialchars($row['cover_image_url']) . "' alt='" . htmlspecialchars($row['title']) . "' style='width:100px;height:150px;'>
+                                <p><strong>" . htmlspecialchars($row['title']) . "</strong><br>by Author ID: " . htmlspecialchars($row['author_id']) . "</p>
+                            </li>";
+                    }
+                } else {
+                    echo "<li>No staff picks available at the moment.</li>";
+                }
+                ?>
+            </ul>
+
                 
                 <h3>Popular</h3>
                 <ul class="book-list">
