@@ -96,26 +96,26 @@ if (isset($_SESSION['cart'])) {
     <section class="popular-books">
         <h3>Popular Books</h3>
         <ul class="book-list">
-            <?php
-            // Fetch popular books from the database
-            $sql = "SELECT book_id, title, cover_image_url FROM Books WHERE book_id IN (1, 2, 3, 4)";
+    <?php
+    // Fetch popular books from the database
+    $sql = "SELECT book_id, title, cover_image_url FROM Books WHERE book_id IN (1, 2, 3, 4)";
 
-            $result = $conn->query($sql);
+    $result = $conn->query($sql);
 
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    echo "<li>
-                            <a href='book-detail.php?book_id=" . htmlspecialchars($row['book_id']) . "'>
-                                <img src="images/<?php echo htmlspecialchars($book['cover_image_url']); ?>" alt="<?php echo htmlspecialchars($book['title']); ?>">
-                                <p><strong>" . htmlspecialchars($row['title']) . "</strong></p>
-                                <a>
-                            </li>";
-                }
-            } else {
-                echo "<li>No popular books available at the moment.</li>";
-            }
-            ?>
-        </ul>
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            echo "<li>
+                    <a href='book-detail.php?book_id=" . htmlspecialchars($row['book_id']) . "'>
+                        <img src='images/" . htmlspecialchars($row['cover_image_url']) . "' alt='" . htmlspecialchars($row['title']) . "'>
+                        <p><strong>" . htmlspecialchars($row['title']) . "</strong></p>
+                    </a>
+                </li>";
+        }
+    } else {
+        echo "<li>No popular books available at the moment.</li>";
+    }
+    ?>
+</ul>
     </section>
 
     <footer>
