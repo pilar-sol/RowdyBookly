@@ -31,8 +31,8 @@ $sql = "SELECT b.book_id, b.title, b.cover_image_url, a.name AS author_name
     <title>RowdyBookly</title>
     <link rel="stylesheet" href="css/style.css">
     <style> 
-            <?php include 'css/style.css'; ?>
-            <?php include 'css/book-display.css'; ?>
+        <?php include 'css/style.css'; ?>
+            
         
     </style>
 </head>
@@ -79,11 +79,10 @@ $sql = "SELECT b.book_id, b.title, b.cover_image_url, a.name AS author_name
                         <?php while ($row = $result->fetch_assoc()): ?> 
                             <li>
                                 <div class="book-item">
-                                    <a href="book-detail.php?book_id=<?php echo (int)$book['book_id']; ?>" class="book-link">
-                                        <img src="images/<?php echo htmlspecialchars($row['cover_image_url']); ?>" alt="<?php echo htmlspecialchars($row['title']); ?>" style="width:100px;height:150px;">
-                                        <p><strong><?php echo htmlspecialchars($row['title']); ?></strong><br>by <?php echo htmlspecialchars($row['author_name']); ?></p>
-                                    </a>
-                                    </div>
+                                    <img src="images/<?php echo htmlspecialchars($row['cover_image_url']); ?>" alt="<?php echo htmlspecialchars($row['title']); ?>" style="width:100px;height:150px;">
+                                    <p><strong><?php echo htmlspecialchars($row['title']); ?></strong><br>by <?php echo htmlspecialchars($row['author_name']); ?></p>
+                                    <h3><?php echo (int)$book['book_id'];?></h3>
+                                </div>
                             </li>
                         <?php endwhile; ?>
                     <?php else: ?>
