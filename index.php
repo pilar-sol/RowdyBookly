@@ -89,19 +89,35 @@ if (isset($_SESSION['cart'])) {
                 }
                 ?>
             </ul>
-
-                
-                <h3>Popular</h3>
-                <ul class="book-list">
-                    <li>Book Title 3</li>
-                    <li>Book Title 3</li>
-                    <li>Book Title 4</li>
-                    <li>Book Title 4</li>
-                </ul>
             </section>
         </aside>
     </main>
     
+    <section class="popular-books">
+        <h3>Popular Books</h3>
+        <ul class="book-list">
+            <?php
+            // Fetch popular books from the database
+            $sql = "SELECT title, cover_image_url, author_id 
+                    FROM books 
+                    WHERE book_id IN (1, 2, 3, 4)";
+
+            $result = $conn->query($sql);
+
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    echo "<li>
+                            <img src='" . htmlspecialchars($row['cover_image_url']) . "' alt='" . htmlspecialchars($row['title']) . "' style='width:120px;height:180px;'>
+                            <p><strong>" . htmlspecialchars($row['title']) . "</strong></p>
+                        </li>";
+                }
+            } else {
+                echo "<li>No popular books available at the moment.</li>";
+            }
+            ?>
+        </ul>
+    </section>
+
     <footer>
         <p>&copy; 2024 RowdyBookly</p>
     </footer>
