@@ -62,6 +62,9 @@ while ($row = $genres_result->fetch_assoc()) {
     <title><?php echo htmlspecialchars($book['title']); ?> - Details</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/book-detail.css">
+    <style>
+        
+        </style>
     <header>
         <h1 class="logo">
             <a class="main-page" href="index.php">
