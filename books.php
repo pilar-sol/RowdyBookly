@@ -88,9 +88,9 @@ $books_result = $books_query->get_result();
     
 
     <?php if ($books_result->num_rows > 0):?>
-
+        <h2>Books in <?php echo htmlspecialchars(ucwords($genre)); ?> Genre</h2>    
     <div class="book-list-container">
-        <h2>Books in <?php echo htmlspecialchars(ucwords($genre)); ?> Genre</h2>
+        
         <div class="books">
             
             <?php while ($book = $books_result->fetch_assoc()): ?>
