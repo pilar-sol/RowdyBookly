@@ -46,8 +46,8 @@ if (!isset($_SESSION['admin_id'])) {
         <h1>Admin Dashboard</h1>
     </header>
     <main class="dashboard-container">
-        <a href="add-book.php" class="action-button">Add Book</a>
-        <a href="delete-book.php" class="action-button">Delete Book</a>
+        <a href="admin-add-book.php" class="action-button">Add Book</a>
+        <a href="admin-delete-book.php" class="action-button">Delete Book</a>
     </main>
 </body>
 </html>
