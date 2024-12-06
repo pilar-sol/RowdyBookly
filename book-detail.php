@@ -53,6 +53,7 @@ while ($row = $genres_result->fetch_assoc()) {
 }
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -82,26 +83,26 @@ while ($row = $genres_result->fetch_assoc()) {
     </header>
 </head>
 <body>
-
-<main>
-    <div class="book-detail-container">
-        <img src="images/<?php echo htmlspecialchars($book['cover_image_url']); ?>" alt="<?php echo htmlspecialchars($book['title']); ?>">
-        <div class="book-details">
-            <h2><?php echo htmlspecialchars($book['title']); ?></h2>
-            <p><strong>Author:</strong> <?php echo htmlspecialchars($book['author_name']); ?></p>
-            <p><strong>Genres:</strong> <?php echo htmlspecialchars(implode(", ", $genres)); ?></p>
-            <p><strong>Published:</strong> <?php echo htmlspecialchars($book['publication_year']); ?></p>
-            <p><strong>Price:</strong> $<?php echo number_format($book['price'], 2); ?></p>
-            <p><strong>Description:</strong> <?php echo htmlspecialchars($book['description']); ?></p>
-            <!-- Add to Cart Button -->
-            <form action="add-to-cart.php" method="post">
-                <input type="hidden" name="book_id" value="<?php echo $book_id; ?>">
-                <input type="number" name="quantity" value="1" min="1" max="10">
-                <button type="submit">Add to Cart</button>
-            </form>
+    <main>
+        <div class="book-detail-container">
+            <img src="images/<?php echo htmlspecialchars($book['cover_image_url']); ?>" alt="<?php echo htmlspecialchars($book['title']); ?>">
+            <div class="book-details">
+                <h2><?php echo htmlspecialchars($book['title']); ?></h2>
+                <p><strong>Author:</strong> <?php echo htmlspecialchars($book['author_name']); ?></p>
+                <p><strong>Genres:</strong> 
+                    <?php echo !empty($genres) ? htmlspecialchars(implode(", ", $genres)) : "Not specified"; ?>
+                </p>
+                <p><strong>Published:</strong> <?php echo htmlspecialchars($book['publication_year']); ?></p>
+                <p><strong>Price:</strong> $<?php echo number_format($book['price'], 2); ?></p>
+                <p><strong>Description:</strong> <?php echo htmlspecialchars($book['description']); ?></p>
+                <form action="add-to-cart.php" method="post">
+                    <input type="hidden" name="book_id" value="<?php echo $book_id; ?>">
+                    <input type="number" name="quantity" value="1" min="1" max="10">
+                    <button type="submit">Add to Cart</button>
+                </form>
+            </div>
         </div>
-    </div>
-</main>
+    </main>
 <div class="overlay" id="overlay">
     <div class="cart-panel" id="cartPanel">
         <div class="cart-header">
