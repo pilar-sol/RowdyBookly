@@ -18,11 +18,30 @@ if (isset($_SESSION['cart'])) {
     }
 }
 
-
 $genre = $_GET['genre'];
 
+// Fetch genre description
+$genre_description = '';
+if ($genre !== 'All') {
+    $genre_query = $conn->prepare("
+        SELECT genre_name, description
+        FROM Genres
+        WHERE genre_name = ?
+    ");
+    $genre_query->bind_param("s", $genre);
+    $genre_query->execute();
+    $genre_result = $genre_query->get_result();
+
+    if ($genre_result->num_rows > 0) {
+        $genre_data = $genre_result->fetch_assoc();
+        $genre_description = $genre_data['description'];
+    } else {
+        die("Genre not found.");
+    }
+}
+
 // Fetch books by genre
-if ($genre == 'All') {
+if ($genre === 'All') {
     // If the genre is 'All', fetch all books without filtering by genre
     $books_query = $conn->prepare("
         SELECT b.book_id, b.title, b.cover_image_url, b.publication_year, b.price, b.description, a.name AS author_name
@@ -43,11 +62,8 @@ if ($genre == 'All') {
 }
 $books_query->execute();
 $books_result = $books_query->get_result();
-
-// Check if books were found for the genre
-
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -88,7 +104,8 @@ $books_result = $books_query->get_result();
     
 
     <?php if ($books_result->num_rows > 0):?>
-        <h2>Books in <?php echo htmlspecialchars(ucwords($genre)); ?> Genre</h2>    
+        <h2>Books in <?php echo htmlspecialchars(ucwords($genre)); ?> Genre</h2>
+        <p class="genre-description"><?php echo htmlspecialchars($genre_description); ?></p>    
     <div class="book-list-container">
         
         <div class="books">
