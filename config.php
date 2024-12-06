@@ -33,6 +33,6 @@ $schemaFile = 'schema.sql'; // Path to your SQL file
 if (file_exists($schemaFile)) {
     executeSqlFile($conn, $schemaFile);
 }
-
+ 
 
 ?>
