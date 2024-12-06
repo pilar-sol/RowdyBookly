@@ -36,7 +36,7 @@ $sql = "SELECT b.book_id, b.title, b.cover_image_url, a.name AS author_name
             texT-decoration: none;
             color: black;
         }
-        .book-item a{
+        .book-item a:hover{
             texT-decoration: none;
             color: brown;
         }
