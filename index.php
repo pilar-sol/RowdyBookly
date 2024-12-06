@@ -99,7 +99,7 @@ if (isset($_SESSION['cart'])) {
             <?php
             // Fetch popular books from the database
             $sql = "SELECT title, cover_image_url, author_id 
-                    FROM books 
+                    FROM Books 
                     WHERE book_id IN (1, 2, 3, 4)";
 
             $result = $conn->query($sql);
