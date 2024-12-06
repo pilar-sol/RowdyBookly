@@ -70,7 +70,7 @@ if (isset($_SESSION['cart'])) {
                 <?php
                 // Fetch staff picks from the database
                 $sql = "SELECT b.title, b.cover_image_url, a.name AS author_name 
-                FROM books b 
+                FROM Books b 
                 JOIN Authors a ON b.author_id = a.author_id 
                 WHERE b.is_staff_pick = 1 LIMIT 7";
 
@@ -79,7 +79,7 @@ if (isset($_SESSION['cart'])) {
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
                         echo "<li>
-                                <img src='" . htmlspecialchars($row['cover_image_url']) . "' alt='" . htmlspecialchars($row['title']) . "' style='width:100px;height:150px;'>
+                                <img src='images/" . htmlspecialchars($row['cover_image_url']) . "' alt='" . htmlspecialchars($row['title']) . "' style='width:100px;height:150px;'>
                                 <p><strong>" . htmlspecialchars($row['title']) . "</strong><br>by " . htmlspecialchars($row['author_name']) . "</p>
 
                             </li>";
