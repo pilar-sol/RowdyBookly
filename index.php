@@ -98,9 +98,7 @@ if (isset($_SESSION['cart'])) {
         <ul class="book-list">
             <?php
             // Fetch popular books from the database
-            $sql = "SELECT title, cover_image_url, author_id 
-                    FROM Books 
-                    WHERE book_id IN (1, 2, 3, 4)";
+            $sql = "SELECT book_id, title, cover_image_url FROM books WHERE book_id IN (1, 2, 3, 4)";
 
             $result = $conn->query($sql);
 
