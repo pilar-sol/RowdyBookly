@@ -47,9 +47,4 @@ $schemaFile = 'schema.sql'; // Path to your SQL file
 if (file_exists($schemaFile)) {
     executeSqlFile($conn, $schemaFile);
 }
-<<<<<<< HEAD
- 
-=======
->>>>>>> 0deea73eef6ecf5982a147e8df2e776c8e276238
-
 ?>
