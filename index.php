@@ -65,25 +65,57 @@ if (isset($_SESSION['cart'])) {
         <!-- Right side content: Books listing -->
         <aside class="book-sidebar">
             <section class="books-section">
-                <h3>Recently Viewed</h3>
-                <ul class="book-list">
-                    <li>Book Title 1</li>
-                    <li>Book Title 1</li>
-                    <li>Book Title 2</li>
-                    <li>Book Title 2</li>
-                </ul>
-                
-                <h3>Popular</h3>
-                <ul class="book-list">
-                    <li>Book Title 3</li>
-                    <li>Book Title 3</li>
-                    <li>Book Title 4</li>
-                    <li>Book Title 4</li>
-                </ul>
+            <h3>Staff Picks</h3>
+            <ul class="book-list">
+                <?php
+                // Fetch staff picks from the database
+                $sql = "SELECT b.title, b.cover_image_url, a.name AS author_name 
+                FROM books b 
+                JOIN Authors a ON b.author_id = a.author_id 
+                WHERE b.is_staff_pick = 1 LIMIT 7";
+
+                $result = $conn->query($sql);
+
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<li>
+                                <img src='" . htmlspecialchars($row['cover_image_url']) . "' alt='" . htmlspecialchars($row['title']) . "' style='width:100px;height:150px;'>
+                                <p><strong>" . htmlspecialchars($row['title']) . "</strong><br>by " . htmlspecialchars($row['author_name']) . "</p>
+
+                            </li>";
+                    }
+                } else {
+                    echo "<li>No staff picks available at the moment.</li>";
+                }
+                ?>
+            </ul>
             </section>
         </aside>
     </main>
     
+    <section class="popular-books">
+        <h3>Popular Books</h3>
+        <ul class="book-list">
+            <?php
+            // Fetch popular books from the database
+            $sql = "SELECT book_id, title, cover_image_url FROM books WHERE book_id IN (1, 2, 3, 4)";
+
+            $result = $conn->query($sql);
+
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    echo "<li>
+                            <img src='" . htmlspecialchars($row['cover_image_url']) . "' alt='" . htmlspecialchars($row['title']) . "' style='width:120px;height:180px;'>
+                            <p><strong>" . htmlspecialchars($row['title']) . "</strong></p>
+                        </li>";
+                }
+            } else {
+                echo "<li>No popular books available at the moment.</li>";
+            }
+            ?>
+        </ul>
+    </section>
+
     <footer>
         <p>&copy; 2024 RowdyBookly</p>
     </footer>
