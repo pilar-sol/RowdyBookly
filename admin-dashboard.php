@@ -1,9 +1,4 @@
 <?php
-
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 session_start();
 
 // Check if the admin is logged in
@@ -50,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($image_extension === 'jpg') {
             $upload_dir = 'uploads/';
             if (!is_dir($upload_dir)) {
-                mkdir($upload_dir, 0777, true); // Create the directory if it doesn't exist
+                mkdir($upload_dir, 0777, true);
             }
 
             $cover_image = $upload_dir . uniqid() . '.jpg';
@@ -64,12 +59,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Validate and insert book data
     if (!empty($title) && !empty($author) && !empty($publication_year) && !empty($price) && !empty($description) && is_numeric($price) && is_numeric($publication_year) && $cover_image) {
+        // Check if the author exists
+        $authorStmt = $pdo->prepare("SELECT author_id FROM Authors WHERE name = :author LIMIT 1");
+        $authorStmt->bindParam(':author', $author);
+        $authorStmt->execute();
+        $authorResult = $authorStmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$authorResult) {
+            // If the author doesn't exist, create a new one
+            $insertAuthorStmt = $pdo->prepare("INSERT INTO Authors (name, bio) VALUES (:author, 'Biography not provided')");
+            $insertAuthorStmt->bindParam(':author', $author);
+            $insertAuthorStmt->execute();
+            $author_id = $pdo->lastInsertId();
+        } else {
+            $author_id = $authorResult['author_id'];
+        }
+
         // Insert the book into the database
         $stmt = $pdo->prepare("INSERT INTO Books (title, cover_image_url, author_id, publication_year, price, description) 
-                               VALUES (:title, :cover_image_url, (SELECT author_id FROM Authors WHERE name = :author LIMIT 1), :publication_year, :price, :description)");
+                               VALUES (:title, :cover_image_url, :author_id, :publication_year, :price, :description)");
         $stmt->bindParam(':title', $title);
         $stmt->bindParam(':cover_image_url', $cover_image);
-        $stmt->bindParam(':author', $author);
+        $stmt->bindParam(':author_id', $author_id);
         $stmt->bindParam(':publication_year', $publication_year);
         $stmt->bindParam(':price', $price);
         $stmt->bindParam(':description', $description);
@@ -77,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($stmt->execute()) {
             $message = "Book added successfully!";
         } else {
-            $message = "Failed to add the book. Ensure the author exists.";
+            $message = "Failed to add the book.";
         }
     } else {
         $message = "Please fill in all required fields correctly.";
