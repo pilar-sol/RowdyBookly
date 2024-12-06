@@ -16,7 +16,7 @@ if (isset($_SESSION['cart'])) {
         $cart_item_count += $item['quantity'];  // Sum up quantities of all items
     }
 }
-$sql = "SELECT b.title, b.cover_image_url, a.name AS author_name 
+$sql = "SELECT b.book_id, b.title, b.cover_image_url, a.name AS author_name 
                 FROM Books b 
                 JOIN Authors a ON b.author_id = a.author_id 
                 WHERE b.is_staff_pick = 1 LIMIT 7";
