@@ -34,8 +34,12 @@ $sql = "SELECT b.book_id, b.title, b.cover_image_url, a.name AS author_name
         <?php include 'css/style.css'; ?>
         .book-item a{
             texT-decoration: none;
+            color: black;
         }
-        
+        .book-item a{
+            texT-decoration: none;
+            color: brown;
+        }
     </style>
 </head>
 <body>
