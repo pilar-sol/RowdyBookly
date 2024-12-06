@@ -16,6 +16,12 @@ if (isset($_SESSION['cart'])) {
         $cart_item_count += $item['quantity'];  // Sum up quantities of all items
     }
 }
+$sql = "SELECT b.title, b.cover_image_url, a.name AS author_name 
+                FROM Books b 
+                JOIN Authors a ON b.author_id = a.author_id 
+                WHERE b.is_staff_pick = 1 LIMIT 7";
+
+                $result = $conn->query($sql);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -67,26 +73,16 @@ if (isset($_SESSION['cart'])) {
             <section class="books-section">
             <h3>Staff Picks</h3>
             <ul class="book-list">
-                <?php
-                // Fetch staff picks from the database
-                $sql = "SELECT b.title, b.cover_image_url, a.name AS author_name 
-                FROM Books b 
-                JOIN Authors a ON b.author_id = a.author_id 
-                WHERE b.is_staff_pick = 1 LIMIT 7";
-
-                $result = $conn->query($sql);
-
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        echo "
-                            <li>
-                                <img src='images/" . htmlspecialchars($row['cover_image_url']) . "' alt='" . htmlspecialchars($row['title']) . "' style='width:100px;height:150px;'>
-                                <p><strong>" . htmlspecialchars($row['title']) . "</strong><br>by " . htmlspecialchars($row['author_name']) . "</p>
-
-                            </li>";
+                <!-- // Fetch staff picks from the database-->
+                <?php if ($result->num_rows > 0): ?> 
+                   <?php while ($row = $result->fetch_assoc()): ?> 
+                        <li>
+                        <img src="images/<?php echo htmlspecialchars($book['cover_image_url']); ?>" alt="<?php echo htmlspecialchars($book['title']); ?>">
+                            <p><strong><?php echo htmlspecialchars($book['title']); ?></strong><br><?php echo htmlspecialchars($book['author_name']); ?></p>
+                        </li>";
                             
-                    }
-                } else {
+                    <?php endwhile; ?>
+                <?php else: ?>
                     echo "<li>No staff picks available at the moment.</li>";
                 }
                 ?>
