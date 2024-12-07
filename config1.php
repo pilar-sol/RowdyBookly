@@ -1,3 +1,4 @@
+
 <?php
 // Database credentials
 define('DB_HOST', 'localhost');
@@ -14,7 +15,7 @@ if ($conn->connect_error) {
 }
 
 // Function to execute SQL scripts
-function executeSqlFile($conn, $filePath) {a
+function executeSqlFile($conn, $filePath) {
     $queries = file_get_contents($filePath);
     if ($conn->multi_query($queries)) {
         do {

@@ -148,6 +148,44 @@ input[type="text"] {
     border-bottom: none; /* Remove divider after the last item */
 }
 
+
+.form-container {
+    margin: 20px 0;
+}
+
+form input[type="text"] {
+    padding: 10px;
+    margin-right: 10px;
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form select {
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form .sort-button {
+    padding: 10px 20px;
+    background-color: #ff6600;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+form .sort-button:hover {
+    background-color: #e65c00;
+}
+
+.selected {
+    background-color: #ff6600;
+    color: white;
+}
+
 /* Footer */
 footer {
     background-color: #333;

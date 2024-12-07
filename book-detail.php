@@ -53,7 +53,6 @@ while ($row = $genres_result->fetch_assoc()) {
 }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -63,7 +62,8 @@ while ($row = $genres_result->fetch_assoc()) {
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/book-detail.css">
     <style>
-        
+        <?php include 'css/style.css'; ?>
+        <?php include 'css/book-detail.css'; ?>
         </style>
     <header>
         <h1 class="logo">
@@ -76,8 +76,8 @@ while ($row = $genres_result->fetch_assoc()) {
             <input type="text" placeholder="Search">
             <button class="search-button">🔍</button>
             <?php if ($is_logged_in): ?>
-                    <span class="login_welcome">Welcome, <?php echo $_SESSION['username']; ?>!</span>
-                    <a href="logout.php">Logout</a>
+                <span class="login_welcome">Welcome, <?php echo $_SESSION['username']; ?>!</span>
+                <a href="logout.php">Logout</a>
             <?php else: ?>
                 <a href="login.php" class="icon">👤</a>
             <?php endif; ?>
@@ -86,26 +86,28 @@ while ($row = $genres_result->fetch_assoc()) {
     </header>
 </head>
 <body>
-    <main>
-        <div class="book-detail-container">
-            <img src="images/<?php echo htmlspecialchars($book['cover_image_url']); ?>" alt="<?php echo htmlspecialchars($book['title']); ?>">
-            <div class="book-details">
-                <h2><?php echo htmlspecialchars($book['title']); ?></h2>
-                <p><strong>Author:</strong> <?php echo htmlspecialchars($book['author_name']); ?></p>
-                <p><strong>Genres:</strong> 
-                    <?php echo !empty($genres) ? htmlspecialchars(implode(", ", $genres)) : "Not specified"; ?>
-                </p>
-                <p><strong>Published:</strong> <?php echo htmlspecialchars($book['publication_year']); ?></p>
-                <p><strong>Price:</strong> $<?php echo number_format($book['price'], 2); ?></p>
-                <p><strong>Description:</strong> <?php echo htmlspecialchars($book['description']); ?></p>
-                <form action="add-to-cart.php" method="post">
-                    <input type="hidden" name="book_id" value="<?php echo $book_id; ?>">
-                    <input type="number" name="quantity" value="1" min="1" max="10">
-                    <button type="submit">Add to Cart</button>
-                </form>
-            </div>
+
+<main>
+    <div class="book-detail-container">
+        <img src="images/<?php echo htmlspecialchars($book['cover_image_url']); ?>" alt="<?php echo htmlspecialchars($book['title']); ?>">
+        <div class="book-details">
+            <h2><?php echo htmlspecialchars($book['title']); ?></h2>
+            <p><strong>Author:</strong> <?php echo htmlspecialchars($book['author_name']); ?></p>
+            <p><strong>Genres:</strong> <?php echo htmlspecialchars(implode(", ", $genres)); ?></p>
+            <p><strong>Published:</strong> <?php echo htmlspecialchars($book['publication_year']); ?></p>
+            <p><strong>Price:</strong> $<?php echo number_format($book['price'], 2); ?></p>
+            <p><strong>Description:</strong> <?php echo htmlspecialchars($book['description']); ?></p>
+            <!-- Add to Cart Button -->
+            <form action="add-to-cart.php" method="post">
+                <input type="hidden" name="book_id" value="<?php echo $book_id; ?>">
+                <input type="number" name="quantity" value="1" min="1" max="10">
+                <button type="submit">Add to Cart</button>
+            </form>
         </div>
-    </main>
+    </div>
+</main>
+
+<!-- Cart overlay, controlled by JavaScript -->
 <div class="overlay" id="overlay">
     <div class="cart-panel" id="cartPanel">
         <div class="cart-header">
@@ -150,52 +152,8 @@ while ($row = $genres_result->fetch_assoc()) {
                 <p>Your cart is empty. <a href="categories.php">Browse Books</a></p>
             <?php endif; ?>
         </div>
-</div>         
-    <div class="cart-panel" id="cartPanel">
-        <div class="cart-header">
-            <h2>Shopping Cart 🛒</h2>
-            <button class="close-cart" onclick="closeCart()">✖</button>
-        </div>
-        <div class="cart-content">
-            <?php if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])): ?>
-                <ul>
-                    <?php
-                    // Initialize subtotal
-                    $subtotal = 0;
-
-                    foreach ($_SESSION['cart'] as $book_id => $item) {
-                        // Fetch book details from the database
-                        $sql = "SELECT title, price FROM Books WHERE book_id = ?";
-                        $stmt = $conn->prepare($sql);
-                        $stmt->bind_param("i", $book_id);
-                        $stmt->execute();
-                        $stmt->bind_result($title, $price);
-                        $stmt->fetch();
-                        $stmt->close();
-
-                        // Calculate total price for the item
-                        $item_total = $price * $item['quantity'];
-                        $subtotal += $item_total;
-                    ?>
-                        <li>
-                            <div class='cart-item'>
-                                <strong><?php echo htmlspecialchars($title); ?></strong><br>
-                                Price: $<?php echo number_format($price, 2); ?> <br>
-                                Quantity: <?php echo $item['quantity']; ?><br>
-                                Total: $<?php echo number_format($item_total, 2); ?>
-                            </div>
-                        </li>
-                    <?php } ?>
-                </ul>
-                <hr>
-                <p><strong>Subtotal(before taxes): $<?php echo number_format($subtotal, 2); ?></strong></p>
-                <a href="review-order.php" class="checkout-button">Review order</a>
-            <?php else: ?>
-                <p>Your cart is empty. <a href="categories.php">Browse Books</a></p>
-            <?php endif; ?>
-        </div>
-        </div>
     </div>
+</div>
 
 <footer>
     <p>&copy; 2024 RowdyBookly</p>

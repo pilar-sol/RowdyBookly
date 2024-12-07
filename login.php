@@ -4,7 +4,7 @@ session_start(); // Start a session to track logged-in users
 // Fetch database URL from environment variable
 //$dbUrl = getenv('CLEARDB_DATABASE_URL');
 //$dbUrl = 'mysql://aqapvw1dt4k36dav:cp8n1pd5tgos08nw@qn0cquuabmqczee2.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/rp7q9eqqkuuf90wn';
-$dbUrl = getenv('JAWSDB_URL');
+$dbUrl = 'mysql://root:@localhost:3306/boostore_db-testing';
 
 // Parse the URL
 $dbParts = parse_url($dbUrl);
@@ -16,7 +16,7 @@ $password = $dbParts['pass'];
 
 // Connect to the database
 try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
+    $pdo = new PDO("mysql:host=$host;port=3306dbname=$dbname;charset=utf8", $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     die("Database connection failed: " . $e->getMessage());

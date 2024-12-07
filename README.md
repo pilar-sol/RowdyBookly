@@ -1,3 +1,13 @@
+***
+Created search-results.php contains:
+-Search function - Search by title, author, genre -Sort by feature - dropdown menu Sort by title, price, publication year, (ascending, descending)
+
+Added Search function into the header of other pages so user can use search bar on other pages, code it visible by comments like:
+
+Added books, authors, images, and ids, to database totaled 60
+***
+
+
 # RowdyBookly
 
 Welcome to Rowdy Bookly! Our mission is to provide a fast, convenient, and secure shopping experience, made to meet the unique needs of the bookworm community. 

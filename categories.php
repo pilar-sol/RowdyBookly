@@ -69,21 +69,24 @@ if (isset($_SESSION['cart'])) {
     </style>
 </head>
 <body>
-    <header>
+<header>
         <h1 class="logo">
             <a class="main-page" href="index.php">
-            Rowdy<br>Bookly
+            Rowdy Bookly
             </a>
         </h1>
         <nav>
             <a href="categories.php" class="category-button">Categories</a>
-            <input type="text" placeholder="Search">
-            <button class="search-button">🔍</button>
+            <form action="search-results.php" method="get">
+            <input type="text" name="query" placeholder="Search books by title, author, genre" required>
+            <button type="submit" class="search-button">🔍</button>
             <?php if ($is_logged_in): ?>
-                    <span class="login_welcome">Welcome, <?php echo $_SESSION['username']; ?>!</span>
-                    <a href="logout.php">Logout</a>
+                    <a href="profile.php" class="icon">👤</a>
+                    <a href="logout.php" class="icon" title="Logout">
+                        <img src="images/logout.png" alt="Logout" style="width:30px; height:30px;">
+                    </a>
             <?php else: ?>
-                <a href="login.php" class="icon">👤</a>
+                <a href="profile.php" class="icon">👤</a>
             <?php endif; ?>
             <a href="javascript:void(0);" class="icon" onclick="openCart()">🛒</a>
         </nav>
