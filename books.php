@@ -188,6 +188,12 @@ $books_result = $books_query->get_result();
                                 <h3><?php echo htmlspecialchars($book['title']); ?></h3>
                                 <p><strong>By:</strong> <?php echo htmlspecialchars($book['author_name']); ?></p>
                                 <p><strong>Price:</strong> $<?php echo number_format($book['price'], 2); ?></p>
+                            <form action="add-to-cart.php" method="post">
+                                <input type="hidden" name="book_id" value="<?php echo (int)$book['book_id']; ?>">
+                                <input type="number" name="quantity" value="1" min="1" max="10">
+                                <input type="hidden" name="genre" value="<?php echo htmlspecialchars($genre); ?>">
+                                <button type="submit">Add to Cart</button>
+                            </form>
                             </a>
                             <form action="add-to-cart.php" method="post">
                                 <input type="hidden" name="book_id" value="<?php echo (int)$book['book_id']; ?>">
