@@ -2,6 +2,8 @@
 session_start();
 include 'config.php';  // Include database connection
 
+$is_logged_in = isset($_SESSION['user_id']);
+
 // Check if cart is empty
 if (!isset($_SESSION['cart']) || empty($_SESSION['cart'])) {
     echo "<p>Your cart is empty. <a href='books.php'>Go back to shopping</a></p>";
@@ -38,78 +40,128 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Cart</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
-
-        h1 {
-            text-align: center;
-            margin: 20px 0;
-        }
-
+        <?php include 'css/style.css'?>
         table {
-            width: 80%;
-            max-width: 1000px;
-            margin: 20px auto;
+            width: 100%;
             border-collapse: collapse;
-            background-color: #fff;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            
         }
 
-        table th, table td {
-            padding: 12px;
-            text-align: center;
-            border-bottom: 1px solid #ddd;
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 2px solid #ddd;
+            border-radius:2px
+
         }
 
-        table th {
-            background-color: #007bff;
-            color: white;
+        th {
+            background-color: #f4f4f4;
+            font-weight: bold;
         }
-
-        table tr:hover {
+        
+        tr:hover {
             background-color: #f1f1f1;
         }
 
-        input[type="number"] {
-            width: 50px;
-            padding: 5px;
-        }
-
-        input[type="submit"], .checkout-button, .back-button {
-            background-color: #28a745;
-            color: white;
-            padding: 10px 15px;
+        button {
+            background-color: #ff4f58;
             border: none;
-            border-radius: 4px;
+            color: white;
+            padding: 6px 12px;
             cursor: pointer;
-            transition: background-color 0.3s;
-            display: inline-block;
-            text-decoration: none;
+            font-size: 14px;
         }
 
-        input[type="submit"]:hover, .checkout-button:hover, .back-button:hover {
-            background-color: #218838;
+        button:hover {
+            background-color: #d43f48;
         }
 
+
+        /* Button styling for checkout */
         .checkout-button, .back-button {
-            display: block;
-            text-align: center;
-            margin: 20px auto;
-            width: 200px;
+            padding: 10px 20px;
+            background-color: #3c8dbc;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 20px;
         }
 
-        .back-button {
-            background-color: #007bff;
+        .checkout-button:hover, .back-button:hover {
+            background-color: #2b7aa1;
         }
 
-        .back-button:hover {
-            background-color: #0056b3;
+        /* Responsive Cart Design */
+        @media (max-width: 500px) {
+            h2 {
+                padding-top: 100px;
+            }
+            table {
+                width: 100%;
+                font-size: 14px;
+            }
+            .minimize{
+                display:none;
+            }
+            th, td {
+                padding: 10px;
+            }
+
+            .group1 {
+                padding: 10px;
+            }
+        }
+        .checkout-calculation {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            font-family: 'Arial', sans-serif;
+            color: #333;
+        }
+
+        .checkout-calculation p {
+            font-size: 1.1em;
+            margin: 10px 0;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .checkout-calculation p span {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .checkout-calculation p:last-child {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #00b4cc; 
+        }
+
+        .checkout-calculation .totals {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .checkout-calculation .totals p {
+            font-size: 1.2em;
+            color: #555;
+        }
+
+        /* Add hover effect on checkout-calculation box */
+        .checkout-calculation:hover {
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            transform: translateY(-5px);
+            transition: all 0.3s ease;
         }
     </style>
+<?php include 'navigation-bar.php' ?>
 </head>
 <body>
     <h1>Your Shopping Cart</h1>
