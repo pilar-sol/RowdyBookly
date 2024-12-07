@@ -87,48 +87,32 @@ if (isset($_GET['book_id'])) {
      </style>
 </head>
 <body>
-    <header>
-        <h1 class="logo">
-            <a class="main-page" href="index.php">Rowdy Bookly</a>
-        </h1>
-        <nav>
-            <a href="categories.php" class="category-button">Categories</a>
-            <!-- Updated Search Form -->
-            <form action="search-results.php" method="GET" style="display: inline;">
-                <input 
-                    type="text" 
-                    name="query" 
-                    value="<?php echo isset($_GET['query']) ? htmlspecialchars($_GET['query']) : ''; ?>" 
-                    placeholder="Search books by title, author, genre">
-                <button type="submit" class="search-button">🔍</button>
-                
-                <!-- Sort By Dropdown -->
-                <select name="sort_by">
-                    <option value="title" <?php echo isset($_GET['sort_by']) && $_GET['sort_by'] == 'title' ? 'selected' : ''; ?>>Sort by Title</option>
-                    <option value="price" <?php echo isset($_GET['sort_by']) && $_GET['sort_by'] == 'price' ? 'selected' : ''; ?>>Sort by Price</option>
-                    <option value="publication_year" <?php echo isset($_GET['sort_by']) && $_GET['sort_by'] == 'publication_year' ? 'selected' : ''; ?>>Sort by Publication Year</option>
-                </select>
-                
-                <!-- Sort Order Dropdown -->
-                <select name="sort_order">
-                    <option value="ASC" <?php echo isset($_GET['sort_order']) && $_GET['sort_order'] == 'ASC' ? 'selected' : ''; ?>>Ascending</option>
-                    <option value="DESC" <?php echo isset($_GET['sort_order']) && $_GET['sort_order'] == 'DESC' ? 'selected' : ''; ?>>Descending</option>
-                </select>
-                
-                <!-- Sort Button -->
-                <button type="submit" class="sort-button">Sort</button>
-            </form>
-            <?php if ($is_logged_in): ?>
-                <span class="login_welcome">Welcome, <?php echo $_SESSION['username']; ?>!</span>
-                <a href="logout.php">Logout</a>
-            <?php else: ?>
-                <a href="login.php" class="icon">👤</a>
-            <?php endif; ?>
-            <a href="javascript:void(0);" class="icon" onclick="openCart()">🛒</a>
-        </nav>
-    </header>
+    
+    <?php include 'navigation-bar.php'; ?>
+
     
     <main>
+    <form action="search-results.php" method="GET" style="display: inline;">
+        <!-- Include the search query as a hidden field -->
+        <input type="hidden" name="query" value="<?php echo htmlspecialchars($query); ?>">
+
+        <!-- Sort By Dropdown -->
+        <select name="sort_by">
+            <option value="title" <?php echo $sort_by === 'title' ? 'selected' : ''; ?>>Sort by Title</option>
+            <option value="price" <?php echo $sort_by === 'price' ? 'selected' : ''; ?>>Sort by Price</option>
+            <option value="publication_year" <?php echo $sort_by === 'publication_year' ? 'selected' : ''; ?>>Sort by Publication Year</option>
+        </select>
+
+        <!-- Sort Order Dropdown -->
+        <select name="sort_order">
+            <option value="ASC" <?php echo $sort_order === 'ASC' ? 'selected' : ''; ?>>Ascending</option>
+            <option value="DESC" <?php echo $sort_order === 'DESC' ? 'selected' : ''; ?>>Descending</option>
+        </select>
+
+        <!-- Sort Button -->
+        <button type="submit" class="sort-button">Sort</button>
+    </form>
+
         <?php if (isset($book)): ?>
             <div class="book-details">
                 <h2><?php echo htmlspecialchars($book['title']); ?></h2>
