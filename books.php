@@ -137,7 +137,7 @@ $books_result = $books_query->get_result();
 
     <?php if ($books_result->num_rows > 0):?>
 
-        <h2><a href ="index.php">Home</a> >> <?php echo htmlspecialchars(ucwords($genre)); ?> Genre</h2>
+        <h2>Book in <?php echo htmlspecialchars(ucwords($genre)); ?> genre</h2>
         <p class="genre-description"><?php echo htmlspecialchars($genre_description); ?></p>    
     <div class="book-list-container">
         
