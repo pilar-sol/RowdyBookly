@@ -1,8 +1,4 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 session_start();
 include 'config.php';  // Include database connection
 
@@ -46,23 +42,23 @@ $sql = "SELECT b.book_id, b.title, b.cover_image_url, a.name AS author_name
     <header>
         <h1 class="logo">
             <a class="main-page" href="index.php">
-            Rowdy<br>Bookly
+            Rowdy Bookly
             </a>
         </h1>
         <nav>
             <a href="categories.php" class="category-button">Categories</a>
-            <input type="text" placeholder="Search">
-            <button class="search-button">🔍</button>
+            <form action="search-results.php" method="get">
+            <input type="text" name="query" placeholder="Search books by title, author, genre" required>
+            <button type="submit" class="search-button">🔍</button>
             <?php if ($is_logged_in): ?>
                     <a href="profile.php" class="icon">👤</a>
                     <a href="logout.php" class="icon" title="Logout">
                         <img src="images/logout.png" alt="Logout" style="width:30px; height:30px;">
-</a>
+                    </a>
             <?php else: ?>
                 <a href="profile.php" class="icon">👤</a>
             <?php endif; ?>
             <a href="javascript:void(0);" class="icon" onclick="openCart()">🛒</a>
-            
         </nav>
     </header>
     
