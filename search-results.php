@@ -84,15 +84,22 @@ if (isset($_GET['book_id'])) {
     <style>
     <?php include 'css/style.css'; ?>
     <?php include 'css/book-display.css'; ?>
+    .search-results {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px; /* Adds space between items */
+        justify-content: flex-start; /* Aligns items to the left */
+    }
      </style>
+    <?php include 'navigation-bar.php'; ?>
 </head>
 <body>
     
-    <?php include 'navigation-bar.php'; ?>
-
+    
+    <div class="body0">
     
     <main>
-    <form action="search-results.php" method="GET" style="display: inline;">
+    <form action="search-results.php" method="GET" style="display: inline;" class="form-container">
         <!-- Include the search query as a hidden field -->
         <input type="hidden" name="query" value="<?php echo htmlspecialchars($query); ?>">
 
@@ -139,7 +146,7 @@ if (isset($_GET['book_id'])) {
                 while ($book = $search_result->fetch_assoc()) {
                     // Display each book with a link to show details on the same page
                     echo '<div class="book-item">
-                            <a href="search-results.php?book_id=' . (int)$book['book_id'] . '" class="book-link">
+                            <a href="book-detail.php?book_id=' . (int)$book['book_id'] . '" class="book-link">
                                 <img src="images/' . htmlspecialchars($book['cover_image_url']) . '" alt="' . htmlspecialchars($book['title']) . '"
                                     style="width: 150px; height: 200px; object-fit: cover;">
                                 <h3>' . htmlspecialchars($book['title']) . '</h3>
@@ -154,7 +161,7 @@ if (isset($_GET['book_id'])) {
             ?>
         <?php endif; ?>
     </main>
-
+        </div>
     <footer>
         <p>&copy; 2024 RowdyBookly</p>
     </footer>
