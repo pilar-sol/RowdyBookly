@@ -1,6 +1,8 @@
 <header>
     <h1 class="logo">
-        <a class="main-page" href="index.php">Rowdy Bookly</a>
+            <a class="main-page" href="index.php">
+            Rowdy<br>Bookly
+            </a>
     </h1>
     <nav>
         <a href="categories.php" class="category-button">Categories</a>
