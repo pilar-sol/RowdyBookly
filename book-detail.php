@@ -65,28 +65,26 @@ while ($row = $genres_result->fetch_assoc()) {
         <?php include 'css/style.css'; ?>
         <?php include 'css/book-detail.css'; ?>
         </style>
-    <header>
-        <h1 class="logo">
-            <a class="main-page" href="index.php">
-            Rowdy<br>Bookly
-            </a>
-        </h1>
-        <nav>
-            <a href="categories.php" class="category-button">Categories</a>
-            <input type="text" placeholder="Search">
-            <button class="search-button">🔍</button>
-            <?php if ($is_logged_in): ?>
-                <span class="login_welcome">Welcome, <?php echo $_SESSION['username']; ?>!</span>
-                <a href="logout.php">Logout</a>
-            <?php else: ?>
-                <a href="login.php" class="icon">👤</a>
-            <?php endif; ?>
-            <a href="javascript:void(0);" class="icon" onclick="openCart()">🛒</a>
-        </nav>
-    </header>
+    <?php include 'navigation-bar.php'; ?>
 </head>
 <body>
+<div class="body0">
+        <nav class="breadcrumb">
+            <a href="index.php">Home</a>
+            <span>&raquo;</span>
+            <a href="categories.php">Categories</a>
+            <span>&raquo;</span>
+            <?php if (!empty($genres)) : ?>
+            <a href="books.php?genre=<?php echo urlencode($genres[0]); ?>">
+                <?php echo htmlspecialchars($genres[0]); ?>
+            </a>
+            <?php else : ?>
+            No Genre
+            <?php endif; ?>
+            <span>&raquo;</span>
+            <span class="current"><?php echo htmlspecialchars($book['title']); ?></span>
 
+    </nav>
 <main>
     <div class="book-detail-container">
         <img src="images/<?php echo htmlspecialchars($book['cover_image_url']); ?>" alt="<?php echo htmlspecialchars($book['title']); ?>">
@@ -108,56 +106,13 @@ while ($row = $genres_result->fetch_assoc()) {
 </main>
 
 <!-- Cart overlay, controlled by JavaScript -->
-<div class="overlay" id="overlay">
-    <div class="cart-panel" id="cartPanel">
-        <div class="cart-header">
-            <h2>Shopping Cart 🛒</h2>
-            <button class="close-cart" onclick="closeCart()">✖</button>
-        </div>
-        <div class="cart-content">
-            <?php if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])): ?>
-                <ul>
-                    <?php
-                    // Initialize subtotal
-                    $subtotal = 0;
+ <?php include 'cart-overlay.php'; ?>
 
-                    foreach ($_SESSION['cart'] as $book_id => $item) {
-                        // Fetch book details from the database
-                        $sql = "SELECT title, price FROM Books WHERE book_id = ?";
-                        $stmt = $conn->prepare($sql);
-                        $stmt->bind_param("i", $book_id);
-                        $stmt->execute();
-                        $stmt->bind_result($title, $price);
-                        $stmt->fetch();
-                        $stmt->close();
 
-                        // Calculate total price for the item
-                        $item_total = $price * $item['quantity'];
-                        $subtotal += $item_total;
-                    ?>
-                        <li>
-                            <div class='cart-item'>
-                                <strong><?php echo htmlspecialchars($title); ?></strong><br>
-                                Price: $<?php echo number_format($price, 2); ?> <br>
-                                Quantity: <?php echo $item['quantity']; ?><br>
-                                Total: $<?php echo number_format($item_total, 2); ?>
-                            </div>
-                        </li>
-                    <?php } ?>
-                </ul>
-                <hr>
-                <p><strong>Subtotal(before taxes): $<?php echo number_format($subtotal, 2); ?></strong></p>
-                <a href="review-order.php" class="checkout-button">Review order</a>
-            <?php else: ?>
-                <p>Your cart is empty. <a href="categories.php">Browse Books</a></p>
-            <?php endif; ?>
-        </div>
-    </div>
 </div>
-
+</body>
+<script src="javascript/cart-interaction.js"></script>
 <footer>
     <p>&copy; 2024 RowdyBookly</p>
 </footer>
-<script src="javascript/cart-interaction.js"></script>
-</body>
 </html>
