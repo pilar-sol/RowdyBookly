@@ -81,6 +81,10 @@ if (isset($_GET['book_id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Results - Rowdy Bookly</title>
     <link rel="stylesheet" href="css/style.css">
+    <style>
+    <?php include 'css/style.css'; ?>
+    <?php include 'css/book-display.css'; ?>
+     </style>
 </head>
 <body>
     <header>
