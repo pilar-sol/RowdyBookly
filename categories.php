@@ -67,30 +67,11 @@ if (isset($_SESSION['cart'])) {
             color: #0073e6;
         }
     </style>
+    <?php include 'navigation-bar.php'; ?>
+
 </head>
 <body>
-<header>
-        <h1 class="logo">
-            <a class="main-page" href="index.php">
-            Rowdy Bookly
-            </a>
-        </h1>
-        <nav>
-            <a href="categories.php" class="category-button">Categories</a>
-            <form action="search-results.php" method="get">
-            <input type="text" name="query" placeholder="Search books by title, author, genre" required>
-            <button type="submit" class="search-button">🔍</button>
-            <?php if ($is_logged_in): ?>
-                    <a href="profile.php" class="icon">👤</a>
-                    <a href="logout.php" class="icon" title="Logout">
-                        <img src="images/logout.png" alt="Logout" style="width:30px; height:30px;">
-                    </a>
-            <?php else: ?>
-                <a href="profile.php" class="icon">👤</a>
-            <?php endif; ?>
-            <a href="javascript:void(0);" class="icon" onclick="openCart()">🛒</a>
-        </nav>
-    </header>
+
     
     <main class="categories-container">
             <a href="books.php?genre=<?php echo urlencode("All"); ?>" class="category">
