@@ -6,8 +6,8 @@
         align-items: center;
         padding-right: 0;
         z-index: 10;
-        width: 40px;
-        height: 40px;
+        width: 50px;
+        height: 50px;
     }
     .cart img{
         width: 30px;

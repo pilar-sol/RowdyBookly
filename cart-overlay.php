@@ -1,3 +1,8 @@
+<style>
+
+<?php include 'css/cart-overlay.css' ?>
+    </style>
+
 <div class="overlay" id="overlay">
     <div class="cart-panel" id="cartPanel">
         <div class="cart-header">
@@ -6,26 +11,29 @@
         </div>
         <div class="cart-content">
             <?php if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])): ?>
-                <ul>
+                <ul class="cart-items-list">
                     <?php
                     $subtotal = 0;
                     foreach ($_SESSION['cart'] as $book_id => $item) {
-                        $sql = "SELECT title, price FROM Books WHERE book_id = ?";
+                        $sql = "SELECT title, price, cover_image_url FROM Books WHERE book_id = ?";
                         $stmt = $conn->prepare($sql);
                         $stmt->bind_param("i", $book_id);
                         $stmt->execute();
-                        $stmt->bind_result($title, $price);
+                        $stmt->bind_result($title, $price, $cover_image_url);
                         $stmt->fetch();
                         $stmt->close();
                         $item_total = $price * $item['quantity'];
                         $subtotal += $item_total;
                     ?>
-                        <li>
-                            <div class='cart-item'>
-                                <strong><?php echo htmlspecialchars($title); ?></strong><br>
-                                Price: $<?php echo number_format($price, 2); ?><br>
-                                Quantity: <?php echo $item['quantity']; ?><br>
-                                Total: $<?php echo number_format($item_total, 2); ?>
+                        <li class="cart-item">
+                            <div class="cart-item-image">
+                                <img src="images/<?php echo htmlspecialchars($cover_image_url); ?>" alt="<?php echo htmlspecialchars($title); ?>" class="book-preview">
+                            </div>
+                            <div class="cart-item-description">
+                                <h4 class="cart-item-title"><?php echo htmlspecialchars($title); ?></h4>
+                                <p class="cart-item-price">Price: $<?php echo number_format($price, 2); ?></p>
+                                <p class="cart-item-quantity">Quantity: <?php echo $item['quantity']; ?></p>
+                                <p class="cart-item-total">Total: $<?php echo number_format($item_total, 2); ?></p>
                             </div>
                         </li>
                     <?php } ?>

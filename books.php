@@ -102,10 +102,10 @@ $books_result = $books_query->get_result();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Books in <?php echo htmlspecialchars(ucwords($genre)); ?> Genre</title>
-    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/book-display.css">
     <style>
             <?php include 'css/book-display.css'; ?>
+            <?php include 'css/style.css'; ?>
             .form-container {
                 margin: 20px 0;
             }
