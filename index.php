@@ -16,6 +16,12 @@ if (isset($_SESSION['cart'])) {
         $cart_item_count += $item['quantity'];  // Sum up quantities of all items
     }
 }
+$sql = "SELECT b.book_id, b.title, b.cover_image_url, a.name AS author_name 
+                FROM Books b 
+                JOIN Authors a ON b.author_id = a.author_id 
+                WHERE b.is_staff_pick = 1 LIMIT 7";
+
+                $result = $conn->query($sql);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,7 +32,14 @@ if (isset($_SESSION['cart'])) {
     <link rel="stylesheet" href="css/style.css">
     <style> 
         <?php include 'css/style.css'; ?>
-        
+        .book-item a{
+            texT-decoration: none;
+            color: black;
+        }
+        .book-item a:hover{
+            texT-decoration: none;
+            color: brown;
+        }
     </style>
 </head>
 <body>
@@ -65,30 +78,25 @@ if (isset($_SESSION['cart'])) {
         <!-- Right side content: Books listing -->
         <aside class="book-sidebar">
             <section class="books-section">
-            <h3>Staff Picks</h3>
-            <ul class="book-list">
-                <?php
-                // Fetch staff picks from the database
-                $sql = "SELECT b.title, b.cover_image_url, a.name AS author_name 
-                FROM books b 
-                JOIN Authors a ON b.author_id = a.author_id 
-                WHERE b.is_staff_pick = 1 LIMIT 7";
-
-                $result = $conn->query($sql);
-
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        echo "<li>
-                                <img src='" . htmlspecialchars($row['cover_image_url']) . "' alt='" . htmlspecialchars($row['title']) . "' style='width:100px;height:150px;'>
-                                <p><strong>" . htmlspecialchars($row['title']) . "</strong><br>by " . htmlspecialchars($row['author_name']) . "</p>
-
-                            </li>";
-                    }
-                } else {
-                    echo "<li>No staff picks available at the moment.</li>";
-                }
-                ?>
-            </ul>
+                <h3>Staff Picks</h3>
+                <ul class="book-list">
+                    <!-- Fetch staff picks from the database -->
+                    <?php if ($result->num_rows > 0): ?> 
+                        <?php while ($row = $result->fetch_assoc()): ?> 
+                            <li>
+                                <div class="book-item">
+                                <a href="book-detail.php?book_id=<?php echo (int)$row['book_id']; ?>" class="book-link">
+                                    <img src="images/<?php echo htmlspecialchars($row['cover_image_url']); ?>" alt="<?php echo htmlspecialchars($row['title']); ?>" style="width:100px;height:150px;">
+                                    <p><strong><?php echo htmlspecialchars($row['title']); ?></strong><br>by <?php echo htmlspecialchars($row['author_name']); ?></p>
+                                    
+                                </a>
+                                </div>
+                            </li>
+                        <?php endwhile; ?>
+                    <?php else: ?>
+                        <li>No staff picks available at the moment.</li>
+                    <?php endif; ?>
+                </ul>
             </section>
         </aside>
     </main>
