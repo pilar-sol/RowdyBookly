@@ -165,7 +165,7 @@ if (isset($_SESSION['cart'])) {
             </ul>
             <hr>
             <p><strong>Subtotal(before taxes): $<?php echo number_format($subtotal, 2); ?></strong></p>
-            <a href="review-order.php" class="checkout-button">Review order</a>
+            <a href="rcheckout.php" class="checkout-button">Checkout</a>
         <?php else: ?>
             <p>Your cart is empty. <a href="categories.php">Browse Books</a></p>
         <?php endif; ?>

@@ -1,0 +1,8 @@
+2024-12-06 15:55:43.101 [info] Started local extension host with pid 30755.
+2024-12-06 15:55:43.269 [error] Extension 'ms-vscode.cpptools' appears in product.json but enables LESS API proposals than the extension wants.
+package.json (LOSES): terminalDataWriteEvent, lmTools
+product.json (WINS): terminalDataWriteEvent
+2024-12-06 15:55:43.281 [warning] [twxs.cmake]: Cannot register 'cmake.cmakePath'. This property is already registered.
+2024-12-06 15:55:43.318 [info] Settings Sync: Updating due to initialize
+2024-12-06 15:55:43.318 [info] Settings Sync: Updating authentication providers. Authentication Providers from store: [{"id":"github","scopes":["user:email"]},{"id":"microsoft","scopes":["openid","profile","email","offline_access"]}]
+2024-12-06 15:55:43.318 [info] Settings Sync: Authentication providers updated ["github","microsoft"]

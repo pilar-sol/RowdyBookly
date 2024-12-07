@@ -1,0 +1,11 @@
+2024-12-06 15:31:55.649 [info] Started local extension host with pid 28736.
+2024-12-06 15:31:55.751 [error] Extension 'ms-vscode.cpptools' appears in product.json but enables LESS API proposals than the extension wants.
+package.json (LOSES): terminalDataWriteEvent, lmTools
+product.json (WINS): terminalDataWriteEvent
+2024-12-06 15:31:55.765 [warning] [twxs.cmake]: Cannot register 'cmake.cmakePath'. This property is already registered.
+2024-12-06 15:31:55.802 [info] Settings Sync: Updating due to initialize
+2024-12-06 15:31:55.802 [info] Settings Sync: Updating authentication providers. Authentication Providers from store: [{"id":"github","scopes":["user:email"]},{"id":"microsoft","scopes":["openid","profile","email","offline_access"]}]
+2024-12-06 15:31:55.802 [info] Settings Sync: Authentication providers updated ["github","microsoft"]
+2024-12-06 15:31:58.208 [info] [perf] Render performance baseline is 10ms
+2024-12-06 15:32:33.320 [error] [text file model] handleSaveError(0) - exit - resulted in a save error: Error: Unable to write file '/Applications/XAMPP/xamppfiles/phpmyadmin/config.inc.php' (NoPermissions (FileSystemError): Error: EACCES: permission denied, open '/Applications/XAMPP/xamppfiles/phpmyadmin/config.inc.php') file:///Applications/XAMPP/xamppfiles/phpmyadmin/config.inc.php
+2024-12-06 15:32:48.883 [error] [text file model] handleSaveError(0) - exit - resulted in a save error: Error: Unable to write file '/Applications/XAMPP/xamppfiles/phpmyadmin/config.inc.php' (NoPermissions (FileSystemError): Error: EACCES: permission denied, open '/Applications/XAMPP/xamppfiles/phpmyadmin/config.inc.php') file:///Applications/XAMPP/xamppfiles/phpmyadmin/config.inc.php

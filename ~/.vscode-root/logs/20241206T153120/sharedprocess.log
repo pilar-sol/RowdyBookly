@@ -1,0 +1,4 @@
+2024-12-06 15:31:32.045 [info] Getting Manifest... ms-python.vscode-pylance
+2024-12-06 15:31:32.362 [info] Installing extension: ms-python.vscode-pylance {"productVersion":{"version":"1.95.3","date":"2024-11-13T14:50:04.152Z"},"pinned":false,"operation":3,"isApplicationScoped":false,"profileLocation":{"$mid":1,"external":"vscode-userdata:/Users/andytran/.vscode/extensions/extensions.json","path":"/Users/andytran/.vscode/extensions/extensions.json","scheme":"vscode-userdata"},"installOnlyNewlyAddedFromExtensionPack":true}
+2024-12-06 15:31:35.691 [info] Getting Manifest... ms-python.python
+2024-12-06 15:31:48.378 [info] Extensions added from another source ms-python.vscode-pylance vscode-userdata:/Users/andytran/.vscode/extensions/extensions.json

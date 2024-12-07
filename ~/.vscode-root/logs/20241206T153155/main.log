@@ -1,0 +1,10 @@
+2024-12-06 15:31:55.392 [info] update#setState idle
+2024-12-06 15:32:25.333 [info] update#setState checking for updates
+2024-12-06 15:32:25.817 [error] UpdateService error: Cannot update while running on a read-only volume. The application is on a read-only volume. Please move the application and try again. If you're on macOS Sierra or later, you'll need to move the application out of the Downloads directory. See https://github.com/Squirrel/Squirrel.Mac/issues/182 for more information.
+2024-12-06 15:32:25.818 [info] update#setState idle
+2024-12-06 15:52:01.625 [info] Extension host with pid 28736 exited with code: 0, signal: unknown.
+2024-12-06 15:52:01.628 [error] [UtilityProcessWorker]: terminated unexpectedly with code 34615168, signal: unknown
+2024-12-06 15:55:44.930 [info] Extension host with pid 30755 exited with code: 0, signal: unknown.
+2024-12-06 15:55:44.931 [error] [UtilityProcessWorker]: terminated unexpectedly with code 34627328, signal: unknown
+2024-12-06 15:55:50.540 [info] Extension host with pid 30761 exited with code: 0, signal: unknown.
+2024-12-06 15:55:50.669 [error] [UtilityProcessWorker]: terminated unexpectedly with code 34667008, signal: unknown
