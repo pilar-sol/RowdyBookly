@@ -160,9 +160,7 @@ $books_result = $books_query->get_result();
                             </form>
                         </a>
                     </div>
-        
-                
-            
+    
             <?php endwhile; ?>
             </div>
         </div>
