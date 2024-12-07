@@ -80,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <header>
         <h1 class="logo">
             <a class="main-page" href="index.php">
-            Rowdy Bookly
+            Rowdy<br>Bookly
             </a>
         </h1>
         <nav>
