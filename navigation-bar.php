@@ -1,3 +1,34 @@
+
+<style>
+    .cart {
+        position: relative;
+        display: grid;
+        align-items: center;
+        padding-right: 0;
+        z-index: 10;
+        width: 50px;
+        height: 50px;
+    }
+    .cart img{
+        width: 30px;
+        height: 30px;
+    }
+    .cart .cart-count {
+    position: absolute;
+    top: 0;
+    right: 0;    
+    background-color: red;
+    color: white;
+    font-size: 12px;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    z-index: 10;
+}
+    </style>
 <header>
     <h1 class="logo">
             <a class="main-page" href="index.php">
@@ -23,6 +54,11 @@
         <?php else: ?>
             <a href="login.php" class="icon">👤</a>
         <?php endif; ?>
-        <a href="javascript:void(0);" class="icon" onclick="openCart()">🛒</a>
+        <a class ="cart" href="javascript:void(0);" class="icon" onclick="openCart()">
+            <img src="icon/shopping-cart.png" alt="Cart">
+            <?php if ($cart_item_count > 0): ?>
+                <div class="cart-count"><?php echo $cart_item_count; ?></div>
+            <?php endif; ?>
+        </a>
     </nav>
 </header>

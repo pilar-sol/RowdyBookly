@@ -102,10 +102,10 @@ $books_result = $books_query->get_result();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Books in <?php echo htmlspecialchars(ucwords($genre)); ?> Genre</title>
-    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/book-display.css">
     <style>
             <?php include 'css/book-display.css'; ?>
+            <?php include 'css/style.css'; ?>
             .form-container {
                 margin: 20px 0;
             }
@@ -192,10 +192,10 @@ $books_result = $books_query->get_result();
                                 <input type="hidden" name="book_id" value="<?php echo (int)$book['book_id']; ?>">
                                 <input type="number" name="quantity" value="1" min="1" max="10">
                                 <input type="hidden" name="genre" value="<?php echo htmlspecialchars($genre); ?>">
+                                <input type="hidden" name="return_url" value="<?php echo htmlspecialchars($_SERVER['REQUEST_URI']); ?>"> <!-- Current URL -->   
                                 <button type="submit">Add to Cart</button>
                             </form>
                             </a>
-                        
                         </div>
                     <?php endwhile; ?>
                 </div>
@@ -203,9 +203,6 @@ $books_result = $books_query->get_result();
         <?php else: ?>
             <p>No books found in this genre.</p>
         <?php endif; ?>
-
-        
-
         <?php include 'cart-overlay.php'; ?>
     </div>
     

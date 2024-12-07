@@ -1,0 +1,136 @@
+
+/* Overlay to dim the background */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* semi-transparent background */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+    z-index: 999;
+}
+
+/* Cart Panel */
+.cart-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    background: #fff;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
+    transform: translateX(100%); /* Initially hidden off-screen */
+    transition: transform 0.3s ease;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: #333;
+    color: #fff;
+}
+
+.cart-content {
+    padding: 2rem;
+    font-size: 1rem;
+    color: #333;
+}
+/* Active classes for showing the overlay and cart */
+.overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.cart-panel.active {
+    transform: translateX(0); /* Slide into view */
+}
+
+/* General styling for the cart item */
+.cart-items-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.cart-item-image {
+    flex-shrink: 0;
+    margin-right: 15px;
+}
+
+.book-preview {
+    width: 70px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.cart-item-description {
+    flex-grow: 1;
+}
+
+.cart-item-title {
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.cart-item-price, .cart-item-quantity, .cart-item-total {
+    font-size: 0.9em;
+    color: #555;
+    margin: 5px 0;
+}
+
+.cart-item-price {
+    font-weight: bold;
+}
+
+.cart-item-total {
+    color: #703702;
+}
+
+.checkout-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #b9590b;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.checkout-button:hover {
+    background-color: #e9b148;
+    color: #b9590b;
+}
+
+/* Close button for cart */
+.close-cart {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #a51414;
+}
+
+/* Optional: Add hover effects for the close button */
+.close-cart:hover {
+    color: #ff3b3b;
+}
