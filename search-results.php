@@ -94,82 +94,76 @@ if (isset($_GET['book_id'])) {
     <?php include 'navigation-bar.php'; ?>
 </head>
 <body>
-    
-    
     <div class="body0">
-    
-    <main>
-    <form action="search-results.php" method="GET" style="display: inline;" class="form-container">
-        <!-- Include the search query as a hidden field -->
-        <input type="hidden" name="query" value="<?php echo htmlspecialchars($query); ?>">
+        <main>
+        <form action="search-results.php" method="GET" style="display: inline;" class="form-container">
+            <!-- Include the search query as a hidden field -->
+            <input type="hidden" name="query" value="<?php echo htmlspecialchars($query); ?>">
 
-        <!-- Sort By Dropdown -->
-        <select name="sort_by">
-            <option value="title" <?php echo $sort_by === 'title' ? 'selected' : ''; ?>>Sort by Title</option>
-            <option value="price" <?php echo $sort_by === 'price' ? 'selected' : ''; ?>>Sort by Price</option>
-            <option value="publication_year" <?php echo $sort_by === 'publication_year' ? 'selected' : ''; ?>>Sort by Publication Year</option>
-        </select>
+            <!-- Sort By Dropdown -->
+            <select name="sort_by">
+                <option value="title" <?php echo $sort_by === 'title' ? 'selected' : ''; ?>>Sort by Title</option>
+                <option value="price" <?php echo $sort_by === 'price' ? 'selected' : ''; ?>>Sort by Price</option>
+                <option value="publication_year" <?php echo $sort_by === 'publication_year' ? 'selected' : ''; ?>>Sort by Publication Year</option>
+            </select>
 
-        <!-- Sort Order Dropdown -->
-        <select name="sort_order">
-            <option value="ASC" <?php echo $sort_order === 'ASC' ? 'selected' : ''; ?>>Ascending</option>
-            <option value="DESC" <?php echo $sort_order === 'DESC' ? 'selected' : ''; ?>>Descending</option>
-        </select>
+            <!-- Sort Order Dropdown -->
+            <select name="sort_order">
+                <option value="ASC" <?php echo $sort_order === 'ASC' ? 'selected' : ''; ?>>Ascending</option>
+                <option value="DESC" <?php echo $sort_order === 'DESC' ? 'selected' : ''; ?>>Descending</option>
+            </select>
 
-        <!-- Sort Button -->
-        <button type="submit" class="sort-button">Sort</button>
-    </form>
+            <!-- Sort Button -->
+            <button type="submit" class="sort-button">Sort</button>
+        </form>
 
-        <?php if (isset($book)): ?>
-            <div class="book-details">
-                <h2><?php echo htmlspecialchars($book['title']); ?></h2>
-                <img src="images/<?php echo htmlspecialchars($book['cover_image_url']); ?>" alt="Book Cover" width="300">
-                <p><strong>By:</strong> <?php echo htmlspecialchars($book['author_name']); ?></p>
-                <p><strong>Price:</strong> $<?php echo number_format($book['price'], 2); ?></p>
-                <p><strong>Publication Year:</strong> <?php echo htmlspecialchars($book['publication_year']); ?></p>
-                <p><strong>Description:</strong> <?php echo htmlspecialchars($book['description']); ?></p>
-                <!-- Add to Cart form -->
-                <form action="add-to-cart.php" method="post">
-                    <input type="hidden" name="book_id" value="<?php echo (int)$book['book_id']; ?>">
-                    <input type="number" name="quantity" value="1" min="1" max="10">
-                    <button type="submit">Add to Cart</button>
-                </form>
-            </div>
-        <?php else: ?>
-            <!-- If no book_id is provided, just show the search results -->
-            <?php
-            if ($search_result->num_rows === 0) {
-                echo "<p>No books found matching your search criteria.</p>";
-            } else {
-                echo "<h2>Search Results for: " . htmlspecialchars($query) . " (" . $search_result->num_rows . " results)</h2>";
-                echo "<div class='search-results'>";
-                while ($book = $search_result->fetch_assoc()) {
-                    // Display each book with a link to show details on the same page
-                    echo '<div class="book-item">
-                            <a href="book-detail.php?book_id=' . (int)$book['book_id'] . '" class="book-link">
-                                <img src="images/' . htmlspecialchars($book['cover_image_url']) . '" alt="' . htmlspecialchars($book['title']) . '"
-                                    style="width: 150px; height: 200px; object-fit: cover;">
-                                <h3>' . htmlspecialchars($book['title']) . '</h3>
-                                <p><strong>By:</strong> ' . htmlspecialchars($book['author_name']) . '</p>
-                                <p><strong>Price:</strong> $' . number_format($book['price'], 2) . '</p>
-                            </a>
-                            <p class="view-details">Click for more details</p>
-                            <form action="add-to-cart.php" method="post">
-                                <input type="hidden" name="book_id" value="<?php echo (int)$book['book_id']; ?>">
-                                <input type="number" name="quantity" value="1" min="1" max="10">
-                                <input type="hidden" name="genre" value="<?php echo htmlspecialchars($genre); ?>">
-                                <button type="submit">Add to Cart</button>
-                            </form>
-                        </div>';
-                }
-                echo "</div>";
-            }
-            ?>
-        <?php endif; ?>
-    </main>
-        </div>
+            <?php if (isset($book)): ?>
+                <div class="book-details">
+                    <h2><?php echo htmlspecialchars($book['title']); ?></h2>
+                    <img src="images/<?php echo htmlspecialchars($book['cover_image_url']); ?>" alt="Book Cover" width="300">
+                    <p><strong>By:</strong> <?php echo htmlspecialchars($book['author_name']); ?></p>
+                    <p><strong>Price:</strong> $<?php echo number_format($book['price'], 2); ?></p>
+                    <p><strong>Publication Year:</strong> <?php echo htmlspecialchars($book['publication_year']); ?></p>
+                    <p><strong>Description:</strong> <?php echo htmlspecialchars($book['description']); ?></p>
+                    <!-- Add to Cart form -->
+                    <form action="add-to-cart.php" method="post">
+                        <input type="hidden" name="book_id" value="<?php echo (int)$book['book_id']; ?>">
+                        <input type="number" name="quantity" value="1" min="1" max="10">
+                        <button type="submit">Add to Cart</button>
+                    </form>
+                </div>
+            <?php else: ?>
+                <!-- If no book_id is provided, just show the search results -->
+                <?php if ($search_result->num_rows === 0): ?>
+                    <p>No books found matching your search criteria.</p>
+                <?php else: ?>
+                    <h2>Search Results for: <?php echo htmlspecialchars($query); ?> (<?php echo $search_result->num_rows; ?> results)</h2>
+                    <div class="search-results">
+                        <?php while ($book = $search_result->fetch_assoc()): ?>
+                            <!-- Display each book with a link to show details on the same page -->
+                            <div class="book-item">
+                                <a href="book-detail.php?book_id=<?php echo (int)$book['book_id']; ?>" class="book-link">
+                                    <img src="images/<?php echo htmlspecialchars($book['cover_image_url']); ?>" alt="<?php echo htmlspecialchars($book['title']); ?>"
+                                        style="width: 150px; height: 200px; object-fit: cover;">
+                                    <h3><?php echo htmlspecialchars($book['title']); ?></h3>
+                                    <p><strong>By:</strong> <?php echo htmlspecialchars($book['author_name']); ?></p>
+                                    <p><strong>Price:</strong> $<?php echo number_format($book['price'], 2); ?></p>
+                                </a>
+                                <p class="view-details">Click for more details</p>
+                                <form action="add-to-cart.php" method="post">
+                                    <input type="hidden" name="book_id" value="<?php echo (int)$book['book_id']; ?>">
+                                    <input type="number" name="quantity" value="1" min="1" max="10">
+                                    <button type="submit">Add to Cart</button>
+                                </form>
+                            </div>
+                        <?php endwhile; ?>
+                    </div>
+                <?php endif; ?>
+            <?php endif; ?>
+        </main>
+    </div>
     <footer>
         <p>&copy; 2024 RowdyBookly</p>
     </footer>
 </body>
-</html
+</html>
