@@ -37,30 +37,12 @@ $sql = "SELECT b.book_id, b.title, b.cover_image_url, a.name AS author_name
             color: brown;
         }
     </style>
+    <?php
+    include 'navigation-bar.php'; // Include the header
+    ?>
 </head>
 <body>
-    <header>
-        <h1 class="logo">
-            <a class="main-page" href="index.php">
-            Rowdy Bookly
-            </a>
-        </h1>
-        <nav>
-            <a href="categories.php" class="category-button">Categories</a>
-            <form action="search-results.php" method="get">
-            <input type="text" name="query" placeholder="Search books by title, author, genre" required>
-            <button type="submit" class="search-button">🔍</button>
-            <?php if ($is_logged_in): ?>
-                    <a href="profile.php" class="icon">👤</a>
-                    <a href="logout.php" class="icon" title="Logout">
-                        <img src="images/logout.png" alt="Logout" style="width:30px; height:30px;">
-                    </a>
-            <?php else: ?>
-                <a href="profile.php" class="icon">👤</a>
-            <?php endif; ?>
-            <a href="javascript:void(0);" class="icon" onclick="openCart()">🛒</a>
-        </nav>
-    </header>
+    
     
     <main class="main-container">
         <!-- Left side content -->
@@ -130,51 +112,8 @@ $sql = "SELECT b.book_id, b.title, b.cover_image_url, a.name AS author_name
     </footer>
 
 <!-- Cart Overlay and Sliding Cart Panel -->
-<div class="overlay" id="overlay"></div>
-<div class="cart-panel" id="cartPanel">
-    <div class="cart-header">
-        <h2>Shopping Cart 🛒</h2>
-        <button class="close-cart" onclick="closeCart()">✖</button>
-    </div>
-    <div class="cart-content">
-        <?php if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])): ?>
-            <ul>
-                <?php
-                // Initialize subtotal
-                $subtotal = 0;
-
-                foreach ($_SESSION['cart'] as $book_id => $item) {
-                    // Fetch book details from the database
-                    $sql = "SELECT title, price FROM Books WHERE book_id = ?";
-                    $stmt = $conn->prepare($sql);
-                    $stmt->bind_param("i", $book_id);
-                    $stmt->execute();
-                    $stmt->bind_result($title, $price);
-                    $stmt->fetch();
-                    $stmt->close();
-
-                    // Calculate total price for the item
-                    $item_total = $price * $item['quantity'];
-                    $subtotal += $item_total;
-                ?>
-                    <li>
-                        <div class='cart-item'>
-                            <strong><?php echo htmlspecialchars($title); ?></strong><br>
-                            Price: $<?php echo number_format($price, 2); ?> <br>
-                            Quantity: <?php echo $item['quantity']; ?><br>
-                            Total: $<?php echo number_format($item_total, 2); ?>
-                        </div>
-                    </li>
-                <?php } ?>
-            </ul>
-            <hr>
-            <p><strong>Subtotal(before taxes): $<?php echo number_format($subtotal, 2); ?></strong></p>
-            <a href="review-order.php" class="checkout-button">Review order</a>
-        <?php else: ?>
-            <p>Your cart is empty. <a href="categories.php">Browse Books</a></p>
-        <?php endif; ?>
-    </div>
-</div>
+<?php
+include 'cart-overlay.php'; ?>
 
 <script src="javascript/cart-interaction.js"></script>
 
