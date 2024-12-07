@@ -23,9 +23,32 @@ if (isset($_SESSION['cart'])) {
     }
 }
 
-// Build the SQL query based on whether a search term is provided
-if ($genre == 'All' && empty($search)) {
-    // No search term, fetch all books without filtering
+
+$genre = $_GET['genre'];
+
+// Fetch genre description
+$genre_description = '';
+if ($genre !== 'All') {
+    $genre_query = $conn->prepare("
+        SELECT genre_name, description
+        FROM Genres
+        WHERE genre_name = ?
+    ");
+    $genre_query->bind_param("s", $genre);
+    $genre_query->execute();
+    $genre_result = $genre_query->get_result();
+
+    if ($genre_result->num_rows > 0) {
+        $genre_data = $genre_result->fetch_assoc();
+        $genre_description = $genre_data['description'];
+    } else {
+        die("Genre not found.");
+    }
+}
+
+// Fetch books by genre
+if ($genre === 'All') {
+    // If the genre is 'All', fetch all books without filtering by genre
     $books_query = $conn->prepare("
         SELECT b.book_id, b.title, b.cover_image_url, b.publication_year, b.price, b.description, a.name AS author_name
         FROM Books b
@@ -86,25 +109,77 @@ $books_result = $books_query->get_result();
         </nav>
     </header>
 
-<?php if ($books_result->num_rows > 0): ?>
+    <style>
+        
+        <?php include 'css/style.css'; ?>
+        <?php include 'css/book-display.css'; ?>
+        body {
+            font-family: Arial, sans-serif;
+            
+        }
+        .body0{
+            padding: 20px;
+        }
+        .breadcrumb {
+            font-size: 1rem;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+        }
+        .breadcrumb a {
+            text-decoration: none;
+            color: #007bff;
+        }
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        .breadcrumb span {
+            margin: 0 5px;
+            color: #6c757d;
+        }
+        .breadcrumb .current {
+            color: #495057;
+            font-weight: bold;
+        }
+    </style>
+    
+</head>
+<body>
+    <div class=body0>
+    <nav class="breadcrumb">
+        <a href="index.php">Home</a>
+        <span>&raquo;</span>
+        <a href="categories.php">Categories</a>
+        <span>&raquo;</span>
+        <span class="current"><?php echo htmlspecialchars(ucwords($genre)); ?> Genre</span>
+    </nav>
+
+    <?php if ($books_result->num_rows > 0):?>
+
+        <h2>Book in <?php echo htmlspecialchars(ucwords($genre)); ?> genre</h2>
+        <p class="genre-description"><?php echo htmlspecialchars($genre_description); ?></p>    
     <div class="book-list-container">
-        <h2>Books in <?php echo htmlspecialchars(ucwords($genre)); ?> Genre</h2>
+        
         <div class="books">
             <?php while ($book = $books_result->fetch_assoc()): ?>
-                <div class="book-item">
-                    <a href="book-detail.php?book_id=<?php echo (int)$book['book_id']; ?>" class="book-link">
-                        <img src="images/<?php echo htmlspecialchars($book['cover_image_url']); ?>" alt="<?php echo htmlspecialchars($book['title']); ?>">
-                        <h3><?php echo htmlspecialchars($book['title']); ?></h3>
-                        <p><strong>By:</strong> <?php echo htmlspecialchars($book['author_name']); ?></p>
-                        <p><strong>Price:</strong> $<?php echo number_format($book['price'], 2); ?></p>
-                    </a>
-                    <form action="add-to-cart.php" method="post">
-                        <input type="hidden" name="book_id" value="<?php echo (int)$book['book_id']; ?>">
-                        <input type="number" name="quantity" value="1" min="1" max="10">
-                        <input type="hidden" name="genre" value="<?php echo htmlspecialchars($genre); ?>">
-                        <button type="submit">Add to Cart</button>
-                    </form>
-                </div>
+
+                
+                    <div class="book-item">
+                        <a href="book-detail.php?book_id=<?php echo (int)$book['book_id']; ?>" class="book-link">
+                            <img src="images/<?php echo htmlspecialchars($book['cover_image_url']); ?>" alt="<?php echo htmlspecialchars($book['title']); ?>">
+                            <h3><?php echo htmlspecialchars($book['title']); ?></h3>
+                            <p><strong>By:</strong> <?php echo htmlspecialchars($book['author_name']); ?></p>
+                            <p><strong>Price:</strong> $<?php echo number_format($book['price'], 2); ?></p>
+                        
+                            <form action="add-to-cart.php" method="post">
+                                <input type="hidden" name="book_id" value="<?php echo (int)$book['book_id']; ?>">
+                                <input type="number" name="quantity" value="1" min="1" max="10">
+                                <input type="hidden" name="genre" value="<?php echo htmlspecialchars($genre); ?>">
+                                <button type="submit">Add to Cart</button>
+                            </form>
+                        </a>
+                    </div>
+
             <?php endwhile; ?>
         </div>
     </div>
@@ -157,6 +232,7 @@ $books_result = $books_query->get_result();
         <?php endif; ?>
     </div>
 </div>
+</body>
 
 <script src="javascript/cart-interaction.js"></script>
 

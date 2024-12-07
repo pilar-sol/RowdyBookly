@@ -92,6 +92,37 @@ input[type="text"] {
     padding: 1rem;
     border-radius: 8px;
 }
+.popular-books {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.popular-books h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.book-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 0;
+}
+
+.book-list li {
+    text-align: center;
+    max-width: 150px;
+}
+
+.book-list img {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
 
 /* Book section styling */
 .books-section h3 {
