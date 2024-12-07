@@ -94,17 +94,50 @@ $books_result = $books_query->get_result();
         
         <?php include 'css/style.css'; ?>
         <?php include 'css/book-display.css'; ?>
-        body{
+        body {
+            font-family: Arial, sans-serif;
             
+        }
+        .body0{
+            padding: 20px;
+        }
+        .breadcrumb {
+            font-size: 1rem;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+        }
+        .breadcrumb a {
+            text-decoration: none;
+            color: #007bff;
+        }
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        .breadcrumb span {
+            margin: 0 5px;
+            color: #6c757d;
+        }
+        .breadcrumb .current {
+            color: #495057;
+            font-weight: bold;
         }
     </style>
     
 </head>
 <body>
-    
+    <div class=body0>
+    <nav class="breadcrumb">
+        <a href="index.php">Home</a>
+        <span>&raquo;</span>
+        <a href="categories.php">Categories</a>
+        <span>&raquo;</span>
+        <span class="current"><?php echo htmlspecialchars(ucwords($genre)); ?> Genre</span>
+    </nav>
 
     <?php if ($books_result->num_rows > 0):?>
-        <h2>Books in <?php echo htmlspecialchars(ucwords($genre)); ?> Genre</h2>
+
+        <h2><a href ="index.php">Home</a> >> <?php echo htmlspecialchars(ucwords($genre)); ?> Genre</h2>
         <p class="genre-description"><?php echo htmlspecialchars($genre_description); ?></p>    
     <div class="book-list-container">
         
@@ -187,7 +220,7 @@ $books_result = $books_query->get_result();
             <?php endif; ?>
         </div>
     </div>
-
+</div>
 </body>
 <script src="javascript/cart-interaction.js"></script>
 </html>
