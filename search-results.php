@@ -154,6 +154,12 @@ if (isset($_GET['book_id'])) {
                                 <p><strong>Price:</strong> $' . number_format($book['price'], 2) . '</p>
                             </a>
                             <p class="view-details">Click for more details</p>
+                            <form action="add-to-cart.php" method="post">
+                                <input type="hidden" name="book_id" value="<?php echo (int)$book['book_id']; ?>">
+                                <input type="number" name="quantity" value="1" min="1" max="10">
+                                <input type="hidden" name="genre" value="<?php echo htmlspecialchars($genre); ?>">
+                                <button type="submit">Add to Cart</button>
+                            </form>
                         </div>';
                 }
                 echo "</div>";
