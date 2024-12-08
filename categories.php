@@ -71,8 +71,12 @@ if (isset($_SESSION['cart'])) {
 
 </head>
 <body>
-
-    
+<div class="body0">
+    <nav class="breadcrumb">
+            <a href="index.php">Home</a>
+            <span>&raquo;</span>
+            <a href="categories.php"><strong>Categories</strong></a>
+        </nav>
     <main class="categories-container">
             <a href="books.php?genre=<?php echo urlencode("All"); ?>" class="category">
                     <span class="category-icon">
@@ -97,7 +101,7 @@ if (isset($_SESSION['cart'])) {
             <p>No genres found in the database.</p>
         <?php endif; ?>
     </main>
-    
+    </div>
     <?php include "cart-overlay.php" ?>
     <footer>
         <p>&copy; 2024 RowdyBookly</p>

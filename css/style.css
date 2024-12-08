@@ -394,17 +394,20 @@ header {
 }
 
 .breadcrumb {
-    font-size: 1rem;
+    font-size: 1.4rem;
     margin: 20px 0;
     display: flex;
     align-items: center;
 }
 .breadcrumb a {
     text-decoration: none;
-    color: #007bff;
+    color: #be6405;
 }
 .breadcrumb a:hover {
-    text-decoration: underline;
+    background-color: burlywood;
+    border-radius: 5px;
+    padding-left:10px;
+    padding-right:10px;
 }
 .breadcrumb span {
     margin: 0 5px;
