@@ -120,8 +120,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .login-button:hover {
             background-color: #555;
         }
-
     </style>
+    <?php include "navigation-bar.php" ?>
 </head>
 <body>
     <main class="login-container">
@@ -139,4 +139,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <p><a href="signup.php" class="signup-link">Not a member? Sign up</a></p>
     </main>
 </body>
+    <?php include "cart-overlay.php" ?>
 </html>
