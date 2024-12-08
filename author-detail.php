@@ -124,22 +124,22 @@ $books_result = $books_query->get_result();
             </div>
             <div class="author-books">
                 <h3>Books by <?php echo htmlspecialchars($author['name']); ?></h3>
-                <ul >
+                <div class='books'>
                     <?php if ($books_result->num_rows > 0): ?>
                         <?php while ($book = $books_result->fetch_assoc()): ?>
-                            <li class="book-item">
+                            <div class="book-item">
                                 <a href="book-detail.php?book_id=<?php echo htmlspecialchars($book['book_id']); ?>">
                                     <img src="images/<?php echo htmlspecialchars($book['cover_image_url']); ?>" alt="<?php echo htmlspecialchars($book['title']); ?>">
                                     <p><strong><?php echo htmlspecialchars($book['title']); ?></strong></p>
                                     <p>Price: $<?php echo number_format($book['price'], 2); ?></p>
                                     <p>Published: <?php echo htmlspecialchars($book['publication_year']); ?></p>
                                 </a>
-                            </li>
+                        </div>
                         <?php endwhile; ?>
                     <?php else: ?>
                         <p>No books available for this author.</p>
                     <?php endif; ?>
-                </ul>
+                    </div>
             </div>
         </div>
     </main>
