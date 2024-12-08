@@ -20,7 +20,11 @@ header {
 
 footer {
     clear: both;
-    position: relative;
+    position: absolute;
+    width: auto;
+    margin-left:0%;
+    margin-right:0%;
+    width: 98.45%;
     bottom: 0;
     height: 60px;
 

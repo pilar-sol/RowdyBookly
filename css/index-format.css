@@ -1,0 +1,64 @@
+.popular-books {
+    padding: 20px;
+    text-align: center;
+}
+
+.popular-books h3 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.book-stack {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center; /* Centers the book items horizontally */
+    align-items: center; /* Centers them vertically */
+    gap: 10px; /* Space between books */
+}
+
+.book-item {
+    position: relative;
+    width: 120px; /* Small width for the "bar-like" effect */
+    height: auto;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    
+}
+
+.book-item a {
+    display: block;
+}
+.book-item a p {
+    visibility:hidden;
+}
+
+.book-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.book-item:hover .book-cover {
+    transform: scale(1.0); /* Expand the image on hover */
+}
+
+.book-item:hover {
+    z-index: 10; /* Bring hovered book to the front */
+    width: 250px; /* Expand the book size on hover */
+    height:auto; /* Expand the book size on hover */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Add shadow for emphasis */
+    transform: scale(1.0);
+    background: url(images/book-texture0.jpeg);
+}
+
+.book-item:hover a p {
+    visibility: visible ;
+}
+
+.book-item:hover ~ .book-item {
+    opacity: 0.5; /* Dim the other books when hovering over one */
+}
