@@ -179,7 +179,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_purchase'])) 
             display: block;
             margin: auto;
         }
-        
+        .thanh-tien{
+            margin-right: 0;
+            padding-left: 80%;
+        }
     </style>
 	<?php
     include 'navigation-bar.php'; // Include the header
@@ -244,11 +247,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_purchase'])) 
             </tbody>
         </table>
 
-
+			
 			<!-- Display totals -->
+			<div class="thanh-tien">  
 			<p>Subtotal: $<?php echo number_format($subtotal, 2); ?></p>
 			<p>Tax (8.25%): $<?php echo number_format($tax, 2); ?></p>
 			<p>Total: $<?php echo number_format($total, 2); ?></p>
+			</div>
 		</div>
 
         <!-- Checkout Form -->
