@@ -102,8 +102,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         .login-container input[type="text"],
         .login-container input[type="password"] {
-            width: 100%; /* Full width to fill container */
-            max-width: 300px; /* Limit the width */
+            width: auto; 
+            
             padding: 0.8rem;
             font-size: 1.2rem;
             margin-bottom: 1rem;
