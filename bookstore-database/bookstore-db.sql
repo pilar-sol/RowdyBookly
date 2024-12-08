@@ -64,12 +64,17 @@ CREATE TABLE CartItems (
 -- Table for orders with a reference to users
 CREATE TABLE Orders (
     order_id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
+    user_id INT(11) NULL,
     total DECIMAL(10, 2) NOT NULL,
     tax DECIMAL(10, 2) DEFAULT 0.00,
     discount DECIMAL(10, 2) DEFAULT 0.00,
+    firstname VARCHAR(255) NOT NULL,
+    lastname VARCHAR(255) NOT NULL,
+    address VARCHAR(255) NOT NULL,
+    city VARCHAR(255) NOT NULL,
+    state VARCHAR(255) NOT NULL,
+    zip VARCHAR(20) NOT NULL;
     status ENUM('Pending', 'Shipped', 'Completed', 'Cancelled') DEFAULT 'Pending',
-    shipping_address TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
