@@ -102,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         .login-container input[type="text"],
         .login-container input[type="password"] {
-            width: auto; 
+            width: 300px; 
             
             padding: 0.8rem;
             font-size: 1.2rem;
