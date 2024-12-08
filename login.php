@@ -56,6 +56,64 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - RowdyBookly</title>
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh; /* Full height for centering */
+            justify-content: flex-start;
+        }
+        
+        .login-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Horizontally center the form */
+            justify-content: center; /* Vertically center the form */
+            height: 100vh; /* Full viewport height */
+            text-align: center; /* Center text inside the container */
+            padding: 2rem;
+        }
+        
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 2rem 2.5rem;
+            background-color: #333;
+            color: #fdfafa;
+        }
+        
+        .login-container h1 {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+        
+        /* Styling for form labels and inputs */
+        .login-container label {
+            font-size: 1.5rem;
+            color: #333;
+            display: block;
+            margin: 0.5rem 0;
+        }
+        
+        .login-container input[type="text"],
+        .login-container input[type="password"] {
+            width: 100%; /* Full width to fill container */
+            max-width: 300px; /* Limit the width */
+            padding: 0.8rem;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f5f5f5;
+            text-align: center;
+        }
+
+    </style>
 </head>
 <body>
     <main class="login-container">
