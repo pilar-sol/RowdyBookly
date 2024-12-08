@@ -18,6 +18,15 @@ if (!$is_logged_in) {
     exit;
 }
 
+
+// Count the total number of items in the cart
+$cart_item_count = 0;
+if (isset($_SESSION['cart'])) {
+    foreach ($_SESSION['cart'] as $item) {
+        $cart_item_count += $item['quantity'];  // Sum up quantities of all items
+    }
+}
+
 // Fetch user profile data
 $user_id = $_SESSION['user_id'];
 $stmt = $conn->prepare("SELECT username, email, address FROM Users WHERE user_id = ?");
