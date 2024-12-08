@@ -517,3 +517,17 @@ header {
     height: auto;
     margin-right: 15px;
 }
+
+.remove-item-button {
+    background-color: #b81c2b;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.remove-item-button:hover {
+    background-color: #8f1522;
+}
