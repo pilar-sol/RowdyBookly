@@ -87,7 +87,7 @@ $sql = "SELECT b.book_id, b.title, b.cover_image_url, a.name AS author_name
     <div class="book-stack">
         <?php
         // Fetch popular books from the database
-        $sql = "SELECT book_id, title, cover_image_url FROM Books WHERE book_id IN (61, 62, 63, 64)";
+        $sql = "SELECT book_id, title, cover_image_url FROM Books WHERE book_id IN (1, 2, 3, 4)";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
