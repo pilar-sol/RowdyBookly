@@ -102,17 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             margin: 0.5rem 0;
         }
         
-        .textbox {
-            width: 100%;
-            max-width: 300px; /* Limits the width of the input fields */
-            padding-left:30px;
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            background-color: #f5f5f5;
-            text-align: center;
-        }
+        
         
         /* Login button styling */
         .login-button {
