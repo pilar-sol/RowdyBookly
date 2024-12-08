@@ -61,7 +61,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         /* Login Page Styling */
 
 /* Centering the login container */
-    
+    body{
+        display: grid;
+        text-align:center;
+    }
     header {
         display: flex;
         align-items: center;
