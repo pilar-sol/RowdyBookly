@@ -473,6 +473,7 @@ header {
 	color: white;
 }
 
+/*
 .totals {
     text-align: center;
     margin: 20px auto;
@@ -488,7 +489,7 @@ header {
     font-size: 22px;
     margin: 10px 0;
 }
-
+*/
 .confirmation-message {
     text-align: center;
     margin-top: 50px;
