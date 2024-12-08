@@ -91,7 +91,16 @@ while ($row = $genres_result->fetch_assoc()) {
         <div class="book-details">
             <h2><?php echo htmlspecialchars($book['title']); ?></h2>
             <p><strong>Author:</strong> <?php echo htmlspecialchars($book['author_name']); ?></p>
-            <p><strong>Genres:</strong> <?php echo htmlspecialchars(implode(", ", $genres)); ?></p>
+            <p><strong>Genres:</strong> 
+                <strong><?php 
+                    $genre_links = [];
+                    foreach ($genres as $genre) {
+                        // For each genre, create a link
+                        $genre_links[] = '<a href="books.php?genre=' . urlencode($genre) . '">' . htmlspecialchars($genre) . '</a>';
+                    }
+                    echo implode(", ", $genre_links);
+                ?></strong>
+            </p>
             <p><strong>Published:</strong> <?php echo htmlspecialchars($book['publication_year']); ?></p>
             <p><strong>Price:</strong> $<?php echo number_format($book['price'], 2); ?></p>
             <p><strong>Description:</strong> <?php echo htmlspecialchars($book['description']); ?></p>
