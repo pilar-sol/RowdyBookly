@@ -25,11 +25,12 @@
     height: auto;
     transition: all 0.3s ease;
     overflow: hidden;
-    
+    border-radius: 5%;    
 }
 
 .book-item a {
     display: block;
+    text-decoration: none;
 }
 .book-item a p {
     visibility:hidden;
@@ -53,10 +54,16 @@
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Add shadow for emphasis */
     transform: scale(1.0);
     background: url(images/book-texture0.jpeg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .book-item:hover a p {
-    visibility: visible ;
+    visibility: visible ; 
+    
+    color: brown;
+    
 }
 
 .book-item:hover ~ .book-item {

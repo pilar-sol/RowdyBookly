@@ -20,7 +20,8 @@ header {
 
 footer {
     clear: both;
-    position: absolute;
+    position: relative;
+    width: auto;
     margin-left:0%;
     margin-right:0%;
     width: 98.45%;
