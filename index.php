@@ -28,6 +28,8 @@ $sql = "SELECT b.book_id, b.title, b.cover_image_url, a.name AS author_name
     <link rel="stylesheet" href="css/style.css">
     <style> 
         <?php include 'css/style.css'; ?>
+        <?php include 'css/index-format.css'; ?>
+
         .book-item a{
             texT-decoration: none;
             color: black;
@@ -36,6 +38,7 @@ $sql = "SELECT b.book_id, b.title, b.cover_image_url, a.name AS author_name
             texT-decoration: none;
             color: brown;
         }
+        
     </style>
     <?php
     include 'navigation-bar.php'; // Include the header
@@ -80,32 +83,32 @@ $sql = "SELECT b.book_id, b.title, b.cover_image_url, a.name AS author_name
     </main>
     
     <section class="popular-books">
-        <h3>Popular Books</h3>
-        <ul class="book-list">
+    <h3>Popular Books 🔥</h3>
+    <div class="book-stack">
+        <?php
+        // Fetch popular books from the database
+        $sql = "SELECT book_id, title, cover_image_url FROM Books WHERE book_id IN (61, 62, 63, 64)";
+        $result = $conn->query($sql);
 
-    <?php
-
-    // Fetch popular books from the database
-    $sql = "SELECT book_id, title, cover_image_url FROM Books WHERE book_id IN (1, 2, 3, 4)";
-
-    $result = $conn->query($sql);
-
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            echo "<li>
-                    <a href='book-detail.php?book_id=" . htmlspecialchars($row['book_id']) . "'>
-                        <img src='images/" . htmlspecialchars($row['cover_image_url']) . "' alt='" . htmlspecialchars($row['title']) . "'>
-                        <p><strong>" . htmlspecialchars($row['title']) . "</strong></p>
-                    </a>
-                </li>";
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                echo "<div class='book-item'>
+                        <a href='book-detail.php?book_id=" . htmlspecialchars($row['book_id']) . "'>
+                            <p><strong>" . htmlspecialchars($row['title']) . "</strong></p>
+                            <img src='images/" . htmlspecialchars($row['cover_image_url']) . "' alt='" . htmlspecialchars($row['title']) . "' class='book-cover'>
+                            <div class='book-info'>
+                            </div>
+                        </a>
+                    </div>";
+            }
+        } else {
+            echo "<p>No popular books available at the moment.</p>";
         }
-    } else {
-        echo "<li>No popular books available at the moment.</li>";
-    }
-    ?>
-</ul>
+        ?>
+    </div>
+</section>
 
-    </section>
+
 
     <footer>
         <p>&copy; 2024 RowdyBookly</p>

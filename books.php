@@ -152,7 +152,7 @@ $books_result = $books_query->get_result();
             <span>&raquo;</span>
             <a href="categories.php">Categories</a>
             <span>&raquo;</span>
-            <span class="current"><?php echo htmlspecialchars(ucwords($genre)); ?> Genre</span>
+            <a href="books.php?genre=<?php echo htmlspecialchars(ucwords($genre)); ?>"> <?php echo htmlspecialchars(ucwords($genre)); ?> Genre</a>
         </nav>
 
         <?php if ($books_result->num_rows > 0): ?>
