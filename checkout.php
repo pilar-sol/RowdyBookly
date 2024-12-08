@@ -115,6 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_purchase'])) 
     <link rel="stylesheet" href="css/style.css">
 	<style> 
         <?php include 'css/style.css'; ?>
+	<?php include 'css/cart-overlay.css' ?>
         
     </style>
 	<?php
@@ -135,7 +136,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_purchase'])) 
 
 			<!-- Display items being purchased -->
 			<h2>Items in your cart:</h2>
-			<ul class="cart-items">
+			<ul class="cart-items-list">
 				<?php foreach ($_SESSION['cart'] as $book_id => $item): ?>
 					<?php
 						// Fetch the book details from the database
@@ -150,11 +151,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_purchase'])) 
 						// Calculate the total for this item
 						$item_total = $price * $item['quantity'];
 					?>
-				<img src="images/<?php echo $cover_image_url; ?>" alt="Book Cover" class="cart-item-cover">
-					<li>
-						<span><?php echo $title; ?> (x<?php echo $item['quantity']; ?>)</span> - 
-						$<?php echo number_format($price, 2); ?> each, 
-						<strong>$<?php echo number_format($item_total, 2); ?></strong>
+	    				<li>
+	    			<div class="cart-item-image">
+					<img src="images/<?php echo $cover_image_url; ?>" alt="Book Cover" class="cart-item-cover">
+				</div>	
+						<h4 class="cart-item-title"><?php echo htmlspecialchars($title); ?></h4>
+		                                <p class="cart-item-price">Price: $<?php echo number_format($price, 2); ?></p>
+		                                <p class="cart-item-quantity">Quantity: <?php echo $item['quantity']; ?></p>
+		                                <p class="cart-item-total">Total: $<?php echo number_format($item_total, 2); ?></p>
 					</li>
 				<?php endforeach; ?>
 			</ul>
