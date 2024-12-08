@@ -57,16 +57,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Login - RowdyBookly</title>
     <link rel="stylesheet" href="css/style.css">
     <style>
-       body {
-            margin: 0;
-            padding: 0;
-            display: flex;
-            align-items: center; /* Centers content vertically */
-            justify-content: center; /* Centers content horizontally */
-            height: 100vh; /* Full viewport height */
-            font-family: Arial, sans-serif;
-            background-color: #f9f9f9; /* Light background for contrast */
-        }
         /* Centering the login container */
         .login-container {
             display: flex;
