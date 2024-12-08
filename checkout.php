@@ -225,7 +225,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_purchase'])) 
                     <th>Price</th>
                     <th>Quantity</th>
                     <th>Total</th>
-                    <th>action</th>
+                    <th>Options</th>
                 </tr>
             </thead>
             <tbody>
