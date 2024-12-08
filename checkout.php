@@ -4,7 +4,7 @@ include 'config.php';
 
 // Check if cart is empty
 if (!isset($_SESSION['cart']) || empty($_SESSION['cart'])) {
-    echo "<p>Your cart is empty. <a href='books.php'>Go back to shopping</a></p>";
+    echo "<p>Your cart is empty. <a href='categories.php'>Go back to shopping</a></p>";
     exit();
 }
 
@@ -184,6 +184,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_purchase'])) 
             padding-left: 80%;
         }
 	.remove-button {
+	color: white;
             background-color: #ff4f58;
             border: none;
             color: white;
