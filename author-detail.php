@@ -113,6 +113,8 @@ $books_result = $books_query->get_result();
     <nav class="breadcrumb">
         <a href="index.php">Home</a>
         <span>&raquo;</span>
+        <a href="authors.php">Author</a>
+        <span>&raquo;</span>
         <span class="current"><?php echo htmlspecialchars($author['name']); ?></span>
     </nav>
     <main>
