@@ -105,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .textbox {
             width: 100%;
             max-width: 300px; /* Limits the width of the input fields */
-            padding: 0.8rem;
+            padding-left:30px;
             font-size: 1.2rem;
             margin-bottom: 1rem;
             border: 1px solid #ddd;
