@@ -51,79 +51,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - RowdyBookly</title>
-    <style>
-        <?php include "css/style.css" ?>
-        body {
-            margin:0px;
-        }
-        .login-wrapper {
-            display: flex;
-            align-items: center; 
-            justify-content: center; 
-            height: auto;
-            border-radius: 10px;
-        }
-
-        .login-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh; /* Full height to center vertically */
-            text-align: center;
-            background-color: #e0e0e0; /* Light grey background */
-            padding: 2rem; 
-        }
-        header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 2rem 2.5rem; /* Adjust padding to make banner thicker */
-            background-color: #333; /* Gray background color */
-            color: #fdfafa;
-        }
-        
-        .login-container h1 {
-            font-size: 2rem;
-            font-weight: bold;
-            margin-bottom: 1.5rem;
-            color: #333;
-        }
-        
-        /* Styling for form labels and inputs */
-        .login-container label {
-            font-size: 1.5rem;
-            color: #333;
-            display: block;
-            margin: 0.5rem 0;
-        }
-        
-        
-        
-        /* Login button styling */
-        .login-button {
-            font-size: 1.5rem;
-            background-color: #333;
-            color: #fff;
-            padding: 0.8rem 1.2rem;
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            margin-top: 1rem;
-            transition: background-color 0.3s ease;
-        }
-        
-        .login-button:hover {
-            background-color: #555;
-        }
-    </style>
-    <?php include "navigation-bar.php" ?>
+    <title>Sign Up - RowdyBookly</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <header>
+        <a href="index.php" class="home-icon">🏠</a> <!-- Home icon to go back to the main page -->
+    </header>
     <div class="login-wrapper">
         <main class="login-container">
             <h1>Login</h1>
@@ -142,5 +81,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 </body>
 
-    <?php include "cart-overlay.php" ?>
 </html>
