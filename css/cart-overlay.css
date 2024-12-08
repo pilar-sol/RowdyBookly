@@ -134,3 +134,9 @@
 .close-cart:hover {
     color: #ff3b3b;
 }
+
+.cart-content {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
