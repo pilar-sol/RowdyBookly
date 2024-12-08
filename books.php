@@ -151,8 +151,9 @@ $books_result = $books_query->get_result();
             <a href="index.php">Home</a>
             <span>&raquo;</span>
             <a href="categories.php">Categories</a>
-            <span>&raquo;</span>
+            <span>&raquo;</span> <strong>
             <a href="books.php?genre=<?php echo htmlspecialchars(ucwords($genre)); ?>"> <?php echo htmlspecialchars(ucwords($genre)); ?> Genre</a>
+        </strong>
         </nav>
 
         <?php if ($books_result->num_rows > 0): ?>
@@ -193,7 +194,7 @@ $books_result = $books_query->get_result();
                                 <input type="number" name="quantity" value="1" min="1" max="10">
                                 <input type="hidden" name="genre" value="<?php echo htmlspecialchars($genre); ?>">
                                 <input type="hidden" name="return_url" value="<?php echo htmlspecialchars($_SERVER['REQUEST_URI']); ?>"> <!-- Current URL -->   
-                                <button type="submit">Add to Cart</button>
+                                <button class="add-to-cart" type="submit">Add to Cart</button>
                             </form>
                             </a>
                         </div>

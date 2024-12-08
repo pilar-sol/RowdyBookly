@@ -36,17 +36,7 @@
             width: 60px;
             margin-right: 10px;
         }
-        .book-details form button {
-            background: #007bff;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-        .book-details form button:hover {
-            background: #0056b3;
-        }
+        
         .book-details a{
             text-decoration: none;
             color: #6e4200;
