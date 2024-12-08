@@ -22,11 +22,12 @@ $book_id = (int) $_GET['book_id'];
 
 // Fetch book details
 $book_query = $conn->prepare("
-    SELECT b.title, b.cover_image_url, b.publication_year, b.price, b.description, a.name AS author_name
+    SELECT b.title, b.cover_image_url, b.publication_year, b.price, b.description, a.author_id, a.name AS author_name
     FROM Books b
     JOIN Authors a ON b.author_id = a.author_id
     WHERE b.book_id = ?
 ");
+
 $book_query->bind_param("i", $book_id);
 $book_query->execute();
 $book_result = $book_query->get_result();
@@ -63,6 +64,7 @@ while ($row = $genres_result->fetch_assoc()) {
     <link rel="stylesheet" href="css/book-detail.css">
     <style>
         <?php include 'css/style.css'; ?>
+        <?php include 'css/book-display.css'; ?>
         <?php include 'css/book-detail.css'; ?>
         </style>
     <?php include 'navigation-bar.php'; ?>
@@ -90,7 +92,11 @@ while ($row = $genres_result->fetch_assoc()) {
         <img src="images/<?php echo htmlspecialchars($book['cover_image_url']); ?>" alt="<?php echo htmlspecialchars($book['title']); ?>">
         <div class="book-details">
             <h2><?php echo htmlspecialchars($book['title']); ?></h2>
-            <p><strong>Author:</strong> <?php echo htmlspecialchars($book['author_name']); ?></p>
+            <p><strong>Author:</strong> 
+                <strong><a href="author-detail.php?author_id=<?php echo urlencode($book['author_id']); ?>">
+                    <?php echo htmlspecialchars($book['author_name']); ?>
+                </a></strong>
+            </p>
             <p><strong>Genres:</strong> 
                 <strong><?php 
                     $genre_links = [];
@@ -109,7 +115,7 @@ while ($row = $genres_result->fetch_assoc()) {
                 <input type="hidden" name="book_id" value="<?php echo $book_id; ?>">
                 <input type="number" name="quantity" value="1" min="1" max="10">
                 <input type="hidden" name="return_url" value="<?php echo htmlspecialchars($_SERVER['REQUEST_URI']); ?>"> <!-- Current URL -->
-                <button type="submit">Add to Cart</button>
+                <button class="add-to-cart" type="submit">Add to Cart</button>
             </form>
         </div>
     </div>

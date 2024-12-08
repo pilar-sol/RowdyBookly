@@ -54,7 +54,7 @@
     color: #555;
 }
 
-.book-item button {
+.add-to-cart {
     background-color: #9a6206;
     color: white;
     padding: 10px;
@@ -64,8 +64,9 @@
     font-size: 1rem;
 }
 
-.book-item button:hover {
+.add-to-cart:hover {
     background-color: #eab25d;
+    color:#311d05
 }
 
 
