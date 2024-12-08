@@ -84,6 +84,7 @@ if (isset($_GET['book_id'])) {
     <style>
     <?php include 'css/style.css'; ?>
     <?php include 'css/book-display.css'; ?>
+    <?php include 'css/book-detail.css'; ?>
     .search-results {
         display: flex;
         flex-wrap: wrap;
@@ -129,7 +130,7 @@ if (isset($_GET['book_id'])) {
                     <form action="add-to-cart.php" method="post">
                         <input type="hidden" name="book_id" value="<?php echo (int)$book['book_id']; ?>">
                         <input type="number" name="quantity" value="1" min="1" max="10">
-                        <button type="submit">Add to Cart</button>
+                        <button type="submit" class="add-to-cart">Add to Cart</button>
                     </form>
                 </div>
             <?php else: ?>
@@ -153,7 +154,7 @@ if (isset($_GET['book_id'])) {
                                 <form action="add-to-cart.php" method="post">
                                     <input type="hidden" name="book_id" value="<?php echo (int)$book['book_id']; ?>">
                                     <input type="number" name="quantity" value="1" min="1" max="10">
-                                    <button type="submit">Add to Cart</button>
+                                    <button type="submit" class="add-to-cart">Add to Cart</button>
                                 </form>
                             </div>
                         <?php endwhile; ?>
