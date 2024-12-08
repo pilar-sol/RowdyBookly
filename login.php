@@ -67,8 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         
         .login-container {
-            display: flex;
-            flex-direction: column;
+            display: grid;
             align-items: center; /* Horizontally center the form */
             justify-content: center; /* Vertically center the form */
             height: 100vh; /* Full viewport height */
@@ -78,6 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         header {
             display: flex;
+            text-align: center;
             align-items: center;
             justify-content: space-between;
             padding: 2rem 2.5rem;
@@ -103,7 +103,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .login-container input[type="text"],
         .login-container input[type="password"] {
             width: 300px; 
-            
             padding: 0.8rem;
             font-size: 1.2rem;
             margin-bottom: 1rem;
