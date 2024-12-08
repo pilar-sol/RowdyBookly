@@ -60,6 +60,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         body {
             margin:0px;
         }
+        .login-wrapper {
+            display: flex;
+            align-items: center; 
+            justify-content: center; 
+            height: 100vh;
+        }
+
         .login-container {
             display: flex;
             flex-direction: column;
@@ -127,20 +134,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php include "navigation-bar.php" ?>
 </head>
 <body>
-    <main class="login-container">
-        <h1>Login</h1>
-        <?php if (!empty($error)) { echo "<p style='color:red;'>$error</p>"; } ?>
-        <form action="login.php" method="post">
-            <label for="email">Email:</label>
-            <input type="text" id="email" name="email" required>
-            
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-            
-            <button type="submit" class="login-button">Login</button>
-        </form>
-        <p><a href="signup.php" class="signup-link">Not a member? Sign up</a></p>
-    </main>
+    <div class="login-wrapper">
+        <main class="login-container">
+            <h1>Login</h1>
+            <?php if (!empty($error)) { echo "<p style='color:red;'>$error</p>"; } ?>
+            <form action="login.php" method="post">
+                <label for="email">Email:</label>
+                <input type="text" id="email" name="email" required>
+                
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                
+                <button type="submit" class="login-button">Login</button>
+            </form>
+            <p><a href="signup.php" class="signup-link">Not a member? Sign up</a></p>
+        </main>
+    </div>
 </body>
+
     <?php include "cart-overlay.php" ?>
 </html>
