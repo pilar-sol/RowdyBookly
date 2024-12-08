@@ -183,6 +183,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_purchase'])) 
             margin-right: 0;
             padding-left: 80%;
         }
+	.remove-button {
+            background-color: #ff4f58;
+            border: none;
+            color: white;
+            padding: 6px 12px;
+            cursor: pointer;
+            font-size: 14px;
+	    border-radius:10px;
+        }
+
+        .remove-button:hover {
+            background-color: #d43f48;
+        }
     </style>
 	<?php
     include 'navigation-bar.php'; // Include the header
@@ -239,7 +252,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_purchase'])) 
                         <td>$<?php echo number_format($item_total, 2); ?></td>
                         <td>
                             <form action="checkout.php" method="POST" style="display: inline;">
-                                <button type="submit" name="remove_item[<?php echo $book_id; ?>]" value="1">Remove</button>
+                                <button type="submit" class= "remove-button" name="remove_item[<?php echo $book_id; ?>]" value="1">❌</button>
                     </form>
                 </td>
                     </tr>
