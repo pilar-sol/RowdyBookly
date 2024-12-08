@@ -33,13 +33,19 @@
                                 <p class="cart-item-price">Price: $<?php echo number_format($price, 2); ?></p>
                                 <p class="cart-item-quantity">Quantity: <?php echo $item['quantity']; ?></p>
                                 <p class="cart-item-total">Total: $<?php echo number_format($item_total, 2); ?></p>
+								 <!-- Remove button -->
+                                <form action="remove-from-cart.php" method="POST" class="remove-item-form">
+									<input type="hidden" name="book_id" value="<?php echo $book_id; ?>">
+									<input type="hidden" name="current_page" value="<?php echo htmlspecialchars($_SERVER['REQUEST_URI']); ?>">
+									<button type="submit" class="remove-item-button">Remove</button>
+								</form>
                             </div>
                         </li>
                     <?php } ?>
                 </ul>
                 <hr>
                 <p><strong>Subtotal (before taxes): $<?php echo number_format($subtotal, 2); ?></strong></p>
-                <a href="review-order.php" class="checkout-button">Review order</a>
+                <a href="checkout.php" class="checkout-button">Checkout!</a>
             <?php else: ?>
                 <p>Your cart is empty. <a href="categories.php">Browse Books</a></p>
             <?php endif; ?>

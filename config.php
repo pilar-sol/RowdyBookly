@@ -1,13 +1,13 @@
 <?php
-// Fetch database URL from environment variable
+//Fetch database URL from environment variable
 //$dbUrl = getenv('CLEARDB_DATABASE_URL');
 //$dbUrl = 'mysql://aqapvw1dt4k36dav:cp8n1pd5tgos08nw@qn0cquuabmqczee2.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/rp7q9eqqkuuf90wn';
 $dbUrl = getenv('JAWSDB_URL');
 
 // // Fallback for local testing (optional, remove in production)
-// if (!$dbUrl) {
-//     $dbUrl = 'mysql://aqapvw1dt4k36dav:cp8n1pd5tgos08nw@qn0cquuabmqczee2.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/rp7q9eqqkuuf90wn';
-// }
+if (!$dbUrl) {
+    $dbUrl = 'mysql://aqapvw1dt4k36dav:cp8n1pd5tgos08nw@qn0cquuabmqczee2.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/rp7q9eqqkuuf90wn';
+}
 
 // Parse the URL
 $dbParts = parse_url($dbUrl);
@@ -47,5 +47,6 @@ $schemaFile = 'schema.sql'; // Path to your SQL file
 if (file_exists($schemaFile)) {
     executeSqlFile($conn, $schemaFile);
 }
+
 
 ?>

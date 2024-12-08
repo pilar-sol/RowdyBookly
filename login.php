@@ -51,26 +51,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - RowdyBookly</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>Sign Up - RowdyBookly</title>
+    <style>
+       <?php include "css/style.css"?>
+    </style>
 </head>
 <body>
-    <main class="login-container">
-        <h1>Login</h1>
-        <?php if (!empty($error)) { echo "<p style='color:red;'>$error</p>"; } ?>
-        <form action="login.php" method="post">
-            <label for="email">Email:</label>
-            <input type="text" id="email" name="email" required>
-            
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-            
-            <button type="submit" class="login-button">Login</button>
-        </form>
-        <p><a href="signup.php" class="signup-link">Not a member? Sign up</a></p>
-    </main>
+    <header>
+        <a href="index.php" class="home-icon">🏠</a> <!-- Home icon to go back to the main page -->
+    </header>
+    <div class="login-wrapper">
+        <main class="login-container">
+            <h1>Login</h1>
+            <?php if (!empty($error)) { echo "<p style='color:red;'>$error</p>"; } ?>
+            <form action="login.php" method="post">
+                <label for="email">Email:</label>
+                <input class="textbox" type="text" id="email" name="email" required>
+                
+                <label for="password">Password:</label>
+                <input class="textbox" type="password" id="password" name="password" required>
+                
+                <button type="submit" class="login-button">Login</button>
+            </form>
+            <p><a href="signup.php" class="signup-link">Not a member? Sign up</a></p>
+        </main>
+    </div>
 </body>
+
 </html>

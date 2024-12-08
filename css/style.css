@@ -424,3 +424,111 @@ header {
 .body0{
     padding: 20px;
 }
+
+.checkout-form {
+    width: 80%;
+    max-width: 600px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.checkout-form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.checkout-form input[type="text"],
+.checkout-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.checkout-form .checkout-button {
+    background-color: #915249;
+    color: white;
+    padding: 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.checkout-form .checkout-button:hover {
+    background-color: #6e3d36;
+	color: white;
+}
+
+/*
+.totals {
+    text-align: center;
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 400px;
+    font-size: 18px;
+    background-color: #f4f4f4; 
+    border-radius: 8px; 
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+.totals p {
+    font-size: 22px;
+    margin: 10px 0;
+}
+*/
+.confirmation-message {
+    text-align: center;
+    margin-top: 50px;
+}
+
+/* Confirmation title */
+.confirmation-message h1 {
+    font-size: 2em;
+    color: #333;
+}
+
+/* Confirmation message */
+.confirmation-message p {
+    font-size: 1.2em;
+    color: #666;
+}
+
+/* Gif */
+.confirmation-message img {
+    margin-top: 20px;
+    width: 280px;
+}
+
+.cart-item-cover {
+    width: 50px;
+    height: auto;
+    margin-right: 15px;
+}
+
+.remove-item-button {
+    background-color: #b81c2b;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.remove-item-button:hover {
+    background-color: #8f1522;
+}
