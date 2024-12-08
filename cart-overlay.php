@@ -1,5 +1,20 @@
 <style>
 <?php include 'css/cart-overlay.css' ?>
+
+
+.empty-message {
+    color: rgb(241, 180, 67);
+    font-size: 14px;
+    background-color: #8b2800;
+    padding: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.empty-message:hover {
+    background-color: #ff733a;
+    color: beige;}
+
     </style>
 
 <div class="overlay" id="overlay">
@@ -47,7 +62,7 @@
                 <p><strong>Subtotal (before taxes): $<?php echo number_format($subtotal, 2); ?></strong></p>
                 <a href="checkout.php" class="checkout-button">Checkout!</a>
             <?php else: ?>
-                <p>Your cart is empty. <a href="categories.php">Browse Books</a></p>
+                <a class="empty-message" href="categories.php"> Your cart is empty. Let's put some books into it first!</a>
             <?php endif; ?>
         </div>
     </div>
