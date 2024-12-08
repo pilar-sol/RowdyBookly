@@ -77,6 +77,10 @@ $books_result = $books_query->get_result();
             width: 100%;
         }
 
+        ul{
+            display: inline;
+            padding: 10px;
+        }
         .book-item {
             display: flex;
             flex-wrap: wrap;
@@ -86,11 +90,9 @@ $books_result = $books_query->get_result();
             list-style: none;
         }
 
-        .book-item li {
+        .book-item {
             background: #f9f9f9;
             padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
             text-align: center;
             width: 200px;
         }
@@ -122,10 +124,10 @@ $books_result = $books_query->get_result();
             </div>
             <div class="author-books">
                 <h3>Books by <?php echo htmlspecialchars($author['name']); ?></h3>
-                <ul class="book-item">
+                <ul >
                     <?php if ($books_result->num_rows > 0): ?>
                         <?php while ($book = $books_result->fetch_assoc()): ?>
-                            <li>
+                            <li class="book-item">
                                 <a href="book-detail.php?book_id=<?php echo htmlspecialchars($book['book_id']); ?>">
                                     <img src="images/<?php echo htmlspecialchars($book['cover_image_url']); ?>" alt="<?php echo htmlspecialchars($book['title']); ?>">
                                     <p><strong><?php echo htmlspecialchars($book['title']); ?></strong></p>
