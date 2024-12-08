@@ -511,3 +511,9 @@ header {
     margin-top: 20px;
     width: 280px;
 }
+
+.cart-item-cover {
+    width: 50px;
+    height: auto;
+    margin-right: 15px;
+}

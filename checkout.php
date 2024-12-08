@@ -13,11 +13,11 @@ $subtotal = 0;
 $tax_rate = 0.0825; // 8.25% tax rate
 
 foreach ($_SESSION['cart'] as $book_id => $item) {
-    $sql = "SELECT title, price FROM Books WHERE book_id = ?";
+    $sql = "SELECT title, price, cover_image_url FROM Books WHERE book_id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $book_id);
     $stmt->execute();
-    $stmt->bind_result($title, $price);
+    $stmt->bind_result($title, $price, $cover_image_url);
     $stmt->fetch();
     $stmt->close();
 
@@ -139,17 +139,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_purchase'])) 
 				<?php foreach ($_SESSION['cart'] as $book_id => $item): ?>
 					<?php
 						// Fetch the book details from the database
-						$sql = "SELECT title, price FROM Books WHERE book_id = ?";
+						$sql = "SELECT title, price, cover_image_url FROM Books WHERE book_id = ?";
 						$stmt = $conn->prepare($sql);
 						$stmt->bind_param("i", $book_id);
 						$stmt->execute();
-						$stmt->bind_result($title, $price);
+						$stmt->bind_result($title, $price, $cover_image_url);
 						$stmt->fetch();
 						$stmt->close();
 
 						// Calculate the total for this item
 						$item_total = $price * $item['quantity'];
 					?>
+				<img src="images/<?php echo $cover_image_url; ?>" alt="Book Cover" class="cart-item-cover">
 					<li>
 						<span><?php echo $title; ?> (x<?php echo $item['quantity']; ?>)</span> - 
 						$<?php echo number_format($price, 2); ?> each, 
