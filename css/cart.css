@@ -1,0 +1,52 @@
+.group1 {
+    width: auto;
+    display: flex;
+    justify-content: center; /* Align items to the center */
+    align-items: center;
+    padding: 20px;
+}
+
+.motivation-poster img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    max-height: 70vh; 
+    border-radius: 10px;;
+}
+
+
+.empty-message {
+    height: auto; /* Let the height adjust based on content */
+    color: rgb(241, 180, 67);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    margin: 10px;
+    font-size: 14px;
+    background-color: #fff6e6;
+    padding: 20px; /* Increase padding slightly if needed */
+    border: 1px solid rgb(255, 166, 0);
+    border-radius: 10px;
+}
+
+.empty-message p {
+    margin-bottom: 20px;
+    max-width: 250px;
+}
+
+.empty-message a {
+    color: rgb(241, 180, 67);
+    vertical-align: bottom;
+    font-size: 14px;
+    background-color: #fff6e6;
+    padding: 10px;
+    border: 1px solid rgb(255, 166, 0);
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.empty-message a:hover {
+    background-color: #fcc245;
+    color: beige;
+}

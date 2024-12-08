@@ -144,7 +144,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         .checkout-calculation .totals {
-            display: flex;
+            display: flex;  
             flex-direction: column;
             gap: 5px;
         }

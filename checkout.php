@@ -2,10 +2,12 @@
 session_start();
 include 'config.php'; 
 
-// Check if cart is empty
-if (!isset($_SESSION['cart']) || empty($_SESSION['cart'])) {
-    echo "<p>Your cart is empty. <a href='categories.php'>Go back to shopping</a></p>";
-    exit();
+
+$cart_item_count = 0;
+if (isset($_SESSION['cart'])) {
+    foreach ($_SESSION['cart'] as $item) {
+        $cart_item_count += $item['quantity'];  // Sum up quantities of all items
+    }
 }
 
 $is_logged_in = isset($_SESSION['user_id']);
@@ -135,6 +137,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_purchase'])) 
     <link rel="stylesheet" href="css/style.css">
 	<style> 
         <?php include 'css/style.css'; ?>
+        <?php include 'css/cart.css';?>
 	.container {
             max-width: 800px;
             margin: auto;
@@ -203,7 +206,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_purchase'])) 
     ?>
 </head>
 <body>
-
+    <?php if (!isset($_SESSION['cart']) || empty($_SESSION['cart'])): ?>
+        <!-- Display empty cart message -->
+        <div class="body0" >
+            <div class="group1">
+                <div class="motivation-poster">
+                    <img src= "images/book-quote.jpg">
+                </div>
+                <div class="empty-message">
+                    <h2>Your cart is empty</h2>
+                    <p>Looks like you haven't added anything yet. Let's add some books to it!</p>
+                    <a href="categories.php">Go back to shopping</a>
+                </div>
+            </div> 
+        </div> 
+    <?php else: ?>        
     <!-- Main Content -->
     <div class="container">
         <?php if (isset($error_message)): ?>
@@ -301,14 +318,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_purchase'])) 
 		</form>
 
     </div>
-	
+	<?php endif; ?>
 	<?php include 'cart-overlay.php'; ?>
 	<script src="javascript/cart-interaction.js"></script>
 
 
     <!-- Footer -->
-    <footer>
-        <p>&copy; 2024 RowdyBookly</p>
-    </footer>
+    
 </body>
+<footer>
+    <p>&copy; 2024 RowdyBookly</p>
+</footer>
 </html>
