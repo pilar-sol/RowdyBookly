@@ -253,7 +253,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_purchase'])) 
                         <td>$<?php echo number_format($item_total, 2); ?></td>
                         <td>
                             <form action="checkout.php" method="POST" style="display: inline;">
-                                <button type="submit" class= "remove-button" name="remove_item[<?php echo $book_id; ?>]" value="1">❌</button>
+                                <button type="submit" class= "remove-button" name="remove_item[<?php echo $book_id; ?>]" value="1">✖</button>
                     </form>
                 </td>
                     </tr>
