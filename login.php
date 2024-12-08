@@ -57,7 +57,66 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up - RowdyBookly</title>
-    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Login Page Styling */
+
+/* Centering the login container */
+    
+    header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 2rem 2.5rem; /* Adjust padding to make banner thicker */
+        background-color: #333; /* Gray background color */
+        color: #fdfafa;
+    }
+    
+    .login-container h1 {
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 1.5rem;
+        color: #333;
+    }
+    
+    /* Styling for form labels and inputs */
+    .login-container label {
+        font-size: 1.5rem;
+        color: #333;
+        display: block;
+        margin: 0.5rem 0;
+    }
+    
+    .login-container input[type="text"],
+    .login-container input[type="password"] {
+        width: 100%;
+        max-width: 300px; /* Limits the width of the input fields */
+        padding: 0.8rem;
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background-color: #f5f5f5;
+        text-align: center;
+    }
+    
+    /* Login button styling */
+    .login-button {
+        font-size: 1.5rem;
+        background-color: #333;
+        color: #fff;
+        padding: 0.8rem 1.2rem;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        margin-top: 1rem;
+        transition: background-color 0.3s ease;
+    }
+    
+    .login-button:hover {
+        background-color: #555;
+    }
+        </style>
+    </style>
 </head>
 <body>
     <header>
