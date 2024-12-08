@@ -56,7 +56,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - RowdyBookly</title>
     <style>
-        /* Centering the login container */
+        <?php include "navigation-bar.php" ?>
+        body {
+            margin:0px;
+        }
         .login-container {
             display: flex;
             flex-direction: column;
