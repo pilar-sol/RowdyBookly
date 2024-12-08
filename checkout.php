@@ -8,6 +8,26 @@ if (!isset($_SESSION['cart']) || empty($_SESSION['cart'])) {
     exit();
 }
 
+$is_logged_in = isset($_SESSION['user_id']);
+// Update cart items or remove items
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_POST['update_cart'])) {
+        // Update item quantities
+        foreach ($_POST['quantity'] as $book_id => $quantity) {
+            if ($quantity == 0) {
+                unset($_SESSION['cart'][$book_id]);  // Remove item if quantity is 0
+            } else {
+                $_SESSION['cart'][$book_id]['quantity'] = $quantity;
+            }
+        }
+    } elseif (isset($_POST['remove_item'])) {
+        foreach ($_POST['remove_item'] as $book_id => $value) {
+            unset($_SESSION['cart'][$book_id]);
+        }
+    }
+}
+
+
 // Initialize cart totals
 $subtotal = 0;
 $tax_rate = 0.0825; // 8.25% tax rate
@@ -101,7 +121,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_purchase'])) 
 }
 
 
-
+	
 
 
 ?>
@@ -115,7 +135,50 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_purchase'])) 
     <link rel="stylesheet" href="css/style.css">
 	<style> 
         <?php include 'css/style.css'; ?>
-	<?php include 'css/cart-overlay.css' ?>
+	.container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+	.cart-items-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 1em;
+            font-family: Arial, sans-serif;
+        }
+
+        .cart-items-table thead {
+            background-color: #f4f4f4;
+        }
+
+        .cart-items-table th, .cart-items-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .cart-items-table th {
+            font-weight: bold;
+        }
+
+        .cart-items-table tbody tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        .cart-item-image {
+            width: 60px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .cart-items-table td img {
+            display: block;
+            margin: auto;
+        }
         
     </style>
 	<?php
@@ -136,41 +199,57 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_purchase'])) 
 
 			<!-- Display items being purchased -->
 			<h2>Items in your cart:</h2>
-			<ul class="cart-items-list">
-				<?php foreach ($_SESSION['cart'] as $book_id => $item): ?>
-					<?php
-						// Fetch the book details from the database
-						$sql = "SELECT title, price, cover_image_url FROM Books WHERE book_id = ?";
-						$stmt = $conn->prepare($sql);
-						$stmt->bind_param("i", $book_id);
-						$stmt->execute();
-						$stmt->bind_result($title, $price, $cover_image_url);
-						$stmt->fetch();
-						$stmt->close();
 
-						// Calculate the total for this item
-						$item_total = $price * $item['quantity'];
-					?>
-	    				<li>
-	    			<div class="cart-item-image">
-					<img src="images/<?php echo $cover_image_url; ?>" alt="Book Cover" class="cart-item-cover">
-				</div>	
-						<h4 class="cart-item-title"><?php echo htmlspecialchars($title); ?></h4>
-		                                <p class="cart-item-price">Price: $<?php echo number_format($price, 2); ?></p>
-		                                <p class="cart-item-quantity">Quantity: <?php echo $item['quantity']; ?></p>
-		                                <p class="cart-item-total">Total: $<?php echo number_format($item_total, 2); ?></p>
-					</li>
-				<?php endforeach; ?>
-			</ul>
+			<table class="cart-items-table">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Title</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    <th>action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($_SESSION['cart'] as $book_id => $item): ?>
+                    <?php
+                        // Fetch the book details from the database
+                        $sql = "SELECT title, price, cover_image_url FROM Books WHERE book_id = ?";
+                        $stmt = $conn->prepare($sql);
+                        $stmt->bind_param("i", $book_id);
+                        $stmt->execute();
+                        $stmt->bind_result($title, $price, $cover_image_url);
+                        $stmt->fetch();
+                        $stmt->close();
+
+                        // Calculate the total for this item
+                        $item_total = $price * $item['quantity'];
+                    ?>
+                    <tr>
+                        <td>
+                            <img src="images/<?php echo $cover_image_url; ?>" alt="Book Cover" class="cart-item-image">
+                        </td>
+                        <td><?php echo htmlspecialchars($title); ?></td>
+                        <td>$<?php echo number_format($price, 2); ?></td>
+                        <td><?php echo $item['quantity']; ?></td>
+                        <td>$<?php echo number_format($item_total, 2); ?></td>
+                        <td>
+                            <form action="checkout.php" method="POST" style="display: inline;">
+                                <button type="submit" name="remove_item[<?php echo $book_id; ?>]" value="1">Remove</button>
+                    </form>
+                </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+
 
 			<!-- Display totals -->
 			<p>Subtotal: $<?php echo number_format($subtotal, 2); ?></p>
 			<p>Tax (8.25%): $<?php echo number_format($tax, 2); ?></p>
 			<p>Total: $<?php echo number_format($total, 2); ?></p>
 		</div>
-
-		
-		
 
         <!-- Checkout Form -->
         <form action="checkout.php" method="POST" class="checkout-form">
