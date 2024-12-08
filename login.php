@@ -67,91 +67,69 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             font-family: Arial, sans-serif;
             background-color: #f9f9f9; /* Light background for contrast */
         }
-
-        /* Login container */
+        /* Centering the login container */
         .login-container {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background-color: #fff;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 400px; /* Limits width for better responsiveness */
+            height: 100vh; /* Full height to center vertically */
             text-align: center;
+            background-color: #e0e0e0; /* Light grey background */
+            padding: 2rem; 
         }
-
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 2rem 2.5rem; /* Adjust padding to make banner thicker */
+            background-color: #333; /* Gray background color */
+            color: #fdfafa;
+        }
+        
         .login-container h1 {
             font-size: 2rem;
             font-weight: bold;
             margin-bottom: 1.5rem;
             color: #333;
         }
-
-        /* Form labels and inputs */
+        
+        /* Styling for form labels and inputs */
         .login-container label {
-            font-size: 1rem;
+            font-size: 1.5rem;
             color: #333;
-            margin-bottom: 0.5rem;
             display: block;
-            text-align: left; /* Align labels to the left for readability */
+            margin: 0.5rem 0;
         }
-
+        
         .login-container input[type="text"],
         .login-container input[type="password"] {
-            width: 100%; /* Full width within the container */
+            width: 100%;
+            max-width: 300px; /* Limits the width of the input fields */
             padding: 0.8rem;
-            font-size: 1rem;
+            font-size: 1.2rem;
             margin-bottom: 1rem;
             border: 1px solid #ddd;
             border-radius: 5px;
             background-color: #f5f5f5;
+            text-align: center;
         }
-
-        .login-container input[type="text"]:focus,
-        .login-container input[type="password"]:focus {
-            outline: none;
-            border-color: #0073e6; /* Highlight border on focus */
-            box-shadow: 0 0 4px rgba(0, 115, 230, 0.2);
-        }
-
-        .login-container .login-button {
-            width: 100%;
-            padding: 0.8rem;
-            font-size: 1rem;
+        
+        /* Login button styling */
+        .login-button {
+            font-size: 1.5rem;
+            background-color: #333;
             color: #fff;
-            background-color: #0073e6;
+            padding: 0.8rem 1.2rem;
             border: none;
-            border-radius: 5px;
+            border-radius: 50%;
             cursor: pointer;
+            margin-top: 1rem;
             transition: background-color 0.3s ease;
         }
-
-        .login-container .login-button:hover {
-            background-color: #005bb5;
-        }
-
-        .login-container p {
-            margin-top: 1rem;
-        }
-
-        .login-container .signup-link {
-            text-decoration: none;
-            color: #0073e6;
-        }
-
-        .login-container .signup-link:hover {
-            text-decoration: underline;
-        }
-
-        /* Error message styling */
-        .login-container p.error {
-            color: red;
-            font-size: 0.9rem;
-            margin-top: -1rem;
-            margin-bottom: 1rem;
+        
+        .login-button:hover {
+            background-color: #555;
         }
 
     </style>
