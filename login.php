@@ -64,7 +64,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             display: flex;
             align-items: center; 
             justify-content: center; 
-            height: 100vh;
+            height: auto;
+            border-radius: 10px;
         }
 
         .login-container {
@@ -101,8 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             margin: 0.5rem 0;
         }
         
-        .login-container input[type="text"],
-        .login-container input[type="password"] {
+        .textbox {
             width: 100%;
             max-width: 300px; /* Limits the width of the input fields */
             padding: 0.8rem;
@@ -140,10 +140,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php if (!empty($error)) { echo "<p style='color:red;'>$error</p>"; } ?>
             <form action="login.php" method="post">
                 <label for="email">Email:</label>
-                <input type="text" id="email" name="email" required>
+                <input class="textbox" type="text" id="email" name="email" required>
                 
                 <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
+                <input class="textbox" type="password" id="password" name="password" required>
                 
                 <button type="submit" class="login-button">Login</button>
             </form>
