@@ -1,13 +1,21 @@
 
 <style>
+    
     .cart {
         position: relative;
         display: grid;
         align-items: center;
-        padding-right: 0;
+        margin:0;
         z-index: 10;
         width: 50px;
         height: 50px;
+        display: flex;
+        align-items: center; 
+        justify-content: center;
+    }
+    .cart:hover {
+        background-color:#19abe0;
+        border-radius: 10px;
     }
     .cart img{
         width: 30px;
@@ -42,8 +50,8 @@
     }
     .search-button{
         align-items: center;
-        height: 30px;
-        width:30px;
+        height: 40px;
+        width:40px;
     }
     
     .search {
@@ -66,7 +74,9 @@
         background: none;
         border: none;
         cursor: pointer;
-        margin-left: 10px;
+        display: flex;
+        align-items: center; 
+        justify-content: center;
     }
 
     .search-button img {
@@ -75,15 +85,31 @@
         object-fit: contain;
     }
     .search-button img:hover{
-        background: #F5F5DC;
+        background: #e8935b;
         border-radius: 10px;
+        padding:5px;
     }
-    .icon:hover{
-        background-color: #e8935b;
-        border-radius: 10px;
+    .icon:hover {
+    background-color: #e8935b;
+    border-radius: 10px;
     }
 
+    .icon {
+        margin: 0; 
+        padding: 0;
+        width: 40px;
+        height: 40px;
+        padding: 5px;
+        display: flex;
+        align-items: center; 
+        justify-content: center;
+    }
 
+    .icon img {
+        width: 30px;
+        height: 30px;
+        object-fit: contain;
+    }
     </style>
 <header>
     <h1 class="logo">
@@ -106,12 +132,17 @@
             </button>
         </form>
         <?php if ($is_logged_in): ?>
-            <a href="profile.php" class="icon">👤</a>
+            <a href="profile.php" class="icon">
+                <img src="icon-image/user.png" alt="Logout">
+            </a>
+
             <a href="logout.php" class="icon" title="Logout">
-                <img src="images/logout.png" alt="Logout" style="width:30px; height:30px;">
+                <img src="icon-image/logout.png" alt="Logout" style="width:30px; height:30px;">
             </a>
         <?php else: ?>
-            <a href="login.php" class="icon">👤</a>
+            <a href="login.php" class="icon">
+                <img src="icon-image/login.png" alt="Logout">
+            </a>
         <?php endif; ?>
         <a class ="cart" href="javascript:void(0);" class="icon" onclick="openCart()">
             <img src="icon/shopping-cart.png" alt="Cart">
