@@ -38,29 +38,10 @@ $stmt->close();
     <style> 
         <?php include 'css/style.css'; ?>
     </style>
+    <?php include "navigation-bar.php" ?>
 </head>
 <body>
-    <header>
-        <h1 class="logo">
-            <a class="main-page" href="index.php">
-            Rowdy<br>Bookly
-            </a>
-        </h1>
-        <nav>
-            <a href="categories.php" class="category-button">Categories</a>
-            <input type="text" placeholder="Search">
-            <button class="search-button">🔍</button>
-            <?php if ($is_logged_in): ?>
-                    <a href="profile.php" class="icon">👤</a>
-                    <a href="logout.php" class="icon" title="Logout">
-                        <img src="images/logout.png" alt="Logout" style="width:30px; height:30px;">
-</a>
-            <?php else: ?>
-                <a href="login.php" class="icon">👤</a>
-            <?php endif; ?>
-            <a href="javascript:void(0);" class="icon" onclick="openCart()">🛒</a>
-        </nav>
-    </header>
+    
     
     <main class="main-container">
 
@@ -78,6 +59,8 @@ $stmt->close();
         </section>
     </main>
     
+
+    <?php include "cart-overlay.php" ?>
     <footer>
         <p>&copy; 2024 RowdyBookly</p>
     </footer>
