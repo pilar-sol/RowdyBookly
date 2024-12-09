@@ -106,11 +106,72 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - Add Book</title>
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+        }
+        .dashboard-container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        form label {
+            display: block;
+            margin: 15px 0 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        form input, form textarea, form button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        form textarea {
+            resize: vertical;
+            height: 100px;
+        }
+        form button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        form button:hover {
+            background-color: #0056b3;
+        }
+        .message {
+            text-align: center;
+            color: green;
+            margin-bottom: 20px;
+        }
+        nav a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #007BFF;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>Admin Dashboard</h1>
-        <nav>
+        <h1 style="text-align:center;">Admin Dashboard</h1>
+        <nav style="text-align:center;">
             <a href="index.php">Home</a>
             <a href="logout.php">Logout</a>
         </nav>
@@ -120,22 +181,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php if (!empty($message)) { echo "<p class='message'>$message</p>"; } ?>
         <form action="admin-dashboard.php" method="post" enctype="multipart/form-data">
             <label for="title">Book Title:</label>
-            <input type="text" id="title" name="title" required>
+            <input type="text" id="title" name="title" placeholder="Enter book title" required>
 
             <label for="author">Author:</label>
-            <input type="text" id="author" name="author" required>
+            <input type="text" id="author" name="author" placeholder="Enter author's name" required>
 
             <label for="cover_image">Cover Image (.jpg):</label>
             <input type="file" id="cover_image" name="cover_image" accept=".jpg">
 
             <label for="publication_year">Publication Year:</label>
-            <input type="number" id="publication_year" name="publication_year" required>
+            <input type="number" id="publication_year" name="publication_year" placeholder="e.g., 2023" required>
 
             <label for="price">Price:</label>
-            <input type="number" step="0.01" id="price" name="price" required>
+            <input type="number" step="0.01" id="price" name="price" placeholder="e.g., 19.99" required>
 
             <label for="description">Description:</label>
-            <textarea id="description" name="description" rows="4"></textarea>
+            <textarea id="description" name="description" placeholder="Enter book description"></textarea>
 
             <label for="is_staff_pick">
                 <input type="checkbox" id="is_staff_pick" name="is_staff_pick"> Staff Pick
