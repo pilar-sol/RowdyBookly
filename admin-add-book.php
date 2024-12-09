@@ -1,6 +1,9 @@
-
 <?php
 session_start();
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 // Check if the admin is logged in
 if (!isset($_SESSION['admin_id'])) {
@@ -35,6 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $publication_year = $_POST['publication_year'];
     $price = $_POST['price'];
     $description = $_POST['description'];
+    $is_staff_pick = isset($_POST['is_staff_pick']) ? 1 : 0; // Default to 0 unless checked
 
     // Handle file upload for the cover image
     $cover_image = null;
@@ -54,12 +58,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             $message = "Only .jpg files are allowed for the cover image.";
         }
-    } else {
-        $message = "Please upload a valid .jpg cover image.";
     }
 
     // Validate and insert book data
-    if (!empty($title) && !empty($author) && !empty($publication_year) && !empty($price) && !empty($description) && is_numeric($price) && is_numeric($publication_year) && $cover_image) {
+    if (!empty($title) && !empty($author) && !empty($publication_year) && !empty($price) && is_numeric($price) && is_numeric($publication_year)) {
         // Check if the author exists
         $authorStmt = $pdo->prepare("SELECT author_id FROM Authors WHERE name = :author LIMIT 1");
         $authorStmt->bindParam(':author', $author);
@@ -77,14 +79,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Insert the book into the database
-        $stmt = $pdo->prepare("INSERT INTO Books (title, cover_image_url, author_id, publication_year, price, description) 
-                               VALUES (:title, :cover_image_url, :author_id, :publication_year, :price, :description)");
+        $stmt = $pdo->prepare("INSERT INTO Books (title, cover_image_url, author_id, publication_year, price, description, is_staff_pick) 
+                               VALUES (:title, :cover_image_url, :author_id, :publication_year, :price, :description, :is_staff_pick)");
         $stmt->bindParam(':title', $title);
         $stmt->bindParam(':cover_image_url', $cover_image);
         $stmt->bindParam(':author_id', $author_id);
-        $stmt->bindParam(':publication_year', $publication_year);
+        $stmt->bindParam(':publication_year', $publication_year, PDO::PARAM_INT);
         $stmt->bindParam(':price', $price);
         $stmt->bindParam(':description', $description);
+        $stmt->bindParam(':is_staff_pick', $is_staff_pick, PDO::PARAM_INT);
 
         if ($stmt->execute()) {
             $message = "Book added successfully!";
@@ -103,46 +106,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - Add Book</title>
     <link rel="stylesheet" href="css/style.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-        .dashboard-container {
-            width: 50%;
-            margin: 0 auto;
-        }
-        form {
-            display: flex;
-            flex-direction: column;
-        }
-        form label {
-            margin-top: 15px;
-            font-weight: bold;
-        }
-        form input, form textarea, form button {
-            margin-top: 5px;
-            padding: 10px;
-            font-size: 16px;
-        }
-        form textarea {
-            resize: none;
-        }
-        .submit-button {
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-        .submit-button:hover {
-            background-color: #0056b3;
-        }
-        .message {
-            color: green;
-            margin-top: 20px;
-        }
-    </style>
 </head>
 <body>
     <header>
@@ -163,7 +126,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="text" id="author" name="author" required>
 
             <label for="cover_image">Cover Image (.jpg):</label>
-            <input type="file" id="cover_image" name="cover_image" accept=".jpg" required>
+            <input type="file" id="cover_image" name="cover_image" accept=".jpg">
 
             <label for="publication_year">Publication Year:</label>
             <input type="number" id="publication_year" name="publication_year" required>
@@ -172,7 +135,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="number" step="0.01" id="price" name="price" required>
 
             <label for="description">Description:</label>
-            <textarea id="description" name="description" rows="4" required></textarea>
+            <textarea id="description" name="description" rows="4"></textarea>
+
+            <label for="is_staff_pick">
+                <input type="checkbox" id="is_staff_pick" name="is_staff_pick"> Staff Pick
+            </label>
 
             <button type="submit" class="submit-button">Add Book</button>
         </form>
