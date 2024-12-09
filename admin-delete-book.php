@@ -31,46 +31,25 @@ try {
 // Initialize variables
 $message = '';
 
-// Debugging: Print all records before deletion
-echo "<h3>Records Before Deletion:</h3>";
-$beforeStmt = $pdo->query("SELECT * FROM Books");
-foreach ($beforeStmt as $row) {
-    echo "Book ID: " . $row['book_id'] . " | Title: " . $row['title'] . "<br>";
-}
-
 // Handle book deletion
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_book_id'])) {
+if (isset($_POST['delete_book_id'])) {
     $delete_book_id = $_POST['delete_book_id'];
+    echo "Attempting to delete book ID: $delete_book_id<br>"; // Debugging
+    $deleteStmt = $pdo->prepare("DELETE FROM Books WHERE book_id = :book_id");
+    $deleteStmt->bindParam(':book_id', $delete_book_id);
 
-    // Debugging
-    echo "Form submitted.<br>";
-    echo "Received book ID for deletion: " . htmlspecialchars($delete_book_id) . "<br>";
-
-    if (empty($delete_book_id)) {
-        echo "No book ID received.<br>";
-    }
-
-    try {
-        $deleteStmt = $pdo->prepare("DELETE FROM Books WHERE book_id = :book_id");
-        $deleteStmt->bindParam(':book_id', $delete_book_id, PDO::PARAM_INT);
-
-        if ($deleteStmt->execute()) {
-            $message = "Book removed successfully!";
-        } else {
-            $errorInfo = $deleteStmt->errorInfo();
-            $message = "Failed to remove the book. SQL Error: " . $errorInfo[2];
-        }
-    } catch (PDOException $e) {
-        $message = "Error while deleting book: " . $e->getMessage();
+    if ($deleteStmt->execute()) {
+        $message = "Book with ID $delete_book_id removed successfully!";
+    } else {
+        $message = "Failed to remove the book with ID $delete_book_id.";
     }
 }
 
-// Debugging: Print all records after deletion
-echo "<h3>Records After Deletion:</h3>";
-$afterStmt = $pdo->query("SELECT * FROM Books");
-foreach ($afterStmt as $row) {
-    echo "Book ID: " . $row['book_id'] . " | Title: " . $row['title'] . "<br>";
-}
+// Fetch all books to display
+$booksStmt = $pdo->query("SELECT b.book_id, b.title, a.name AS author, b.publication_year, b.price 
+                          FROM Books b
+                          LEFT JOIN Authors a ON b.author_id = a.author_id");
+$books = $booksStmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -113,7 +92,7 @@ foreach ($afterStmt as $row) {
                             <td><?php echo htmlspecialchars($book['publication_year']); ?></td>
                             <td><?php echo htmlspecialchars($book['price']); ?></td>
                             <td>
-                                <form action="admin-dashboard.php" method="post">
+                                <form action="admin-dashboard.php" method="post" style="display:inline;">
                                     <input type="hidden" name="delete_book_id" value="<?php echo $book['book_id']; ?>">
                                     <button type="submit" class="delete-button">Delete</button>
                                 </form>
