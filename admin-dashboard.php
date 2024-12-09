@@ -29,8 +29,8 @@ try {
 }
 
 // Fetch admin profile data
-$admin_id = $_SESSION['admin_id']; // This stays the same, assuming admin_id is the session key
-$stmt = $pdo->prepare("SELECT username, email FROM Admin WHERE user_id = :admin_id"); // Replace admin_id with user_id in the query
+$admin_id = $_SESSION['admin_id'];
+$stmt = $pdo->prepare("SELECT username, email, address FROM Admin WHERE user_id = :admin_id");
 $stmt->bindParam(':admin_id', $admin_id, PDO::PARAM_INT);
 $stmt->execute();
 $admin = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -44,83 +44,67 @@ if (!$admin) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
+    <title>Admin Dashboard - RowdyBookly</title>
     <link rel="stylesheet" href="css/style.css">
     <style>
+        <?php include 'css/style.css'; ?>
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f9;
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            background-color: #007BFF;
-            color: white;
-            padding: 20px 0;
             text-align: center;
+            margin: 0;
         }
         .dashboard-container {
-            max-width: 600px;
-            margin: 30px auto;
+            max-width: 800px;
+            margin: 50px auto;
             background: white;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
         }
-        h1, h2 {
-            text-align: center;
+        h1 {
             color: #333;
         }
-        .welcome-text {
-            margin-bottom: 30px;
+        h2 {
+            color: #007BFF;
         }
-        .welcome-text p {
-            font-size: 18px;
+        .profile-info p {
             margin: 10px 0;
-            color: #555;
+            font-size: 18px;
         }
-        .action-button {
+        .action-buttons a {
             display: inline-block;
+            margin: 10px;
+            padding: 15px 30px;
             background-color: #007BFF;
             color: white;
-            border: none;
-            padding: 15px 30px;
-            font-size: 18px;
-            border-radius: 5px;
             text-decoration: none;
-            margin: 10px 5px;
-            cursor: pointer;
+            border-radius: 5px;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
         }
-        .action-button:hover {
+        .action-buttons a:hover {
             background-color: #0056b3;
         }
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #333;
-            color: white;
-            margin-top: 50px;
-        }
     </style>
+    <?php include "navigation-bar.php"; ?>
 </head>
 <body>
     <header>
         <h1>Admin Dashboard</h1>
     </header>
     <main class="dashboard-container">
-        <section class="welcome">
-            <div class="welcome-text">
-                <h2>Welcome, <?php echo htmlspecialchars($admin['username']); ?>!</h2>
-                <p><strong>Email:</strong> <?php echo htmlspecialchars($admin['email']); ?></p>
-            </div>
+        <section class="profile-info">
+            <h2>Welcome, <?php echo htmlspecialchars($admin['username']); ?>!</h2>
+            <p><strong>Email:</strong> <?php echo htmlspecialchars($admin['email']); ?></p>
+            <p><strong>Address:</strong> <?php echo htmlspecialchars($admin['address'] ?: 'Not provided'); ?></p>
         </section>
-        <section class="actions">
-            <a href="admin-add-book.php" class="action-button">Add Book</a>
-            <a href="admin-delete-book.php" class="action-button">Delete Book</a>
+
+        <section class="action-buttons">
+            <a href="admin-add-book.php">Add Book</a>
+            <a href="admin-delete-book.php">Delete Book</a>
+            <a href="index.php">Back to Home</a>
         </section>
     </main>
-    <footer>
-        <p>&copy; 2024 RowdyBookly</p>
-    </footer>
 </body>
 </html>
