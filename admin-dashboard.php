@@ -87,7 +87,6 @@ if (!$admin) {
             background-color: #0056b3;
         }
     </style>
-    <?php include "navigation-bar.php"; ?>
 </head>
 <body>
     <header>
