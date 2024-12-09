@@ -98,6 +98,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $message = "Please fill in all required fields correctly.";
     }
 }
+echo "Form submitted.<br>";
+echo "Title: $title<br>";
+echo "Author: $author<br>";
+echo "Publication Year: $publication_year<br>";
+echo "Price: $price<br>";
+echo "Description: $description<br>";
+echo "Staff Pick: $is_staff_pick<br>";
 ?>
 <!DOCTYPE html>
 <html lang="en">
