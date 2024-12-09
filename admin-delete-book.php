@@ -32,16 +32,15 @@ try {
 $message = '';
 
 // Handle book deletion
-if (isset($_POST['delete_book_id'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_book_id'])) {
     $delete_book_id = $_POST['delete_book_id'];
-    echo "Attempting to delete book ID: $delete_book_id<br>"; // Debugging
     $deleteStmt = $pdo->prepare("DELETE FROM Books WHERE book_id = :book_id");
-    $deleteStmt->bindParam(':book_id', $delete_book_id);
+    $deleteStmt->bindParam(':book_id', $delete_book_id, PDO::PARAM_INT);
 
     if ($deleteStmt->execute()) {
-        $message = "Book with ID $delete_book_id removed successfully!";
+        $message = "Book removed successfully!";
     } else {
-        $message = "Failed to remove the book with ID $delete_book_id.";
+        $message = "Failed to remove the book.";
     }
 }
 
@@ -58,6 +57,42 @@ $books = $booksStmt->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - Manage Books</title>
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .dashboard-container {
+            width: 80%;
+            margin: 0 auto;
+        }
+        .message {
+            color: green;
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        .delete-button {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .delete-button:hover {
+            background-color: #cc0000;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -92,7 +127,7 @@ $books = $booksStmt->fetchAll(PDO::FETCH_ASSOC);
                             <td><?php echo htmlspecialchars($book['publication_year']); ?></td>
                             <td><?php echo htmlspecialchars($book['price']); ?></td>
                             <td>
-                                <form action="admin-dashboard.php" method="post" style="display:inline;">
+                                <form action="" method="post" style="display:inline;">
                                     <input type="hidden" name="delete_book_id" value="<?php echo $book['book_id']; ?>">
                                     <button type="submit" class="delete-button">Delete</button>
                                 </form>
