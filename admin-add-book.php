@@ -35,15 +35,6 @@ $is_staff_pick = 0;
 
 // Handle book submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Debugging $_POST and $_FILES data
-    echo "<pre>POST data: ";
-    print_r($_POST);
-    echo "</pre>";
-
-    echo "<pre>FILES data: ";
-    print_r($_FILES);
-    echo "</pre>";
-
     // Capture and sanitize input
     $title = $_POST['title'] ?? '';
     $author = $_POST['author'] ?? '';
