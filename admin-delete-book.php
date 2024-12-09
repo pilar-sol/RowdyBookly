@@ -32,15 +32,24 @@ try {
 $message = '';
 
 // Handle book deletion
-if (isset($_POST['delete_book_id'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_book_id'])) {
     $delete_book_id = $_POST['delete_book_id'];
-    $deleteStmt = $pdo->prepare("DELETE FROM Books WHERE book_id = :book_id");
-    $deleteStmt->bindParam(':book_id', $delete_book_id);
 
-    if ($deleteStmt->execute()) {
-        $message = "Book removed successfully!";
-    } else {
-        $message = "Failed to remove the book.";
+    // Debugging: Check received value
+    echo "Received book ID for deletion: $delete_book_id<br>";
+
+    $deleteStmt = $pdo->prepare("DELETE FROM Books WHERE book_id = :book_id");
+    $deleteStmt->bindParam(':book_id', $delete_book_id, PDO::PARAM_INT);
+
+    try {
+        if ($deleteStmt->execute()) {
+            $message = "Book removed successfully!";
+        } else {
+            $errorInfo = $deleteStmt->errorInfo();
+            $message = "Failed to remove the book. SQL Error: " . $errorInfo[2];
+        }
+    } catch (PDOException $e) {
+        $message = "Error while deleting book: " . $e->getMessage();
     }
 }
 
@@ -144,4 +153,3 @@ $books = $booksStmt->fetchAll(PDO::FETCH_ASSOC);
     </main>
 </body>
 </html>
-
