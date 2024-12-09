@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $image_extension = strtolower(pathinfo($image_name, PATHINFO_EXTENSION));
 
         if ($image_extension === 'jpg') {
-            $upload_dir = 'uploads/';
+            $upload_dir = '';
             if (!is_dir($upload_dir)) {
                 mkdir($upload_dir, 0777, true);
             }
