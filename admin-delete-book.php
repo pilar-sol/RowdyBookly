@@ -31,44 +31,46 @@ try {
 // Initialize variables
 $message = '';
 
+// Debugging: Print all records before deletion
+echo "<h3>Records Before Deletion:</h3>";
+$beforeStmt = $pdo->query("SELECT * FROM Books");
+foreach ($beforeStmt as $row) {
+    echo "Book ID: " . $row['book_id'] . " | Title: " . $row['title'] . "<br>";
+}
+
 // Handle book deletion
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_book_id'])) {
     $delete_book_id = $_POST['delete_book_id'];
 
-    // Debug: Check received POST data
-    echo "Received book ID for deletion: $delete_book_id<br>";
+    // Debugging
+    echo "Form submitted.<br>";
+    echo "Received book ID for deletion: " . htmlspecialchars($delete_book_id) . "<br>";
+
+    if (empty($delete_book_id)) {
+        echo "No book ID received.<br>";
+    }
 
     try {
-        // Check if the book ID exists
-        $checkStmt = $pdo->prepare("SELECT * FROM Books WHERE book_id = :book_id");
-        $checkStmt->bindParam(':book_id', $delete_book_id, PDO::PARAM_INT);
-        $checkStmt->execute();
-        $bookExists = $checkStmt->fetch(PDO::FETCH_ASSOC);
+        $deleteStmt = $pdo->prepare("DELETE FROM Books WHERE book_id = :book_id");
+        $deleteStmt->bindParam(':book_id', $delete_book_id, PDO::PARAM_INT);
 
-        if ($bookExists) {
-            // Delete the book if it exists
-            $deleteStmt = $pdo->prepare("DELETE FROM Books WHERE book_id = :book_id");
-            $deleteStmt->bindParam(':book_id', $delete_book_id, PDO::PARAM_INT);
-
-            if ($deleteStmt->execute()) {
-                $message = "Book removed successfully!";
-            } else {
-                $errorInfo = $deleteStmt->errorInfo();
-                $message = "Failed to remove the book. SQL Error: " . $errorInfo[2];
-            }
+        if ($deleteStmt->execute()) {
+            $message = "Book removed successfully!";
         } else {
-            $message = "Book with ID $delete_book_id does not exist.";
+            $errorInfo = $deleteStmt->errorInfo();
+            $message = "Failed to remove the book. SQL Error: " . $errorInfo[2];
         }
     } catch (PDOException $e) {
         $message = "Error while deleting book: " . $e->getMessage();
     }
 }
 
-// Fetch all books to display
-$booksStmt = $pdo->query("SELECT b.book_id, b.title, a.name AS author, b.publication_year, b.price 
-                          FROM Books b
-                          LEFT JOIN Authors a ON b.author_id = a.author_id");
-$books = $booksStmt->fetchAll(PDO::FETCH_ASSOC);
+// Debugging: Print all records after deletion
+echo "<h3>Records After Deletion:</h3>";
+$afterStmt = $pdo->query("SELECT * FROM Books");
+foreach ($afterStmt as $row) {
+    echo "Book ID: " . $row['book_id'] . " | Title: " . $row['title'] . "<br>";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -77,42 +79,6 @@ $books = $booksStmt->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - Manage Books</title>
     <link rel="stylesheet" href="css/style.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-        .dashboard-container {
-            width: 80%;
-            margin: 0 auto;
-        }
-        .message {
-            color: green;
-            margin-top: 20px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        table, th, td {
-            border: 1px solid #ccc;
-        }
-        th, td {
-            padding: 10px;
-            text-align: left;
-        }
-        .delete-button {
-            background-color: #ff4d4d;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-        .delete-button:hover {
-            background-color: #cc0000;
-        }
-    </style>
 </head>
 <body>
     <header>
@@ -147,7 +113,7 @@ $books = $booksStmt->fetchAll(PDO::FETCH_ASSOC);
                             <td><?php echo htmlspecialchars($book['publication_year']); ?></td>
                             <td><?php echo htmlspecialchars($book['price']); ?></td>
                             <td>
-                                <form action="admin-dashboard.php" method="post" style="display:inline;">
+                                <form action="admin-dashboard.php" method="post">
                                     <input type="hidden" name="delete_book_id" value="<?php echo $book['book_id']; ?>">
                                     <button type="submit" class="delete-button">Delete</button>
                                 </form>
