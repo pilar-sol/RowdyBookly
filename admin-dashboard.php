@@ -29,8 +29,8 @@ try {
 }
 
 // Fetch admin profile data
-$admin_id = $_SESSION['admin_id'];
-$stmt = $pdo->prepare("SELECT username, email FROM Admin WHERE admin_id = :admin_id");
+$admin_id = $_SESSION['admin_id']; // This stays the same, assuming admin_id is the session key
+$stmt = $pdo->prepare("SELECT username, email FROM Admin WHERE user_id = :admin_id"); // Replace admin_id with user_id in the query
 $stmt->bindParam(':admin_id', $admin_id, PDO::PARAM_INT);
 $stmt->execute();
 $admin = $stmt->fetch(PDO::FETCH_ASSOC);
