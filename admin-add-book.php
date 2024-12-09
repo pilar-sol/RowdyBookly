@@ -30,15 +30,27 @@ try {
 
 // Initialize variables
 $message = '';
+$title = $author = $publication_year = $price = $description = '';
+$is_staff_pick = 0;
 
 // Handle book submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $title = $_POST['title'];
-    $author = $_POST['author'];
-    $publication_year = $_POST['publication_year'];
-    $price = $_POST['price'];
-    $description = $_POST['description'];
-    $is_staff_pick = isset($_POST['is_staff_pick']) ? 1 : 0; // Default to 0 unless checked
+    // Debugging $_POST and $_FILES data
+    echo "<pre>POST data: ";
+    print_r($_POST);
+    echo "</pre>";
+
+    echo "<pre>FILES data: ";
+    print_r($_FILES);
+    echo "</pre>";
+
+    // Capture and sanitize input
+    $title = $_POST['title'] ?? '';
+    $author = $_POST['author'] ?? '';
+    $publication_year = $_POST['publication_year'] ?? '';
+    $price = $_POST['price'] ?? '';
+    $description = $_POST['description'] ?? '';
+    $is_staff_pick = isset($_POST['is_staff_pick']) ? 1 : 0;
 
     // Handle file upload for the cover image
     $cover_image = null;
@@ -54,13 +66,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
 
             $cover_image = $upload_dir . uniqid() . '.jpg';
-            move_uploaded_file($image_tmp_path, $cover_image);
+            if (!move_uploaded_file($image_tmp_path, $cover_image)) {
+                $message = "Failed to upload the cover image.";
+            }
         } else {
             $message = "Only .jpg files are allowed for the cover image.";
         }
     }
 
-    // Validate and insert book data
+    // Validate required fields
     if (!empty($title) && !empty($author) && !empty($publication_year) && !empty($price) && is_numeric($price) && is_numeric($publication_year)) {
         // Check if the author exists
         $authorStmt = $pdo->prepare("SELECT author_id FROM Authors WHERE name = :author LIMIT 1");
@@ -83,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                VALUES (:title, :cover_image_url, :author_id, :publication_year, :price, :description, :is_staff_pick)");
         $stmt->bindParam(':title', $title);
         $stmt->bindParam(':cover_image_url', $cover_image);
-        $stmt->bindParam(':author_id', $author_id);
+        $stmt->bindParam(':author_id', $author_id, PDO::PARAM_INT);
         $stmt->bindParam(':publication_year', $publication_year, PDO::PARAM_INT);
         $stmt->bindParam(':price', $price);
         $stmt->bindParam(':description', $description);
@@ -92,19 +106,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($stmt->execute()) {
             $message = "Book added successfully!";
         } else {
-            $message = "Failed to add the book.";
+            $errorInfo = $stmt->errorInfo();
+            $message = "Failed to add the book. SQL Error: " . $errorInfo[2];
         }
     } else {
         $message = "Please fill in all required fields correctly.";
     }
 }
-echo "Form submitted.<br>";
-echo "Title: $title<br>";
-echo "Author: $author<br>";
-echo "Publication Year: $publication_year<br>";
-echo "Price: $price<br>";
-echo "Description: $description<br>";
-echo "Staff Pick: $is_staff_pick<br>";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -186,27 +194,27 @@ echo "Staff Pick: $is_staff_pick<br>";
     <main class="dashboard-container">
         <h2>Add a New Book</h2>
         <?php if (!empty($message)) { echo "<p class='message'>$message</p>"; } ?>
-        <form action="admin-dashboard.php" method="post" enctype="multipart/form-data">
+        <form action="admin-add-book.php" method="post" enctype="multipart/form-data">
             <label for="title">Book Title:</label>
-            <input type="text" id="title" name="title" placeholder="Enter book title" required>
+            <input type="text" id="title" name="title" placeholder="Enter book title" required value="<?= htmlspecialchars($title) ?>">
 
             <label for="author">Author:</label>
-            <input type="text" id="author" name="author" placeholder="Enter author's name" required>
+            <input type="text" id="author" name="author" placeholder="Enter author's name" required value="<?= htmlspecialchars($author) ?>">
 
             <label for="cover_image">Cover Image (.jpg):</label>
             <input type="file" id="cover_image" name="cover_image" accept=".jpg">
 
             <label for="publication_year">Publication Year:</label>
-            <input type="number" id="publication_year" name="publication_year" placeholder="e.g., 2023" required>
+            <input type="number" id="publication_year" name="publication_year" placeholder="e.g., 2023" required value="<?= htmlspecialchars($publication_year) ?>">
 
             <label for="price">Price:</label>
-            <input type="number" step="0.01" id="price" name="price" placeholder="e.g., 19.99" required>
+            <input type="number" step="0.01" id="price" name="price" placeholder="e.g., 19.99" required value="<?= htmlspecialchars($price) ?>">
 
             <label for="description">Description:</label>
-            <textarea id="description" name="description" placeholder="Enter book description"></textarea>
+            <textarea id="description" name="description" placeholder="Enter book description"><?= htmlspecialchars($description) ?></textarea>
 
             <label for="is_staff_pick">
-                <input type="checkbox" id="is_staff_pick" name="is_staff_pick"> Staff Pick
+                <input type="checkbox" id="is_staff_pick" name="is_staff_pick" <?= $is_staff_pick ? 'checked' : '' ?>> Staff Pick
             </label>
 
             <button type="submit" class="submit-button">Add Book</button>
