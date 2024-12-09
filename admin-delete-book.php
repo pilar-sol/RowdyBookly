@@ -35,18 +35,29 @@ $message = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_book_id'])) {
     $delete_book_id = $_POST['delete_book_id'];
 
-    // Debugging: Check received value
+    // Debug: Check received POST data
     echo "Received book ID for deletion: $delete_book_id<br>";
 
-    $deleteStmt = $pdo->prepare("DELETE FROM Books WHERE book_id = :book_id");
-    $deleteStmt->bindParam(':book_id', $delete_book_id, PDO::PARAM_INT);
-
     try {
-        if ($deleteStmt->execute()) {
-            $message = "Book removed successfully!";
+        // Check if the book ID exists
+        $checkStmt = $pdo->prepare("SELECT * FROM Books WHERE book_id = :book_id");
+        $checkStmt->bindParam(':book_id', $delete_book_id, PDO::PARAM_INT);
+        $checkStmt->execute();
+        $bookExists = $checkStmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($bookExists) {
+            // Delete the book if it exists
+            $deleteStmt = $pdo->prepare("DELETE FROM Books WHERE book_id = :book_id");
+            $deleteStmt->bindParam(':book_id', $delete_book_id, PDO::PARAM_INT);
+
+            if ($deleteStmt->execute()) {
+                $message = "Book removed successfully!";
+            } else {
+                $errorInfo = $deleteStmt->errorInfo();
+                $message = "Failed to remove the book. SQL Error: " . $errorInfo[2];
+            }
         } else {
-            $errorInfo = $deleteStmt->errorInfo();
-            $message = "Failed to remove the book. SQL Error: " . $errorInfo[2];
+            $message = "Book with ID $delete_book_id does not exist.";
         }
     } catch (PDOException $e) {
         $message = "Error while deleting book: " . $e->getMessage();
