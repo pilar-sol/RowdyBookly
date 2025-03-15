@@ -45,8 +45,6 @@ $sql = "SELECT b.book_id, b.title, b.cover_image_url, a.name AS author_name
     ?>
 </head>
 <body>
-    
-    
     <main class="main-container">
         <!-- Left side content -->
         <section class="welcome">
